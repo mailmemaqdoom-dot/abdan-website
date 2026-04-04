@@ -1,0 +1,153 @@
+/* ============================================================
+   ABDAN — style.css
+   Brand palette: Emerald Green #1B5E35 · Warm Gold #C9A84C
+   "Where Devotion Meets Style"
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background-color: #FAF8F2; color: #2C2416; overflow-x: hidden; }
+img  { display: block; max-width: 100%; }
+
+/* ── Brand Variables ─────────────────────────────────────────── */
+:root {
+  --forest:       #1B5E35;
+  --forest-l:     #2E7D4F;
+  --forest-d:     #134228;
+  --gold:         #C9A84C;
+  --gold-l:       #DFC27A;
+  --gold-d:       #A07830;
+  --cream:        #FAF8F2;
+  --cream-warm:   #F5F0E0;
+  --cream-deep:   #EDE4CC;
+  --bark:         #2C2416;
+  --bark-l:       #4A3C28;
+}
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+#navbar { background: transparent; }
+#navbar.scrolled {
+  background: rgba(250,248,242,0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream-deep);
+  box-shadow: 0 2px 24px rgba(44,36,22,0.07);
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.hero-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 80% at 10% 80%, rgba(27,94,53,0.07) 0%, transparent 60%),
+    var(--cream);
+}
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(250,248,242,0) 0%, rgba(245,240,224,0.25) 100%);
+}
+.hero-card-gradient {
+  background: linear-gradient(to top, rgba(27,94,53,0.80) 0%, transparent 100%);
+}
+
+/* Card stack shadows */
+.card-back  { box-shadow: 0 8px 30px rgba(44,36,22,0.09); }
+.card-mid   { box-shadow: 0 8px 30px rgba(44,36,22,0.07); }
+.card-front { box-shadow: 0 20px 60px rgba(44,36,22,0.18), 0 4px 12px rgba(44,36,22,0.08); }
+
+/* Floating badges */
+.floating-badge  { animation: float 4s ease-in-out infinite; }
+.floating-badge-2{ animation: float 4s ease-in-out infinite; animation-delay: 2s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-float-slow { animation: float 6s ease-in-out infinite; }
+
+/* Scroll indicator */
+@keyframes scroll-drop {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  30%  { opacity: 1; }
+  80%  { transform: translateY(200%); opacity: 0.5; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+.animate-scroll-drop { animation: scroll-drop 2.2s ease-in-out infinite; }
+
+/* ── Fade-in animations (hero elements) ─────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scroll Reveal ──────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.75s cubic-bezier(0.25,0.46,0.45,0.94),
+              transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Stagger children inside grids */
+.grid .reveal:nth-child(2) { transition-delay: 0.10s; }
+.grid .reveal:nth-child(3) { transition-delay: 0.20s; }
+.grid .reveal:nth-child(4) { transition-delay: 0.30s; }
+.grid .reveal:nth-child(5) { transition-delay: 0.40s; }
+.grid .reveal:nth-child(6) { transition-delay: 0.50s; }
+
+/* ── Brand Statement ────────────────────────────────────────── */
+.brand-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--gold) 0px, var(--gold) 1px,
+    transparent 1px, transparent 20px
+  );
+}
+
+/* ── Collection cards overlay ───────────────────────────────── */
+.card-overlay {
+  background: linear-gradient(to top, rgba(27,94,53,0.90) 0%, rgba(27,94,53,0.35) 55%, transparent 100%);
+}
+
+/* Safari image-scale fix */
+.collection-card img { transition: transform 700ms cubic-bezier(0.25,0.46,0.45,0.94); }
+
+/* ── Inspiration grid overlay ───────────────────────────────── */
+.insp-overlay {
+  background: linear-gradient(to top, rgba(27,94,53,0.82) 0%, transparent 70%);
+}
+
+/* ── Loyalty section pattern ────────────────────────────────── */
+.loyalty-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231B5E35' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── Contact dot-pattern ─────────────────────────────────────── */
+.contact-pattern {
+  background-image: radial-gradient(circle at 1px 1px, var(--gold) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* ── Hamburger animation ─────────────────────────────────────── */
+#menu-btn.open .hamburger-line:nth-child(1) { transform: translateY(6px) rotate(45deg);  }
+#menu-btn.open .hamburger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#menu-btn.open .hamburger-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.hamburger-line { transition: all 0.3s ease; }
+
+/* ── Focus / accessibility ──────────────────────────────────── */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-visual { margin-top: 2rem; }
+  .card-stack  { width: 260px; height: 320px; }
+  .floating-badge, .floating-badge-2 { display: none; }
+}
