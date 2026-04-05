@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta-IN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ABDAN – Where Devotion Meets Style. Celebrating you, every day. Sarees, kurtis and everyday pieces for the woman who gives everything." />
+  <meta name="description" content="ABDAN – Where Devotion Meets Style. A warm, personal space for you to explore sarees, kurtis and everyday pieces — at your own pace." />
   <title>ABDAN | Where Devotion Meets Style</title>
+
+  <!-- Favicon: coin logo -->
+  <link rel="icon" type="image/jpeg" href="assets/logo-coin.jpg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Playfair+Display:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -22,432 +25,494 @@
             gold:   { DEFAULT:'#C9A84C', light:'#DFC27A', dark:'#A07830' },
             cream:  { DEFAULT:'#FAF8F2', warm:'#F5F0E0', deep:'#EDE4CC' },
             bark:   { DEFAULT:'#2C2416', light:'#4A3C28' },
+            maroon: { DEFAULT:'#7B1C2E', light:'#A0394D' },
           },
           fontFamily: {
-            display: ['"Cormorant Garamond"', 'serif'],
-            serif:   ['"Playfair Display"', 'serif'],
-            body:    ['"Nunito Sans"', 'sans-serif'],
-          },
-          transitionTimingFunction: {
-            'gentle': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            display: ['"Cormorant Garamond"','serif'],
+            serif:   ['"Playfair Display"','serif'],
+            body:    ['"Nunito Sans"','sans-serif'],
           },
         }
       }
     }
   </script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style_002.css" />
 </head>
 
 <body class="bg-cream font-body text-bark antialiased">
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  NAVIGATION                                              ║
-     ╚══════════════════════════════════════════════════════════╝ -->
+<!-- ════════════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════════════ -->
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 py-3 flex items-center justify-between">
 
-    <a href="#" class="logo-link flex items-center gap-3 group">
-      <img src="assets/logo.png" alt="ABDAN" class="h-12 w-auto transition-transform duration-300 group-hover:scale-105" id="nav-logo" />
-      <!-- Fallback: shown via JS if logo 404s -->
-      <div id="nav-logo-fallback" class="logo-fallback-wrap items-center gap-2" style="display:none">
-        <div class="w-10 h-10 rounded-full bg-forest flex items-center justify-center shadow-md">
-          <span class="text-gold font-display font-bold text-lg leading-none">A</span>
-        </div>
-        <span class="font-display text-2xl font-semibold tracking-wider text-forest">ABDAN</span>
+    <!-- Logo: wordmark in nav -->
+    <a href="#" class="flex items-center gap-3 group" aria-label="ABDAN Home">
+      <img src="assets/logo-coin.jpg"
+           alt="ABDAN seal"
+           class="h-11 w-11 rounded-full object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
+           onerror="this.style.display='none'" />
+      <div class="flex flex-col leading-tight">
+        <span class="font-display font-semibold text-forest text-xl tracking-widest">ABDAN</span>
+        <span class="font-body text-[9px] text-gold-dark tracking-[0.22em] uppercase">Where Devotion Meets Style</span>
       </div>
     </a>
 
-    <!-- Desktop links -->
-    <ul class="hidden md:flex items-center gap-8 font-body text-sm tracking-wide text-bark/70">
-      <li><a href="#collections" class="nav-link hover:text-forest transition-colors duration-300">Collections</a></li>
-      <li><a href="#women-like-you" class="nav-link hover:text-forest transition-colors duration-300">Our Women</a></li>
-      <li><a href="#community" class="nav-link hover:text-forest transition-colors duration-300">Community</a></li>
-      <li><a href="#loyalty" class="nav-link hover:text-forest transition-colors duration-300">Our Circle</a></li>
+    <!-- Desktop nav — emotional labels -->
+    <ul class="hidden lg:flex items-center gap-6 font-body text-sm text-bark/65">
+      <li><a href="#hero"         class="nav-lnk hover:text-forest transition-colors duration-300">Your Morning Glow</a></li>
+      <li><a href="#collections"  class="nav-lnk hover:text-forest transition-colors duration-300">Your Treasures</a></li>
+      <li><a href="#we-see-you"   class="nav-lnk hover:text-forest transition-colors duration-300">We See You</a></li>
+      <li><a href="#stories"      class="nav-lnk hover:text-forest transition-colors duration-300">Stories Like Yours</a></li>
+      <li><a href="#community"    class="nav-lnk hover:text-forest transition-colors duration-300">Our Circle</a></li>
       <li>
-        <a href="#contact" class="px-5 py-2 rounded-full border border-forest/50 text-forest font-semibold text-sm hover:bg-forest hover:text-gold hover:border-forest transition-all duration-300">
-          Say Hello
+        <a href="#contact"
+           class="px-5 py-2 rounded-full border border-forest/50 text-forest font-semibold text-sm hover:bg-forest hover:text-gold hover:border-forest transition-all duration-300">
+          Say Hello 💛
         </a>
       </li>
     </ul>
 
     <!-- Mobile hamburger -->
-    <button id="menu-btn" class="md:hidden flex flex-col justify-center items-end gap-1.5 w-9 h-9" aria-label="Open menu" aria-expanded="false">
-      <span class="ham-line w-6 h-px bg-bark block"></span>
-      <span class="ham-line w-4 h-px bg-bark block"></span>
-      <span class="ham-line w-6 h-px bg-bark block"></span>
+    <button id="menu-btn" class="lg:hidden flex flex-col justify-center items-end gap-[5px] w-9 h-9" aria-label="Open menu" aria-expanded="false">
+      <span class="ham-line w-6 h-[1.5px] bg-bark rounded-full block"></span>
+      <span class="ham-line w-4 h-[1.5px] bg-bark rounded-full block"></span>
+      <span class="ham-line w-6 h-[1.5px] bg-bark rounded-full block"></span>
     </button>
   </div>
 
-  <!-- Mobile menu panel -->
-  <div id="mobile-menu" class="hidden md:hidden bg-cream border-t border-cream-deep shadow-lg px-6 py-6 space-y-1">
-    <a href="#collections"   class="mob-link block py-3 text-bark/80 hover:text-forest border-b border-cream-deep/50 transition-colors">Collections</a>
-    <a href="#women-like-you" class="mob-link block py-3 text-bark/80 hover:text-forest border-b border-cream-deep/50 transition-colors">Our Women</a>
-    <a href="#community"     class="mob-link block py-3 text-bark/80 hover:text-forest border-b border-cream-deep/50 transition-colors">Community</a>
-    <a href="#loyalty"       class="mob-link block py-3 text-bark/80 hover:text-forest border-b border-cream-deep/50 transition-colors">Our Circle</a>
-    <a href="#contact"       class="mob-link block pt-4 text-forest font-semibold hover:text-forest-dark transition-colors">Say Hello →</a>
+  <!-- Mobile panel -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-cream border-t border-cream-deep shadow-lg px-6 pt-5 pb-6 space-y-1">
+    <a href="#hero"        class="mob-lnk block py-3 border-b border-cream-deep/50 text-bark/80 hover:text-forest">Your Morning Glow</a>
+    <a href="#collections" class="mob-lnk block py-3 border-b border-cream-deep/50 text-bark/80 hover:text-forest">Your Treasures</a>
+    <a href="#we-see-you"  class="mob-lnk block py-3 border-b border-cream-deep/50 text-bark/80 hover:text-forest">We See You</a>
+    <a href="#stories"     class="mob-lnk block py-3 border-b border-cream-deep/50 text-bark/80 hover:text-forest">Stories Like Yours</a>
+    <a href="#community"   class="mob-lnk block py-3 border-b border-cream-deep/50 text-bark/80 hover:text-forest">Our Circle</a>
+    <a href="#contact"     class="mob-lnk block pt-4 text-forest font-semibold hover:text-forest-dark">Say Hello 💛 →</a>
   </div>
 </nav>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  HERO  — Emotional rewrite                               ║
-     ╚══════════════════════════════════════════════════════════╝ -->
+<!-- ════════════════════════════════════════════════════════
+     HERO — "Hi… this is for you."
+════════════════════════════════════════════════════════ -->
 <section id="hero" class="hero-section relative min-h-screen flex items-center overflow-hidden">
 
-  <!-- Background layers -->
+  <!-- Layered background -->
   <div class="hero-bg absolute inset-0 z-0"></div>
   <div class="hero-overlay absolute inset-0 z-0"></div>
+  <!-- Decorative motif orbs -->
+  <div class="motif-orb motif-orb-1 absolute" aria-hidden="true"></div>
+  <div class="motif-orb motif-orb-2 absolute" aria-hidden="true"></div>
+  <div class="motif-orb motif-orb-3 absolute" aria-hidden="true"></div>
+  <!-- Paisley SVG watermark -->
+  <div class="paisley-bg absolute inset-0 z-0 opacity-[0.028]" aria-hidden="true">
+    <svg viewBox="0 0 800 800" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="paisleyPat" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+          <path d="M100 20 C130 20, 160 50, 155 90 C150 130, 120 155, 100 180 C80 155, 50 130, 45 90 C40 50, 70 20, 100 20 Z" fill="none" stroke="#1B5E35" stroke-width="2"/>
+          <path d="M100 40 C120 40, 140 60, 137 90 C134 120, 116 138, 100 155 C84 138, 66 120, 63 90 C60 60, 80 40, 100 40 Z" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="100" cy="95" r="8" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+        </pattern>
+      </defs>
+      <rect width="800" height="800" fill="url(#paisleyPat)"/>
+    </svg>
+  </div>
 
-  <!-- Decorative -->
-  <div class="deco-orb deco-orb-1 absolute top-24 right-8 w-80 h-80 rounded-full" aria-hidden="true"></div>
-  <div class="deco-orb deco-orb-2 absolute bottom-20 left-4 w-52 h-52 rounded-full" aria-hidden="true"></div>
-  <div class="absolute top-1/3 left-0 w-24 h-px bg-gold/40" aria-hidden="true"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-32 pb-28 grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 
-  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-32 pb-24 grid lg:grid-cols-2 gap-16 items-center">
-
-    <!-- ── Left: Emotional copy ── -->
+    <!-- Left: Emotional copy -->
     <div>
-      <!-- Pre-headline label -->
-      <div class="hero-label inline-flex items-center gap-2 mb-10 opacity-0">
-        <span class="w-8 h-px bg-gold"></span>
-        <span class="font-body text-gold text-xs tracking-[0.3em] uppercase font-semibold">For You. Always.</span>
-      </div>
+      <!-- Greeting -->
+      <p class="hero-greeting opacity-0 font-body text-bark/50 text-sm tracking-[0.22em] uppercase mb-6">
+        <span class="inline-flex items-center gap-2">
+          <span class="w-5 h-px bg-gold"></span>
+          For You. Always.
+          <span class="w-5 h-px bg-gold"></span>
+        </span>
+      </p>
 
-      <!-- Staggered emotional headline -->
-      <h1 class="font-display font-light text-bark leading-[1.12] mb-8" style="font-size: clamp(2.4rem, 5vw, 4.25rem);">
-        <span class="hero-line block opacity-0">For everything you do…</span>
-        <span class="hero-line block opacity-0">for everyone you care for…</span>
-        <span class="hero-line block opacity-0 text-forest italic">this is something</span>
-        <span class="hero-line block opacity-0"><em class="font-serif italic text-gold">just for you.</em></span>
+      <!-- Headline stagger -->
+      <h1 class="font-display font-light text-bark leading-[1.13] mb-8" style="font-size:clamp(2.5rem,5.5vw,4.5rem)">
+        <span class="hero-l hero-l-1 block opacity-0">Hi… <em class="italic text-gold">this is for you.</em></span>
+        <span class="hero-l hero-l-2 block opacity-0 text-bark/70 mt-1" style="font-size:clamp(1.1rem,2.5vw,1.65rem); font-weight:300; line-height:1.6">
+          The mornings you wake early…
+        </span>
+        <span class="hero-l hero-l-3 block opacity-0 text-bark/70 mt-0" style="font-size:clamp(1.1rem,2.5vw,1.65rem); font-weight:300; line-height:1.6">
+          packing everyone's day before yours begins…
+        </span>
+        <span class="hero-l hero-l-4 block opacity-0 text-bark/70 mt-0" style="font-size:clamp(1.1rem,2.5vw,1.65rem); font-weight:300; line-height:1.6">
+          saving a little for yourself, quietly…
+        </span>
+        <span class="hero-l hero-l-5 block opacity-0 mt-3 text-forest italic" style="font-size:clamp(1.8rem,4vw,3rem); font-weight:400">
+          We see you.
+        </span>
       </h1>
 
-      <!-- Brand name block -->
-      <div class="hero-brand opacity-0 mb-8 pl-1 border-l-2 border-gold/50">
-        <p class="font-display text-3xl font-semibold tracking-widest text-forest">ABDAN</p>
-        <p class="font-body text-bark/55 text-sm tracking-[0.18em] uppercase mt-1">Where Devotion Meets Style</p>
+      <!-- Logo wordmark block -->
+      <div class="hero-brand opacity-0 mb-8 flex items-center gap-4">
+        <div class="w-px h-14 bg-gold/50"></div>
+        <div>
+          <img src="assets/logo-wordmark.jpg"
+               alt="ABDAN — Where Devotion Meets Style"
+               class="h-14 w-auto object-contain"
+               onerror="this.style.display='none'; document.getElementById('hero-brand-fb').style.display='block'" />
+          <div id="hero-brand-fb" style="display:none">
+            <p class="font-display text-2xl font-semibold text-forest tracking-widest">ABDAN</p>
+            <p class="font-body text-xs text-gold-dark tracking-[0.2em] uppercase">Where Devotion Meets Style</p>
+          </div>
+        </div>
       </div>
 
       <!-- Sub-copy -->
-      <p class="hero-sub opacity-0 font-body text-bark/60 text-lg leading-relaxed max-w-[420px] mb-10">
-        You carry so much — the early mornings, the quiet prayers, the small details no one else notices.
-        <br/><br/>
-        <span class="text-bark/80 font-medium">We see you. ABDAN is made for you.</span>
+      <p class="hero-sub opacity-0 font-body text-bark/58 text-base leading-[1.9] max-w-md mb-10">
+        <em class="text-bark/75 not-italic font-medium">"Celebrating You, Every Day"</em><br/>
+        A small, warm space where you can explore, ask, and choose —
+        at your own pace, with someone here for you. 💛
       </p>
 
       <!-- CTAs -->
       <div class="hero-ctas opacity-0 flex flex-wrap gap-4">
         <a href="#collections"
-           class="btn-primary px-8 py-4 rounded-full bg-forest text-gold font-semibold tracking-wide shadow-lg transition-all duration-300">
-          Explore What Feels Right
+           class="cta-primary px-7 py-3.5 rounded-full bg-forest text-gold font-semibold shadow-lg transition-all duration-300">
+          Explore Your Treasures
         </a>
-        <a href="#contact"
-           class="btn-outline px-8 py-4 rounded-full border border-bark/25 text-bark font-semibold tracking-wide transition-all duration-300">
-          💬 Talk to Us
+        <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20was%20just%20exploring%20and%20wanted%20to%20say%20hi%20%F0%9F%92%9B"
+           target="_blank" rel="noopener noreferrer"
+           class="cta-whatsapp px-7 py-3.5 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Talk to us
         </a>
       </div>
 
       <!-- Trust strip -->
-      <div class="hero-trust opacity-0 flex items-center gap-5 mt-14">
+      <div class="hero-trust opacity-0 flex items-center gap-4 mt-12">
         <div class="flex -space-x-2">
-          <div class="avatar-dot bg-gold/30">M</div>
-          <div class="avatar-dot bg-forest/20">P</div>
-          <div class="avatar-dot bg-gold/40">S</div>
-          <div class="avatar-dot bg-forest/15">R</div>
+          <div class="trust-dot" style="background:rgba(201,168,76,0.28)">M</div>
+          <div class="trust-dot" style="background:rgba(27,94,53,0.18)">P</div>
+          <div class="trust-dot" style="background:rgba(201,168,76,0.38)">S</div>
+          <div class="trust-dot" style="background:rgba(27,94,53,0.14)">R</div>
         </div>
-        <p class="font-body text-bark/50 text-sm leading-snug">
-          Loved by <strong class="text-bark/75 font-semibold">1,200+ women</strong><br/>
-          across Tamil Nadu
+        <p class="font-body text-bark/48 text-sm leading-snug">
+          Loved by <strong class="text-bark/70">1,200+ women</strong><br/>across Tamil Nadu
         </p>
       </div>
     </div>
 
-    <!-- ── Right: Card visual ── -->
-    <div class="hero-visual opacity-0 relative flex justify-center lg:justify-end items-center">
-      <div class="card-stack relative w-[300px] h-[380px]" style="will-change: transform;">
-        <!-- Back cards -->
-        <div class="card-layer card-layer-back absolute inset-0 rounded-3xl bg-gold/12 border border-gold/20" style="transform: rotate(6deg) translateX(12px);"></div>
-        <div class="card-layer card-layer-mid  absolute inset-0 rounded-3xl bg-forest/8  border border-forest/12" style="transform: rotate(2deg) translateX(6px);"></div>
-        <!-- Front card -->
-        <div class="card-layer absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&q=80"
-               alt="Woman in elegant saree"
-               class="w-full h-full object-cover" id="hero-img"
-               onerror="document.getElementById('hero-img-fallback').style.display='flex'; this.style.display='none';" />
-          <div id="hero-img-fallback" class="w-full h-full bg-cream-warm items-center justify-center" style="display:none;">
-            <span class="font-display text-7xl text-gold/30">A</span>
-          </div>
-          <div class="hero-card-cap absolute bottom-0 left-0 right-0 p-6">
-            <p class="font-display text-white text-base font-light italic">"Dressed for the life I live with love"</p>
-          </div>
+    <!-- Right: Logo showcase + floating elements -->
+    <div class="hero-visual opacity-0 relative flex flex-col items-center justify-center gap-8">
+
+      <!-- Coin logo — large centrepiece -->
+      <div class="logo-showcase relative">
+        <div class="logo-glow-ring" aria-hidden="true"></div>
+        <img src="assets/logo-coin.jpg"
+             alt="ABDAN emblem"
+             class="logo-coin-lg relative z-10 w-56 h-56 rounded-full object-cover shadow-2xl"
+             onerror="this.style.display='none'" />
+      </div>
+
+      <!-- Floating SVG saree texture card -->
+      <div class="saree-card relative w-full max-w-xs rounded-3xl overflow-hidden border border-cream-deep shadow-xl bg-cream-warm">
+        <!-- Woven textile SVG texture -->
+        <div class="saree-texture-wrap h-44 relative overflow-hidden">
+          <svg viewBox="0 0 400 180" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="silkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#1B5E35"/>
+                <stop offset="50%"  stop-color="#2E7D4F"/>
+                <stop offset="100%" stop-color="#134228"/>
+              </linearGradient>
+              <pattern id="weave" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                <rect width="16" height="16" fill="url(#silkGrad)"/>
+                <line x1="0" y1="8" x2="16" y2="8" stroke="rgba(201,168,76,0.25)" stroke-width="0.8"/>
+                <line x1="8" y1="0" x2="8" y2="16" stroke="rgba(201,168,76,0.15)" stroke-width="0.8"/>
+              </pattern>
+              <!-- Zari border -->
+              <pattern id="zariBorder" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke="#C9A84C" stroke-width="1.2" opacity="0.7"/>
+                <circle cx="12" cy="12" r="3" fill="rgba(201,168,76,0.5)"/>
+              </pattern>
+            </defs>
+            <!-- Silk base -->
+            <rect width="400" height="180" fill="url(#weave)"/>
+            <!-- Zari border band -->
+            <rect x="0" y="140" width="400" height="40" fill="url(#zariBorder)" opacity="0.8"/>
+            <rect x="0" y="138" width="400" height="2" fill="#C9A84C" opacity="0.6"/>
+            <!-- Decorative motifs -->
+            <g opacity="0.4">
+              <path d="M60 70 C70 55, 90 55, 90 70 C90 85, 70 90, 60 80 Z" fill="#C9A84C"/>
+              <circle cx="75" cy="70" r="5" fill="none" stroke="#DFC27A" stroke-width="1.5"/>
+              <path d="M160 65 C170 50, 190 50, 190 65 C190 80, 170 85, 160 75 Z" fill="#C9A84C" opacity="0.7"/>
+              <path d="M260 68 C270 53, 290 53, 290 68 C290 83, 270 88, 260 78 Z" fill="#C9A84C" opacity="0.5"/>
+              <path d="M340 62 C350 47, 370 47, 370 62 C370 77, 350 82, 340 72 Z" fill="#C9A84C" opacity="0.6"/>
+            </g>
+            <!-- Caption overlay -->
+            <rect x="0" y="0" width="400" height="140" fill="rgba(27,94,53,0.15)"/>
+          </svg>
+        </div>
+        <div class="px-5 py-4">
+          <p class="font-display text-bark text-lg font-light">"Kanjivaram Silk Sarees"</p>
+          <p class="font-body text-bark/50 text-xs mt-1">Woven for women who carry tradition with grace</p>
+          <a href="#contact"
+             class="mt-3 inline-flex items-center gap-1.5 font-body text-xs text-forest font-semibold hover:text-forest-dark transition-colors duration-200">
+            Is This Mine? →
+          </a>
         </div>
       </div>
 
-      <!-- Floating labels -->
-      <div class="float-badge float-badge-top absolute -top-2 -left-8 bg-cream rounded-2xl px-4 py-3 border border-cream-deep shadow-xl">
-        <p class="font-body text-xs text-bark/50 uppercase tracking-widest mb-0.5">New Arrivals</p>
-        <p class="font-display text-bark font-semibold text-sm">Summer Kurtis</p>
+      <!-- Floating badge -->
+      <div class="float-badge-hero absolute -top-4 -right-4 lg:right-0 bg-cream rounded-2xl px-4 py-3 border border-cream-deep shadow-xl">
+        <p class="font-body text-[10px] text-bark/50 uppercase tracking-widest mb-0.5">New Arrivals</p>
+        <p class="font-display text-bark font-semibold text-sm">Summer Kurtis 🌸</p>
       </div>
-      <div class="float-badge float-badge-bot absolute bottom-6 -right-6 bg-forest rounded-2xl px-4 py-3 shadow-xl">
-        <p class="font-body text-xs text-gold/80 mb-0.5">✦ Handpicked for you</p>
-        <p class="font-display text-gold font-semibold text-sm">New Collection</p>
-      </div>
-    </div>
 
+    </div>
   </div><!-- /grid -->
 
   <!-- Scroll cue -->
-  <div class="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0" aria-hidden="true">
-    <span class="font-body text-[10px] tracking-[0.3em] text-bark/40 uppercase">Scroll</span>
+  <div class="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 pointer-events-none" aria-hidden="true">
+    <span class="font-body text-[9px] tracking-[0.3em] text-bark/35 uppercase">Scroll</span>
     <div class="w-px h-8 bg-gradient-to-b from-gold/40 to-transparent"></div>
   </div>
 </section>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  BRAND BELIEF STRIP                                      ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<section class="belief-strip py-20 bg-forest relative overflow-hidden">
-  <div class="belief-pattern absolute inset-0 opacity-[0.04]" aria-hidden="true"></div>
+<!-- ════════════════════════════════════════════════════════
+     TRUST LAYER — "We're here with you"
+════════════════════════════════════════════════════════ -->
+<section class="trust-strip py-16 bg-forest relative overflow-hidden">
+  <div class="trust-pattern absolute inset-0 opacity-[0.05]" aria-hidden="true"></div>
   <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
-    <span class="font-body text-gold text-xs tracking-[0.3em] uppercase font-semibold block mb-6">Our Belief</span>
-    <blockquote class="font-display font-light text-cream/92 leading-relaxed" style="font-size: clamp(1.5rem, 3.5vw, 2.75rem);">
-      "Every woman who gives herself to her family<br/>
-      deserves clothing that gives something
-      <em class="text-gold not-italic"> back to her."</em>
-    </blockquote>
-    <div class="flex items-center justify-center gap-3 mt-10">
-      <span class="w-10 h-px bg-gold/40"></span>
-      <span class="w-2 h-2 rounded-full bg-gold/50"></span>
-      <span class="w-10 h-px bg-gold/40"></span>
+
+    <span class="font-body text-gold text-xs tracking-[0.3em] uppercase font-semibold block mb-5">We're Here With You</span>
+    <p class="font-display font-light text-cream leading-relaxed mb-6" style="font-size:clamp(1.4rem,3vw,2.2rem)">
+      Not sure about something? Want a second opinion?<br/>
+      Or just exploring? <em class="text-gold italic">We're one message away.</em>
+    </p>
+    <p class="font-body text-cream/60 text-sm mb-8">Always happy to help — no pressure, no rush 😊</p>
+
+    <!-- Chat-style WhatsApp preview -->
+    <div class="wa-preview-card reveal">
+      <div class="wa-preview-header">
+        <img src="assets/logo-coin.jpg" alt="ABDAN" class="w-9 h-9 rounded-full object-cover" onerror="this.style.display='none'" />
+        <div class="ml-3 text-left">
+          <p class="font-body font-semibold text-white text-sm">ABDAN</p>
+          <p class="font-body text-green-300 text-xs">● Online now</p>
+        </div>
+      </div>
+      <div class="wa-preview-body">
+        <div class="wa-bubble wa-bubble-in">
+          Hello! 😊 I was just exploring your sarees — can you help me choose?
+        </div>
+        <div class="wa-bubble wa-bubble-out">
+          Of course! We'd love to help you find something perfect 💛 What occasion are you looking for?
+        </div>
+        <div class="wa-bubble wa-bubble-in">
+          My daughter's wedding next month 🌸
+        </div>
+        <div class="wa-bubble wa-bubble-out">
+          How beautiful! Let us show you something special for that day ✨
+        </div>
+      </div>
+      <div class="wa-preview-footer">
+        <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20would%20love%20your%20help%20choosing%20something%20special%20%F0%9F%92%9B"
+           target="_blank" rel="noopener noreferrer"
+           class="wa-preview-btn">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Start a conversation — +91 99999 99999
+        </a>
+      </div>
     </div>
+
   </div>
 </section>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  EMOTIONAL RECOGNITION MICRO-SECTION  (NEW)             ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<section class="recognition-strip py-16 bg-cream-warm">
+<!-- ════════════════════════════════════════════════════════
+     EMOTIONAL RECOGNITION — "We noticed you're here"
+════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-cream-warm">
   <div class="max-w-3xl mx-auto px-6 text-center reveal">
-    <div class="recognition-inner inline-block px-8 py-10 rounded-3xl border border-gold/20 bg-cream shadow-sm">
-      <p class="font-display font-light text-bark leading-relaxed" style="font-size: clamp(1.3rem, 2.8vw, 2rem);">
+    <div class="recognition-card">
+      <div class="recognition-icon">✦</div>
+      <p class="font-display font-light text-bark mb-2" style="font-size:clamp(1.5rem,3vw,2.2rem)">
         We noticed you're here…
       </p>
-      <p class="font-display font-light text-forest/80 italic mt-2" style="font-size: clamp(1.1rem, 2.4vw, 1.6rem);">
+      <p class="font-display font-light text-forest italic" style="font-size:clamp(1.1rem,2.4vw,1.7rem)">
         Take your time — your style matters.
       </p>
-      <div class="mt-6 flex items-center justify-center gap-3">
-        <span class="w-6 h-px bg-gold/50"></span>
-        <span class="text-gold text-lg">✦</span>
-        <span class="w-6 h-px bg-gold/50"></span>
+      <div class="my-5 flex items-center justify-center gap-3">
+        <span class="w-8 h-px bg-gold/50"></span>
+        <img src="assets/logo-coin.jpg" alt="" class="w-8 h-8 rounded-full object-cover opacity-80" aria-hidden="true" onerror="this.style.display='none'" />
+        <span class="w-8 h-px bg-gold/50"></span>
       </div>
-      <p class="font-body text-bark/50 text-sm mt-4 leading-relaxed">
-        There's no rush here. Browse freely, feel inspired,<br class="hidden sm:block"/>
-        and reach out whenever it feels right.
+      <p class="font-body text-bark/52 text-sm leading-relaxed max-w-sm mx-auto">
+        There's no rush. Browse freely, feel inspired, and reach out<br/>whenever it feels right. We're always here for you.
       </p>
     </div>
   </div>
 </section>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  FEATURED COLLECTIONS                                    ║
-     ╚══════════════════════════════════════════════════════════╝ -->
+<!-- ════════════════════════════════════════════════════════
+     COLLECTIONS — "Your Treasures"
+════════════════════════════════════════════════════════ -->
 <section id="collections" class="py-28 bg-cream">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
 
-    <div class="text-center mb-20 reveal">
-      <span class="section-label">Curated With Care</span>
-      <h2 class="section-title mt-3">
-        Pieces She'll <em class="italic text-forest">Reach For</em>
-      </h2>
-      <p class="section-sub">
-        Not trends. Not fast fashion. Beautiful, comfortable clothing because she deserves both — always.
+    <div class="text-center mb-18 reveal">
+      <span class="sec-label">Your Treasures</span>
+      <h2 class="sec-title mt-3">Pieces <em class="italic text-forest">chosen for you</em></h2>
+      <p class="sec-sub mt-2">Not trends — timeless. Not fast fashion — forever yours.</p>
+      <!-- Subtle sourcing disclaimer -->
+      <p class="font-body text-bark/35 text-xs mt-3 max-w-md mx-auto italic">
+        ✦ We carefully curate and source from trusted partners to bring you the best styles.
       </p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-      <!-- Card 1: Sarees -->
-      <div class="col-card reveal">
-        <div class="col-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80"
-               alt="Kanjivaram Sarees — timeless weaves"
-               class="col-card-img"
-               onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none';" />
-          <div class="col-card-overlay">
-            <span class="col-badge-overlay">New Arrivals</span>
-            <h3 class="font-display text-cream text-2xl font-light mb-2">Kanjivaram Sarees</h3>
-            <p class="font-body text-cream/80 text-sm leading-relaxed mb-4">Woven like a prayer — every thread holds a tradition she carries forward with quiet pride.</p>
-            <a href="#contact" class="col-overlay-link">Find something that speaks to you →</a>
-          </div>
+      <!-- Product 1 -->
+      <div class="prod-card reveal">
+        <!-- SVG-generated product visual: Kanjivaram -->
+        <div class="prod-visual prod-visual-kanjivaram">
+          <svg viewBox="0 0 360 280" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="kGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#1B5E35"/><stop offset="100%" stop-color="#134228"/>
+              </linearGradient>
+              <pattern id="kWeave" width="12" height="12" patternUnits="userSpaceOnUse">
+                <rect width="12" height="12" fill="url(#kGrad)"/>
+                <line x1="0" y1="6" x2="12" y2="6" stroke="rgba(201,168,76,0.3)" stroke-width="0.6"/>
+                <line x1="6" y1="0" x2="6" y2="12" stroke="rgba(201,168,76,0.2)" stroke-width="0.6"/>
+              </pattern>
+            </defs>
+            <rect width="360" height="280" fill="url(#kWeave)"/>
+            <!-- Zari border bottom -->
+            <rect x="0" y="230" width="360" height="50" fill="rgba(201,168,76,0.18)"/>
+            <rect x="0" y="228" width="360" height="2" fill="rgba(201,168,76,0.6)"/>
+            <!-- Paisley motifs -->
+            <g fill="#C9A84C" opacity="0.55">
+              <path d="M70 100 C80 80,105 80,103 100 C101 120,80 128,70 115 Z"/>
+              <circle cx="86" cy="98" r="6" fill="none" stroke="#DFC27A" stroke-width="1.5"/>
+              <path d="M170 90 C180 70,205 70,203 90 C201 110,180 118,170 105 Z"/>
+              <path d="M270 95 C280 75,305 75,303 95 C301 115,280 123,270 110 Z"/>
+            </g>
+            <!-- Drape silhouette: abstract flowing shape, no face/body -->
+            <path d="M140 0 C155 30,175 60,165 110 C158 145,145 170,150 220 L210 220 C215 170,202 145,195 110 C185 60,205 30,220 0 Z" fill="rgba(255,255,255,0.07)"/>
+            <!-- Label overlay -->
+            <rect x="0" y="0" width="360" height="280" fill="rgba(27,94,53,0.12)"/>
+            <text x="180" y="255" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="14" fill="rgba(201,168,76,0.9)" letter-spacing="3">KANJIVARAM SILK</text>
+          </svg>
+          <div class="prod-badge">New Arrivals</div>
         </div>
-        <div class="col-card-body">
-          <span class="col-badge col-badge-forest">Sarees</span>
-          <h3 class="col-card-title">Kanjivaram Sarees</h3>
-          <p class="col-card-desc">Timeless weaves for the woman who carries tradition with grace.</p>
-        </div>
-      </div>
-
-      <!-- Card 2: Kurtis -->
-      <div class="col-card reveal">
-        <div class="col-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=600&q=80"
-               alt="Daily Cotton Kurtis — comfort and beauty"
-               class="col-card-img"
-               onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none';" />
-          <div class="col-card-overlay">
-            <span class="col-badge-overlay">Most Loved</span>
-            <h3 class="font-display text-cream text-2xl font-light mb-2">Daily Cotton Kurtis</h3>
-            <p class="font-body text-cream/80 text-sm leading-relaxed mb-4">Made for long days and quiet evenings. Breathable, beautiful, and entirely hers.</p>
-            <a href="#contact" class="col-overlay-link">Explore what feels right to you →</a>
-          </div>
-        </div>
-        <div class="col-card-body">
-          <span class="col-badge col-badge-gold">Kurtis</span>
-          <h3 class="col-card-title">Daily Cotton Kurtis</h3>
-          <p class="col-card-desc">From morning prayers to evening walks — comfort that travels with her.</p>
-        </div>
-      </div>
-
-      <!-- Card 3: Dupattas -->
-      <div class="col-card reveal">
-        <div class="col-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1651170842498-9c3e98b7d17e?w=600&q=80"
-               alt="Festive Dupattas — celebration in every drape"
-               class="col-card-img"
-               onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none';" />
-          <div class="col-card-overlay">
-            <span class="col-badge-overlay">Festive Edit</span>
-            <h3 class="font-display text-cream text-2xl font-light mb-2">Festive Dupattas</h3>
-            <p class="font-body text-cream/80 text-sm leading-relaxed mb-4">A little celebration in every drape. Because she deserves to feel festive, always.</p>
-            <a href="#contact" class="col-overlay-link">Find something that speaks to your style →</a>
-          </div>
-        </div>
-        <div class="col-card-body">
-          <span class="col-badge col-badge-forest">Dupattas</span>
-          <h3 class="col-card-title">Festive Dupattas</h3>
-          <p class="col-card-desc">Woven celebration — for every occasion that deserves a little more colour.</p>
+        <div class="prod-body">
+          <h3 class="prod-title">Kanjivaram Silk Sarees</h3>
+          <p class="prod-desc">Woven like a prayer — each thread carries a tradition she passes forward with quiet pride.</p>
+          <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%27m%20interested%20in%20the%20Kanjivaram%20Silk%20Sarees%20%F0%9F%92%9B"
+             target="_blank" rel="noopener noreferrer"
+             class="prod-cta">
+            <span>Is This Mine? 💛</span>
+          </a>
+          <p class="prod-cta-sub">Tap to talk to us on WhatsApp — we'll guide you. No pressure, just help.</p>
         </div>
       </div>
 
-    </div>
-
-    <div class="text-center mt-14 reveal">
-      <a href="#contact" class="inline-flex items-center gap-2 font-body text-forest text-sm border-b border-forest/30 pb-0.5 hover:border-forest transition-colors duration-300 tracking-wide">
-        See everything we've curated for you <span>→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  WOMEN LIKE YOU  (NEW SECTION)                          ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<section id="women-like-you" class="py-28 bg-cream-warm">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
-
-    <div class="text-center mb-20 reveal">
-      <span class="section-label">You're Not Alone</span>
-      <h2 class="section-title mt-3">
-        Women <em class="italic text-forest">Like You</em>
-      </h2>
-      <p class="section-sub">
-        From Madurai to Chennai, from morning pujas to evening functions —<br class="hidden md:block"/>
-        ABDAN is worn by women who give everything, and deserve to feel beautiful doing it.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      <!-- Woman 1 -->
-      <div class="woman-card reveal">
-        <div class="woman-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80"
-               alt="Meena from Chennai"
-               class="woman-card-img"
-               onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none';" />
-          <div class="woman-card-shimmer" aria-hidden="true"></div>
+      <!-- Product 2 -->
+      <div class="prod-card reveal">
+        <div class="prod-visual prod-visual-kurti">
+          <svg viewBox="0 0 360 280" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="ctGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7B4F2E"/><stop offset="100%" stop-color="#5A3520"/>
+              </linearGradient>
+              <pattern id="cottonPat" width="20" height="20" patternUnits="userSpaceOnUse">
+                <rect width="20" height="20" fill="#F5E6D0"/>
+                <line x1="0" y1="10" x2="20" y2="10" stroke="rgba(123,79,46,0.15)" stroke-width="1"/>
+                <line x1="10" y1="0" x2="10" y2="20" stroke="rgba(123,79,46,0.1)" stroke-width="1"/>
+                <circle cx="10" cy="10" r="1.5" fill="rgba(201,168,76,0.3)"/>
+              </pattern>
+            </defs>
+            <rect width="360" height="280" fill="url(#cottonPat)"/>
+            <!-- Block print motifs -->
+            <g opacity="0.6">
+              <rect x="40" y="50" width="25" height="25" rx="3" fill="none" stroke="#7B4F2E" stroke-width="2"/>
+              <path d="M52 55 L52 70 M45 62 L60 62" stroke="#C9A84C" stroke-width="1.5"/>
+              <rect x="150" y="80" width="25" height="25" rx="3" fill="none" stroke="#7B4F2E" stroke-width="2"/>
+              <path d="M162 85 L162 100 M155 92 L170 92" stroke="#C9A84C" stroke-width="1.5"/>
+              <rect x="280" y="55" width="25" height="25" rx="3" fill="none" stroke="#7B4F2E" stroke-width="2"/>
+              <path d="M292 60 L292 75 M285 67 L300 67" stroke="#C9A84C" stroke-width="1.5"/>
+              <!-- More scattered prints -->
+              <circle cx="100" cy="150" r="12" fill="none" stroke="#7B4F2E" stroke-width="1.5"/>
+              <circle cx="240" cy="130" r="10" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+              <circle cx="320" cy="160" r="8" fill="none" stroke="#7B4F2E" stroke-width="1.5"/>
+            </g>
+            <rect x="0" y="0" width="360" height="280" fill="rgba(245,230,208,0.08)"/>
+            <text x="180" y="255" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="14" fill="rgba(123,79,46,0.8)" letter-spacing="3">COTTON KURTIS</text>
+          </svg>
+          <div class="prod-badge prod-badge-warm">Most Loved</div>
         </div>
-        <div class="woman-card-body">
-          <p class="woman-card-name">Meena, Chennai</p>
-          <p class="woman-card-caption">"Loves simple elegance for everyday moments — a cotton kurti that feels like herself."</p>
-        </div>
-      </div>
-
-      <!-- Woman 2 -->
-      <div class="woman-card reveal">
-        <div class="woman-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80"
-               alt="Radha from Coimbatore"
-               class="woman-card-img"
-               onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none';" />
-          <div class="woman-card-shimmer" aria-hidden="true"></div>
-        </div>
-        <div class="woman-card-body">
-          <p class="woman-card-name">Radha, Coimbatore</p>
-          <p class="woman-card-caption">"A mother of three who believes you can dress with grace even on the busiest days."</p>
+        <div class="prod-body">
+          <h3 class="prod-title">Daily Cotton Kurtis</h3>
+          <p class="prod-desc">Made for long days and quiet evenings. Breathable, beautiful, and entirely hers — from morning prayers to evening walks.</p>
+          <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%27m%20interested%20in%20your%20Cotton%20Kurtis%20%F0%9F%92%9B"
+             target="_blank" rel="noopener noreferrer"
+             class="prod-cta">
+            <span>Is This Mine? 💛</span>
+          </a>
+          <p class="prod-cta-sub">Tap to talk to us on WhatsApp — we'll guide you. No pressure, just help.</p>
         </div>
       </div>
 
-      <!-- Woman 3 -->
-      <div class="woman-card reveal">
-        <div class="woman-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=500&q=80"
-               alt="Kavya from Madurai"
-               class="woman-card-img"
-               onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none';" />
-          <div class="woman-card-shimmer" aria-hidden="true"></div>
-        </div>
-        <div class="woman-card-body">
-          <p class="woman-card-name">Kavya, Madurai</p>
-          <p class="woman-card-caption">"Wears her saree every Tuesday — tradition that gives her quiet confidence."</p>
-        </div>
-      </div>
+      <!-- Product 3 -->
+      <div class="prod-card reveal">
+        <div class="prod-visual prod-visual-dupatta">
+          <svg viewBox="0 0 360 280" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="dpGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7B1C2E"/><stop offset="60%" stop-color="#A0394D"/><stop offset="100%" stop-color="#5C0F1E"/>
+              </linearGradient>
+              <pattern id="dpPat" width="30" height="30" patternUnits="userSpaceOnUse">
+                <rect width="30" height="30" fill="url(#dpGrad)"/>
+                <path d="M15 5 L25 15 L15 25 L5 15 Z" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+                <circle cx="15" cy="15" r="3" fill="rgba(201,168,76,0.2)"/>
+              </pattern>
+            </defs>
+            <rect width="360" height="280" fill="url(#dpPat)"/>
+            <!-- Festive zari embroidery effect -->
+            <g opacity="0.7">
+              <path d="M0 240 Q90 210,180 240 Q270 270,360 240 L360 280 L0 280 Z" fill="rgba(201,168,76,0.25)"/>
+              <path d="M0 248 Q90 220,180 248 Q270 276,360 248" stroke="#C9A84C" stroke-width="2" fill="none"/>
+            </g>
+            <!-- Flower motifs -->
+            <g fill="#C9A84C" opacity="0.5">
+              <circle cx="90" cy="90" r="18" fill="none" stroke="#DFC27A" stroke-width="2"/>
+              <circle cx="90" cy="90" r="8" fill="rgba(201,168,76,0.4)"/>
+              <path d="M80 90 Q90 75,100 90 Q90 105,80 90 Z" fill="rgba(201,168,76,0.35)"/>
+              <path d="M90 80 Q105 90,90 100 Q75 90,90 80 Z" fill="rgba(201,168,76,0.35)"/>
 
-      <!-- Woman 4 -->
-      <div class="woman-card reveal">
-        <div class="woman-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=500&q=80"
-               alt="Priya from Trichy"
-               class="woman-card-img"
-               onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none';" />
-          <div class="woman-card-shimmer" aria-hidden="true"></div>
-        </div>
-        <div class="woman-card-body">
-          <p class="woman-card-name">Priya, Trichy</p>
-          <p class="woman-card-caption">"Found her signature look with ABDAN — understated, dignified, effortlessly hers."</p>
-        </div>
-      </div>
+              <circle cx="240" cy="100" r="16" fill="none" stroke="#DFC27A" stroke-width="2"/>
+              <circle cx="240" cy="100" r="7" fill="rgba(201,168,76,0.4)"/>
 
-      <!-- Woman 5 -->
-      <div class="woman-card reveal">
-        <div class="woman-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80"
-               alt="Sujatha from Salem"
-               class="woman-card-img"
-               onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none';" />
-          <div class="woman-card-shimmer" aria-hidden="true"></div>
+              <circle cx="170" cy="155" r="14" fill="none" stroke="#DFC27A" stroke-width="1.5"/>
+              <circle cx="320" cy="80" r="12" fill="none" stroke="#DFC27A" stroke-width="1.5"/>
+            </g>
+            <rect x="0" y="0" width="360" height="280" fill="rgba(123,28,46,0.08)"/>
+            <text x="180" y="255" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="14" fill="rgba(201,168,76,0.9)" letter-spacing="3">FESTIVE DUPATTAS</text>
+          </svg>
+          <div class="prod-badge prod-badge-gold">Festive Edit</div>
         </div>
-        <div class="woman-card-body">
-          <p class="woman-card-name">Sujatha, Salem</p>
-          <p class="woman-card-caption">"Dresses to honour herself — not to impress anyone. ABDAN gets that."</p>
+        <div class="prod-body">
+          <h3 class="prod-title">Festive Dupattas</h3>
+          <p class="prod-desc">A little celebration in every drape. Because she deserves to feel festive — not just on occasions, but always.</p>
+          <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%27m%20interested%20in%20your%20Festive%20Dupattas%20%F0%9F%92%9B"
+             target="_blank" rel="noopener noreferrer"
+             class="prod-cta">
+            <span>Is This Mine? 💛</span>
+          </a>
+          <p class="prod-cta-sub">Tap to talk to us on WhatsApp — we'll guide you. No pressure, just help.</p>
         </div>
-      </div>
-
-      <!-- Woman 6 — CTA card -->
-      <div class="woman-cta-card reveal flex flex-col items-center justify-center text-center p-10 rounded-3xl border-2 border-dashed border-gold/40 bg-cream hover:border-gold hover:bg-cream-warm transition-all duration-400 min-h-[320px]">
-        <div class="w-16 h-16 rounded-full bg-gold/15 flex items-center justify-center mb-6">
-          <span class="text-2xl text-gold">✦</span>
-        </div>
-        <p class="font-display text-bark text-xl font-light mb-2">Your story belongs here too.</p>
-        <p class="font-body text-bark/55 text-sm leading-relaxed mb-6">Every woman who wears ABDAN has a story worth telling.</p>
-        <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20would%20love%20to%20share%20my%20style%20story%20with%20you%20%F0%9F%8C%B8"
-           target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest text-gold font-body font-semibold text-sm hover:bg-forest-dark transition-all duration-300 hover:-translate-y-0.5">
-          Share Your Story
-        </a>
       </div>
 
     </div><!-- /grid -->
@@ -455,135 +520,289 @@
 </section>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  STYLE INSPIRATION GRID                                  ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<section id="inspiration" class="py-28 bg-cream">
+<!-- ════════════════════════════════════════════════════════
+     WE SEE YOU — Emotional Story
+════════════════════════════════════════════════════════ -->
+<section id="we-see-you" class="we-see-you-section py-28 relative overflow-hidden">
+  <div class="we-see-bg absolute inset-0 z-0"></div>
+  <div class="max-w-6xl mx-auto px-6 lg:px-10 relative z-10">
+
+    <div class="text-center mb-16 reveal">
+      <span class="sec-label text-gold">We See You</span>
+      <h2 class="sec-title text-cream mt-3" style="font-size:clamp(2rem,4.5vw,3.2rem)">
+        Every quiet moment<br/><em class="italic text-gold">you carry for others</em>
+      </h2>
+    </div>
+
+    <!-- Life moment cards -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="moment-card reveal">
+        <div class="moment-icon">🌅</div>
+        <h3 class="moment-title">The 5 AM morning</h3>
+        <p class="moment-desc">Before anyone else wakes, you're already caring — making tiffin, folding clothes, beginning the day for everyone. You deserve something beautiful to begin it for yourself.</p>
+      </div>
+
+      <div class="moment-card reveal">
+        <div class="moment-icon">🙏</div>
+        <h3 class="moment-title">The quiet prayer</h3>
+        <p class="moment-desc">Every morning, a moment of devotion — for your family, your home, your hopes. Your clothing can honour that quiet grace you carry every single day.</p>
+      </div>
+
+      <div class="moment-card reveal">
+        <div class="moment-icon">💐</div>
+        <h3 class="moment-title">The function you dress for</h3>
+        <p class="moment-desc">A wedding, a puja, a school function. You make everyone look their best. This time, let something make <em>you</em> feel like the celebration itself.</p>
+      </div>
+
+      <div class="moment-card reveal">
+        <div class="moment-icon">✨</div>
+        <h3 class="moment-title">The "just for me" feeling</h3>
+        <p class="moment-desc">That rare moment when you hold something and think — "this is mine." ABDAN is built so you feel that with every single piece you choose.</p>
+      </div>
+
+      <div class="moment-card reveal">
+        <div class="moment-icon">💌</div>
+        <h3 class="moment-title">The compliment you remember</h3>
+        <p class="moment-desc">"You look beautiful today" — when it comes from a stranger at the temple, or your child noticing — that's the feeling we want to give you every time.</p>
+      </div>
+
+      <div class="moment-card moment-card-cta reveal">
+        <img src="assets/logo-coin.jpg" alt="ABDAN" class="w-16 h-16 rounded-full object-cover mx-auto mb-4 opacity-90" onerror="this.style.display='none'" />
+        <p class="font-display text-cream text-xl font-light mb-3">"Celebrating You,<br/>Every Day"</p>
+        <p class="font-body text-cream/65 text-sm mb-5 leading-relaxed">You've always put everyone first. Let us put <em class="text-gold">you</em> first, for once.</p>
+        <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20saw%20your%20We%20See%20You%20section%20and%20wanted%20to%20connect%20%F0%9F%92%9B"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-forest font-semibold text-sm hover:bg-gold-light transition-all duration-300">
+          Talk to us 💛
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     STORIES — "Stories Like Yours"
+════════════════════════════════════════════════════════ -->
+<section id="stories" class="py-28 bg-cream-warm">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
 
-    <div class="lg:flex lg:items-end lg:justify-between mb-16 reveal">
-      <div>
-        <span class="section-label">Style Stories</span>
-        <h2 class="section-title mt-3">Real Women.<br/><em class="italic text-forest">Real Beauty.</em></h2>
-      </div>
-      <p class="font-body text-bark/55 max-w-xs mt-4 lg:mt-0 text-sm leading-relaxed">
-        Every woman here dressed for herself.<br/>We just helped her find the words.
-      </p>
+    <div class="text-center mb-18 reveal">
+      <span class="sec-label">Stories Like Yours</span>
+      <h2 class="sec-title mt-3">Women Who <em class="italic text-forest">Choose Themselves</em></h2>
+      <p class="sec-sub mt-2">Every story here belongs to a real woman from Tamil Nadu — just like you.</p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-      <div class="insp-card group rounded-2xl overflow-hidden relative col-span-1 row-span-2 aspect-[3/4] reveal">
-        <img src="https://images.unsplash.com/photo-1606744888344-493238951221?w=400&q=80" alt="Style" class="insp-img" onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none'" />
-        <div class="insp-overlay">
-          <p class="font-display text-cream text-base italic font-light">"Graceful as the woman who wears it."</p>
-          <span class="font-body text-cream/60 text-xs mt-1 block">— Meenakshi, Madurai</span>
+      <!-- Story 1 — SVG silhouette, no real face -->
+      <div class="story-card reveal">
+        <div class="story-silhouette story-sil-1">
+          <svg viewBox="0 0 280 320" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="sil1Grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#F5F0E0"/><stop offset="100%" stop-color="#EDE4CC"/>
+              </linearGradient>
+            </defs>
+            <rect width="280" height="320" fill="url(#sil1Grad)"/>
+            <!-- Abstract Tamil feminine silhouette — draped saree, no face details -->
+            <ellipse cx="140" cy="70" rx="38" ry="45" fill="#1B5E35" opacity="0.15"/>
+            <path d="M102 115 C95 130,88 180,90 260 L190 260 C192 180,185 130,178 115 Z" fill="#1B5E35" opacity="0.18"/>
+            <!-- Saree drape flowing from shoulder -->
+            <path d="M110 118 C100 140,85 200,80 260 L120 260 C125 200,125 148,130 120 Z" fill="rgba(27,94,53,0.3)"/>
+            <!-- Dupatta drape -->
+            <path d="M150 118 Q180 145,200 180 Q210 210,205 260 L190 260 Q195 210,185 178 Q166 142,150 120 Z" fill="rgba(201,168,76,0.22)"/>
+            <!-- Zari border on pallu -->
+            <path d="M150 118 Q180 145,200 180" stroke="#C9A84C" stroke-width="2" fill="none" opacity="0.5"/>
+            <!-- Bangle hint -->
+            <circle cx="96" cy="190" r="8" fill="none" stroke="#C9A84C" stroke-width="2" opacity="0.5"/>
+            <circle cx="96" cy="202" r="8" fill="none" stroke="#1B5E35" stroke-width="1.5" opacity="0.4"/>
+            <!-- Temple jewellery motif at neck area -->
+            <path d="M125 128 Q140 138,155 128" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <circle cx="140" cy="133" r="4" fill="rgba(201,168,76,0.4)"/>
+          </svg>
+        </div>
+        <div class="story-body">
+          <p class="story-name">Meena, Chennai</p>
+          <p class="story-caption">"Loves simple elegance for everyday moments — a cotton kurti that feels like herself, every single morning."</p>
         </div>
       </div>
 
-      <div class="insp-card group rounded-2xl overflow-hidden relative aspect-square reveal">
-        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&q=80" alt="Style" class="insp-img" onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none'" />
-        <div class="insp-overlay">
-          <p class="font-display text-cream text-sm italic font-light">"Comfortable enough to cook, beautiful enough to pray."</p>
+      <!-- Story 2 -->
+      <div class="story-card reveal">
+        <div class="story-silhouette story-sil-2">
+          <svg viewBox="0 0 280 320" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="sil2Grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FDF0F3"/><stop offset="100%" stop-color="#F5DDE3"/>
+              </linearGradient>
+            </defs>
+            <rect width="280" height="320" fill="url(#sil2Grad)"/>
+            <!-- Silhouette 2 -->
+            <ellipse cx="140" cy="72" rx="36" ry="43" fill="#7B1C2E" opacity="0.15"/>
+            <path d="M104 114 C97 128,90 178,92 255 L188 255 C190 178,183 128,176 114 Z" fill="#7B1C2E" opacity="0.18"/>
+            <path d="M115 115 C108 135,100 195,97 255 L130 255 C133 195,130 145,136 118 Z" fill="rgba(123,28,46,0.28)"/>
+            <path d="M148 116 Q174 140,192 172 Q200 200,198 255 L183 255 Q185 198,178 168 Q161 137,148 118 Z" fill="rgba(201,168,76,0.2)"/>
+            <path d="M148 116 Q174 140,192 172" stroke="#C9A84C" stroke-width="2" fill="none" opacity="0.5"/>
+            <!-- Earring suggestion -->
+            <circle cx="106" cy="105" r="4" fill="rgba(201,168,76,0.5)"/>
+            <line x1="106" y1="109" x2="106" y2="120" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="106" cy="122" r="3" fill="rgba(201,168,76,0.4)"/>
+          </svg>
+        </div>
+        <div class="story-body">
+          <p class="story-name">Radha, Coimbatore</p>
+          <p class="story-caption">"A mother of three who believes you can dress with grace even on the busiest days. She found that grace here."</p>
         </div>
       </div>
 
-      <div class="insp-card group rounded-2xl overflow-hidden relative col-span-1 md:col-span-2 aspect-video md:aspect-[2/1] reveal">
-        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Style" class="insp-img" onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none'" />
-        <div class="insp-overlay">
-          <p class="font-display text-cream text-base italic font-light">"She doesn't dress to impress. She dresses to feel alive."</p>
+      <!-- Story 3 -->
+      <div class="story-card reveal">
+        <div class="story-silhouette story-sil-3">
+          <svg viewBox="0 0 280 320" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="sil3Grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#F0F5F2"/><stop offset="100%" stop-color="#DFF0E6"/>
+              </linearGradient>
+            </defs>
+            <rect width="280" height="320" fill="url(#sil3Grad)"/>
+            <ellipse cx="140" cy="68" rx="40" ry="46" fill="#1B5E35" opacity="0.12"/>
+            <path d="M100 113 C93 126,86 175,88 255 L192 255 C194 175,187 126,180 113 Z" fill="#1B5E35" opacity="0.16"/>
+            <path d="M112 114 C104 133,96 192,93 255 L126 255 C128 192,124 143,130 117 Z" fill="rgba(27,94,53,0.25)"/>
+            <path d="M150 115 Q178 143,196 176 Q205 205,202 255 L187 255 Q190 203,181 172 Q162 140,150 117 Z" fill="rgba(201,168,76,0.18)"/>
+            <!-- Maang tikka suggestion -->
+            <circle cx="140" cy="55" r="5" fill="rgba(201,168,76,0.45)"/>
+            <line x1="140" y1="60" x2="140" y2="72" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="story-body">
+          <p class="story-name">Kavya, Madurai</p>
+          <p class="story-caption">"Wears her Kanjivaram every Tuesday — tradition that gives her quiet confidence and a connection to who she truly is."</p>
         </div>
       </div>
 
-      <div class="insp-card group rounded-2xl overflow-hidden relative aspect-square reveal">
-        <img src="https://images.unsplash.com/photo-1610993351958-61e85f67aff7?w=400&q=80" alt="Style" class="insp-img" onerror="this.parentNode.style.background='#EDE4CC'; this.style.display='none'" />
-        <div class="insp-overlay">
-          <p class="font-display text-cream text-sm italic font-light">"Style is not a luxury. It's a language."</p>
-          <span class="font-body text-cream/60 text-xs mt-1 block">— Priya, Chennai</span>
-        </div>
-      </div>
+    </div><!-- /stories grid -->
+  </div>
+</section>
 
+
+<!-- ════════════════════════════════════════════════════════
+     COMMUNITY — "Something Magical is Coming"
+════════════════════════════════════════════════════════ -->
+<section id="community" class="community-section py-28 relative overflow-hidden">
+  <div class="community-bg absolute inset-0 z-0"></div>
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+
+    <div class="community-logo-wrap mb-8">
+      <img src="assets/logo-coin.jpg" alt="ABDAN" class="w-20 h-20 rounded-full object-cover mx-auto shadow-2xl community-logo-glow" onerror="this.style.display='none'" />
     </div>
 
-    <div class="text-center mt-12 reveal">
-      <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20would%20love%20to%20share%20my%20style%20story%20%F0%9F%8C%B8"
-         target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center gap-3 font-body text-sm text-bark/60 hover:text-forest transition-colors duration-300">
-        <span class="w-6 h-px bg-current"></span>
-        <span>Share your own story with us</span>
-        <span class="w-6 h-px bg-current"></span>
-      </a>
+    <span class="font-body text-gold text-xs tracking-[0.3em] uppercase font-semibold block mb-5">Something Magical is Coming…</span>
+
+    <h2 class="font-display font-light text-cream leading-snug mb-6" style="font-size:clamp(2rem,4.5vw,3rem)">
+      A small, private circle<br/>
+      <em class="italic text-gold">where women like you</em><br/>
+      share, ask, and celebrate each other.
+    </h2>
+
+    <p class="font-body text-cream/62 text-base leading-relaxed max-w-lg mx-auto mb-10">
+      Imagine a warm, safe space where you can ask "does this suit me?", share your favourite finds, get genuine opinions from women who understand your life — and feel celebrated, always.
+    </p>
+
+    <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20want%20to%20be%20the%20first%20to%20join%20your%20private%20circle%20%F0%9F%92%9B"
+       target="_blank" rel="noopener noreferrer"
+       class="community-cta-btn inline-flex items-center gap-3 px-10 py-4 rounded-full font-semibold text-base transition-all duration-300 hover:-translate-y-1">
+      Be the first to join — we'd love to have you 💛
+    </a>
+
+    <p class="font-body text-cream/35 text-xs mt-5">No spam. No selling. Just warmth, community, and style. 🌸</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     ACCOUNT SPACE — "Your Celebration Space"
+════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-cream-warm">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-12 reveal">
+      <span class="sec-label">Your Celebration Space</span>
+      <h2 class="sec-title mt-3">A small corner <em class="italic text-forest">just for you</em></h2>
+      <p class="sec-sub mt-2">Where your पसंद, your style, your moments are saved and remembered.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div class="account-card reveal">
+        <div class="account-icon">💝</div>
+        <p class="account-label">Moments You Loved</p>
+        <p class="account-desc">Your saved favourites, waiting for you whenever you return.</p>
+      </div>
+
+      <div class="account-card reveal">
+        <div class="account-icon">🛍</div>
+        <p class="account-label">Your Keepsakes</p>
+        <p class="account-desc">Every order — a little memory of the day you chose yourself.</p>
+      </div>
+
+      <div class="account-card reveal">
+        <div class="account-icon">✨</div>
+        <p class="account-label">Your Style Profile</p>
+        <p class="account-desc">So we remember what you love, and find more of it for you.</p>
+      </div>
+
+      <div class="account-card account-card-cta reveal">
+        <img src="assets/logo-coin.jpg" alt="" class="w-12 h-12 rounded-full object-cover mx-auto mb-3 opacity-80" aria-hidden="true" onerror="this.style.display='none'" />
+        <p class="font-display text-forest text-base font-light mb-3">"Coming soon — and made especially for you."</p>
+        <a href="#contact" class="font-body text-xs text-forest font-semibold hover:text-forest-dark transition-colors">
+          Be notified first →
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  COMMUNITY VOICE / TESTIMONIALS                          ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<section id="community" class="py-28 bg-cream-warm relative overflow-hidden">
-  <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-forest/4 -translate-y-1/2 translate-x-1/3" aria-hidden="true"></div>
-  <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-gold/4 translate-y-1/2 -translate-x-1/3" aria-hidden="true"></div>
-
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
-    <div class="text-center mb-20 reveal">
-      <span class="section-label">Community Voice</span>
-      <h2 class="section-title mt-3">
-        Words from <em class="italic text-forest">our neighbours</em>
-      </h2>
-      <p class="section-sub">These aren't reviews. They're conversations we're honoured to share.</p>
+<!-- ════════════════════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════════════════ -->
+<section id="community-voice" class="py-28 bg-cream relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-18 reveal">
+      <span class="sec-label">Community Voice</span>
+      <h2 class="sec-title mt-3">Words from <em class="italic text-forest">our neighbours</em></h2>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-8">
 
-      <!-- Testimonial 1 -->
       <article class="testi-card reveal">
-        <div class="testi-quote-mark text-forest">"</div>
-        <p class="testi-body">
-          I was scared to buy online. But my daughter-in-law insisted.
-          The saree arrived folded like a gift. I cried a little. It fit perfectly.
-          ABDAN understood what I needed even before I did.
-        </p>
-        <footer class="testi-footer">
-          <div class="testi-avatar bg-gold/25">K</div>
-          <div>
-            <p class="testi-name">Kavitha R.</p>
-            <p class="testi-location">Coimbatore, Tamil Nadu</p>
-          </div>
+        <div class="testi-qm">"</div>
+        <p class="testi-txt">I was scared to buy online. But my daughter-in-law insisted. The saree arrived folded like a gift. I cried a little. It fit perfectly. ABDAN understood what I needed even before I did.</p>
+        <footer class="testi-ft">
+          <div class="testi-av" style="background:rgba(201,168,76,0.22)">K</div>
+          <div><p class="testi-nm">Kavitha R.</p><p class="testi-loc">Coimbatore, TN</p></div>
         </footer>
       </article>
 
-      <!-- Testimonial 2 — Featured -->
-      <article class="testi-card testi-card-featured reveal relative">
-        <div class="testi-quote-mark text-cream/20">"</div>
-        <p class="testi-body text-cream/90">
-          I wore my ABDAN kurti to my son's school function.
-          Three mothers asked me where I got it. That moment — I felt so happy.
-          I'm not a model. I'm just a mother. But that day I felt beautiful.
-        </p>
-        <footer class="testi-footer border-cream/15">
-          <div class="testi-avatar bg-gold/25 text-gold">S</div>
-          <div>
-            <p class="testi-name text-cream">Sumathi N.</p>
-            <p class="testi-location text-cream/50">Salem, Tamil Nadu</p>
-          </div>
+      <article class="testi-card testi-featured reveal relative">
+        <div class="testi-qm text-cream/20">"</div>
+        <p class="testi-txt" style="color:rgba(250,248,242,0.88)">I wore my ABDAN kurti to my son's school function. Three mothers asked me where I got it. I'm not a model. I'm just a mother. But that day I felt beautiful.</p>
+        <footer class="testi-ft border-cream/15">
+          <div class="testi-av" style="background:rgba(201,168,76,0.3); color:var(--gold)">S</div>
+          <div><p class="testi-nm" style="color:var(--cream)">Sumathi N.</p><p class="testi-loc" style="color:rgba(250,248,242,0.45)">Salem, TN</p></div>
         </footer>
-        <span class="absolute top-5 right-6 font-display text-5xl leading-none text-cream/10 select-none" aria-hidden="true">"</span>
+        <span class="absolute top-5 right-6 font-display text-5xl leading-none text-cream/10 select-none">"</span>
       </article>
 
-      <!-- Testimonial 3 -->
       <article class="testi-card reveal">
-        <div class="testi-quote-mark text-forest">"</div>
-        <p class="testi-body">
-          I ordered a dupatta for Pongal. It arrived with a small handwritten note that said
-          "May your celebrations be as colourful as you are." I kept that note. Still have it.
-        </p>
-        <footer class="testi-footer">
-          <div class="testi-avatar bg-forest/15">L</div>
-          <div>
-            <p class="testi-name">Lakshmi V.</p>
-            <p class="testi-location">Madurai, Tamil Nadu</p>
-          </div>
+        <div class="testi-qm">"</div>
+        <p class="testi-txt">I ordered a dupatta for Pongal. It arrived with a handwritten note — "May your celebrations be as colourful as you are." I kept that note. Still have it.</p>
+        <footer class="testi-ft">
+          <div class="testi-av" style="background:rgba(27,94,53,0.12)">L</div>
+          <div><p class="testi-nm">Lakshmi V.</p><p class="testi-loc">Madurai, TN</p></div>
         </footer>
       </article>
 
@@ -592,169 +811,117 @@
 </section>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  LOYALTY — ABDAN CIRCLE                                  ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<section id="loyalty" class="py-28 bg-cream relative overflow-hidden">
-  <div class="loyalty-pattern absolute inset-0 opacity-[0.03]" aria-hidden="true"></div>
-
-  <div class="max-w-5xl mx-auto px-6 lg:px-10 relative z-10">
-    <div class="text-center reveal">
-      <span class="section-label">A Circle of Belonging</span>
-      <h2 class="section-title mt-3">
-        The <em class="italic text-forest">ABDAN Circle</em> —<br/>
-        where she is always remembered.
-      </h2>
-      <p class="section-sub max-w-xl mx-auto mt-4 mb-16">
-        This isn't a loyalty scheme. It's our way of saying:
-        <em class="text-bark/75">we see you, we appreciate you, and we want to celebrate you</em> —
-        not because you bought something, but because you chose us.
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8 mb-14">
-
-      <div class="loyalty-pillar reveal group">
-        <div class="loyalty-icon bg-forest/10 group-hover:bg-forest/18 transition-colors duration-300">🪔</div>
-        <h3 class="loyalty-title">Early Access</h3>
-        <p class="loyalty-desc">Before the new collection reaches anyone else, you see it first. Because you've earned that quiet privilege.</p>
-      </div>
-
-      <div class="loyalty-pillar loyalty-pillar-featured reveal">
-        <div class="loyalty-icon bg-cream/20">💌</div>
-        <h3 class="loyalty-title text-gold">Personal Notes</h3>
-        <p class="loyalty-desc text-cream/80">Festival greetings. Birthday messages. Little notes to remind you we're thinking of you — always.</p>
-      </div>
-
-      <div class="loyalty-pillar reveal group">
-        <div class="loyalty-icon bg-gold/15 group-hover:bg-gold/25 transition-colors duration-300">🎁</div>
-        <h3 class="loyalty-title">Surprise Gifts</h3>
-        <p class="loyalty-desc">Occasionally, unexpectedly — a small something arrives. Not because of a transaction. Just because.</p>
-      </div>
-
-    </div>
-
-    <div class="text-center reveal">
-      <a href="#contact"
-         class="btn-primary inline-flex items-center gap-3 px-10 py-4 rounded-full bg-bark text-cream font-body font-semibold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5">
-        Join Our Circle <span class="text-gold">→</span>
-      </a>
-      <p class="font-body text-bark/40 text-xs mt-5">No sign-ups. No forms. Just send us a WhatsApp. We'll do the rest.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  CONTACT & WHATSAPP CTA                                  ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<section id="contact" class="py-28 bg-forest text-cream relative overflow-hidden">
+<!-- ════════════════════════════════════════════════════════
+     CONTACT / WHATSAPP
+════════════════════════════════════════════════════════ -->
+<section id="contact" class="py-28 bg-forest relative overflow-hidden">
   <div class="contact-dots absolute inset-0 opacity-[0.04]" aria-hidden="true"></div>
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gold/30" aria-hidden="true"></div>
 
-  <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center relative z-10 reveal">
-    <span class="font-body text-gold text-xs tracking-[0.3em] uppercase font-semibold block mb-6">We Are Listening</span>
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+    <div class="mb-8">
+      <img src="assets/logo-coin.jpg" alt="ABDAN" class="w-16 h-16 rounded-full object-cover mx-auto shadow-xl opacity-90" onerror="this.style.display='none'" />
+    </div>
 
-    <h2 class="font-display font-light leading-tight mb-8" style="font-size: clamp(2rem, 5vw, 3.5rem);">
+    <span class="font-body text-gold text-xs tracking-[0.3em] uppercase font-semibold block mb-5">We Are Always Listening</span>
+
+    <h2 class="font-display font-light text-cream leading-tight mb-6" style="font-size:clamp(2rem,4.5vw,3.2rem)">
       Even if you're just <em class="italic text-gold">exploring</em>,<br/>
       we'd love to hear from you.
     </h2>
-
-    <p class="font-body text-cream/60 text-lg leading-relaxed max-w-lg mx-auto mb-14">
-      No pressure. No scripts. Just a real conversation.
-      Ask about a colour, a size, a saree for your daughter's wedding —
-      or simply say hello.
+    <p class="font-body text-cream/58 text-base leading-relaxed max-w-lg mx-auto mb-12">
+      We're always happy to help — even if you're just exploring 😊<br/>
+      No pressure. No scripts. Just a real, warm conversation.
     </p>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16">
-
-      <!-- WhatsApp CTA — upgraded -->
-      <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20was%20just%20exploring%20and%20wanted%20to%20say%20hi%20%F0%9F%99%8F"
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-5 mb-14">
+      <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20was%20just%20exploring%20and%20wanted%20to%20say%20hi%20%F0%9F%92%9B"
          target="_blank" rel="noopener noreferrer"
-         class="wa-btn inline-flex items-center gap-3 px-8 py-4 rounded-full font-body font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5">
-        <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        <span>💬 Talk to us — even if you're just exploring</span>
+         class="wa-cta-btn inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:-translate-y-0.5">
+        <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        💬 Talk to us — we're here for you
       </a>
-
-      <!-- Email — hardcoded, not obfuscated by Cloudflare -->
       <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#108;&#111;&#64;&#97;&#98;&#100;&#97;&#110;&#46;&#105;&#110;"
-         class="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-cream/25 text-cream/80 font-body font-semibold hover:border-cream/60 hover:text-cream transition-all duration-300 hover:-translate-y-0.5">
-        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
-        </svg>
-        <span>hello@abdan.in</span>
+         class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-cream/25 text-cream/75 font-semibold hover:border-cream/55 hover:text-cream transition-all duration-300 hover:-translate-y-0.5">
+        hello@abdan.in
       </a>
     </div>
 
-    <!-- Trust reassurance -->
-    <div class="grid grid-cols-3 gap-4 border-t border-cream/10 pt-12">
+    <div class="grid grid-cols-3 gap-4 border-t border-cream/10 pt-10">
       <div class="text-center">
         <p class="font-display text-2xl font-light text-gold mb-1">100%</p>
-        <p class="font-body text-cream/45 text-xs uppercase tracking-widest">Genuine products</p>
+        <p class="font-body text-cream/42 text-xs uppercase tracking-widest">Genuine products</p>
       </div>
       <div class="text-center border-x border-cream/10">
         <p class="font-display text-2xl font-light text-gold mb-1">Easy</p>
-        <p class="font-body text-cream/45 text-xs uppercase tracking-widest">Returns welcome</p>
+        <p class="font-body text-cream/42 text-xs uppercase tracking-widest">Returns welcome</p>
       </div>
       <div class="text-center">
         <p class="font-display text-2xl font-light text-gold mb-1">Real</p>
-        <p class="font-body text-cream/45 text-xs uppercase tracking-widest">Human support</p>
+        <p class="font-body text-cream/42 text-xs uppercase tracking-widest">Human support</p>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  FOOTER                                                  ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<footer class="bg-bark text-cream/55 py-10 border-t border-white/5">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-5">
+<!-- ════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer class="bg-bark py-12 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
 
-    <div class="flex items-center gap-3">
-      <img src="assets/logo.png" alt="ABDAN" class="h-8 w-auto brightness-0 invert opacity-70"
-           id="footer-logo"
-           onerror="document.getElementById('footer-logo-fb').style.display='flex'; this.style.display='none';" />
-      <div id="footer-logo-fb" class="items-center gap-2" style="display:none;">
-        <div class="w-6 h-6 rounded-full bg-forest flex items-center justify-center">
-          <span class="text-gold font-display text-xs font-bold">A</span>
-        </div>
-        <span class="font-display text-cream/75 tracking-wider">ABDAN</span>
-      </div>
+    <!-- Logo row -->
+    <div class="flex flex-col items-center mb-8">
+      <img src="assets/logo-wordmark.jpg" alt="ABDAN — Where Devotion Meets Style" class="h-12 w-auto object-contain mb-3 opacity-85" style="filter: brightness(1.1)" onerror="this.style.display='none'" />
+      <p class="font-body text-cream/40 text-xs tracking-[0.2em] uppercase">Celebrating You, Every Day</p>
     </div>
 
-    <p class="font-body text-xs text-center leading-relaxed">
-      © 2025 ABDAN. <span class="text-gold/60">Where Devotion Meets Style.</span>
-    </p>
-
-    <nav class="flex gap-6 text-xs font-body" aria-label="Footer navigation">
-      <a href="#" class="hover:text-cream/80 transition-colors duration-300">Privacy</a>
-      <a href="#" class="hover:text-cream/80 transition-colors duration-300">Shipping</a>
-      <a href="#contact" class="hover:text-cream/80 transition-colors duration-300">Contact</a>
+    <!-- Nav links -->
+    <nav class="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-8" aria-label="Footer nav">
+      <a href="#hero"        class="font-body text-cream/45 text-xs hover:text-cream/75 transition-colors">Home</a>
+      <a href="#collections" class="font-body text-cream/45 text-xs hover:text-cream/75 transition-colors">Collections</a>
+      <a href="#we-see-you"  class="font-body text-cream/45 text-xs hover:text-cream/75 transition-colors">We See You</a>
+      <a href="#stories"     class="font-body text-cream/45 text-xs hover:text-cream/75 transition-colors">Stories</a>
+      <a href="#community"   class="font-body text-cream/45 text-xs hover:text-cream/75 transition-colors">Our Circle</a>
+      <a href="#contact"     class="font-body text-cream/45 text-xs hover:text-cream/75 transition-colors">Contact</a>
     </nav>
+
+    <!-- Aggregator disclaimer (clear & friendly) -->
+    <div class="max-w-2xl mx-auto text-center mb-8 px-4">
+      <p class="font-body text-cream/30 text-xs leading-relaxed italic">
+        ABDAN curates and connects you with trusted partner vendors to bring you the best collections.
+        We personally coordinate every order to ensure a smooth, reliable, and warm experience for you. 💛
+      </p>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-center justify-between gap-3 border-t border-cream/8 pt-6">
+      <p class="font-body text-cream/30 text-xs">© 2025 ABDAN. Where Devotion Meets Style.</p>
+      <div class="flex gap-5 text-xs font-body">
+        <a href="#" class="text-cream/30 hover:text-cream/60 transition-colors">Privacy</a>
+        <a href="#" class="text-cream/30 hover:text-cream/60 transition-colors">Shipping</a>
+        <a href="#contact" class="text-cream/30 hover:text-cream/60 transition-colors">Contact</a>
+      </div>
+    </div>
   </div>
 </footer>
 
 
-<!-- ╔══════════════════════════════════════════════════════════╗
-     ║  FLOATING WHATSAPP BUTTON                                ║
-     ╚══════════════════════════════════════════════════════════╝ -->
-<div class="wa-float-wrap fixed bottom-7 right-7 z-50" role="complementary" aria-label="WhatsApp contact">
-  <!-- Pulse rings (CSS-only, no JS animation clash) -->
-  <span class="wa-pulse-ring wa-ring-1" aria-hidden="true"></span>
-  <span class="wa-pulse-ring wa-ring-2" aria-hidden="true"></span>
-  <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20was%20just%20exploring%20and%20wanted%20to%20say%20hi%20%F0%9F%99%8F"
+<!-- ════════════════════════════════════════════════════════
+     FLOATING WHATSAPP BUTTON
+════════════════════════════════════════════════════════ -->
+<div class="wa-float-root" role="complementary" aria-label="WhatsApp contact">
+  <span class="wa-ring wa-ring-a" aria-hidden="true"></span>
+  <span class="wa-ring wa-ring-b" aria-hidden="true"></span>
+  <a href="https://wa.me/919999999999?text=Hello%20ABDAN!%20I%20was%20just%20exploring%20and%20wanted%20to%20say%20hi%20%F0%9F%92%9B"
      target="_blank" rel="noopener noreferrer"
-     class="wa-float-btn relative flex items-center justify-center w-14 h-14 rounded-full shadow-xl"
+     class="wa-float-btn"
      aria-label="Chat with ABDAN on WhatsApp">
-    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
+    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
+  <!-- Tooltip -->
+  <div class="wa-tooltip">💬 Talk to us — we're here for you</div>
 </div>
 
-<script src="script.js"></script>
+<script src="script_002.js"></script>
 </body>
 </html>

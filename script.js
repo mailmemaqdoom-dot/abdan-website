@@ -1,60 +1,41 @@
 /* ============================================================
-   ABDAN — script.js  v3
-   • All DOM ops inside DOMContentLoaded (no classList null errors)
-   • Hero staggered text animation
-   • IntersectionObserver scroll reveal
-   • Navbar scroll state
-   • Mobile menu
-   • Card parallax tilt
-   • Logo fallback
+   ABDAN — script_002.js
+   Serial: 002
+   All DOM operations inside DOMContentLoaded.
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  /* ────────────────────────────────────────────────────────
-     1. LOGO FALLBACK
-  ─────────────────────────────────────────────────────── */
-  const navLogo = document.getElementById('nav-logo');
-  if (navLogo) {
-    navLogo.addEventListener('error', function () {
-      this.style.display = 'none';
-      const fb = document.getElementById('nav-logo-fallback');
-      if (fb) fb.style.display = 'flex';
+  /* ── 1. LOGO FALLBACK ───────────────────────────────────── */
+  document.querySelectorAll('img[onerror]').forEach(function (img) {
+    // onerror handlers already in HTML; this is just a safety net
+    img.addEventListener('error', function () {
+      this.style.opacity = '0';
     });
-  }
+  });
 
-  /* ────────────────────────────────────────────────────────
-     2. NAVBAR SCROLL BEHAVIOUR
-  ─────────────────────────────────────────────────────── */
-  const navbar = document.getElementById('navbar');
 
+  /* ── 2. NAVBAR SCROLL STATE ─────────────────────────────── */
+  var navbar = document.getElementById('navbar');
   function syncNavbar () {
     if (!navbar) return;
-    if (window.scrollY > 64) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
   }
   window.addEventListener('scroll', syncNavbar, { passive: true });
-  syncNavbar(); // initial call
+  syncNavbar();
 
 
-  /* ────────────────────────────────────────────────────────
-     3. MOBILE MENU
-  ─────────────────────────────────────────────────────── */
-  const menuBtn    = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+  /* ── 3. MOBILE MENU ─────────────────────────────────────── */
+  var menuBtn    = document.getElementById('menu-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
 
   if (menuBtn && mobileMenu) {
     menuBtn.addEventListener('click', function () {
-      const open = mobileMenu.classList.toggle('hidden') === false;
+      var open = mobileMenu.classList.toggle('hidden') === false;
       this.classList.toggle('open', open);
       this.setAttribute('aria-expanded', String(open));
     });
-
-    // Close on nav link click
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.add('hidden');
@@ -65,175 +46,166 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  /* ────────────────────────────────────────────────────────
-     4. SMOOTH SCROLL
-  ─────────────────────────────────────────────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      const id = this.getAttribute('href');
+  /* ── 4. SMOOTH SCROLL ───────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = this.getAttribute('href');
       if (!id || id === '#') return;
-      const target = document.querySelector(id);
+      var target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      const offset = navbar ? navbar.offsetHeight : 0;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset - 10;
-      window.scrollTo({ top: top, behavior: 'smooth' });
+      var offset = navbar ? navbar.offsetHeight : 0;
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - offset - 10,
+        behavior: 'smooth'
+      });
     });
   });
 
 
-  /* ────────────────────────────────────────────────────────
-     5. HERO STAGGERED TEXT ANIMATION
-     Each line/element fades up with a staggered delay
-  ─────────────────────────────────────────────────────── */
-  const heroAnimItems = [
-    { selector: '.hero-label',   delay: 0.15,  duration: 0.7 },
-    { selector: '.hero-line:nth-child(1)', delay: 0.35, duration: 0.75 },
-    { selector: '.hero-line:nth-child(2)', delay: 0.50, duration: 0.75 },
-    { selector: '.hero-line:nth-child(3)', delay: 0.65, duration: 0.75 },
-    { selector: '.hero-line:nth-child(4)', delay: 0.80, duration: 0.75 },
-    { selector: '.hero-brand',   delay: 0.95,  duration: 0.7 },
-    { selector: '.hero-sub',     delay: 1.10,  duration: 0.7 },
-    { selector: '.hero-ctas',    delay: 1.25,  duration: 0.7 },
-    { selector: '.hero-trust',   delay: 1.40,  duration: 0.7 },
-    { selector: '.hero-visual',  delay: 0.40,  duration: 0.9 },
-    { selector: '.scroll-cue',   delay: 1.80,  duration: 0.6 },
+  /* ── 5. HERO STAGGERED TEXT ANIMATION ───────────────────── */
+  // Each element gets a CSS animation applied via JS to guarantee
+  // it fires only after DOMContentLoaded (never on null elements)
+  var heroItems = [
+    { sel: '.hero-greeting',  delay: 0.18, dur: 0.7  },
+    { sel: '.hero-l-1',       delay: 0.38, dur: 0.75 },
+    { sel: '.hero-l-2',       delay: 0.54, dur: 0.7  },
+    { sel: '.hero-l-3',       delay: 0.68, dur: 0.7  },
+    { sel: '.hero-l-4',       delay: 0.82, dur: 0.7  },
+    { sel: '.hero-l-5',       delay: 0.98, dur: 0.8  },
+    { sel: '.hero-brand',     delay: 1.18, dur: 0.75 },
+    { sel: '.hero-sub',       delay: 1.34, dur: 0.7  },
+    { sel: '.hero-ctas',      delay: 1.50, dur: 0.7  },
+    { sel: '.hero-trust',     delay: 1.65, dur: 0.65 },
+    { sel: '.hero-visual',    delay: 0.45, dur: 0.95 },
+    { sel: '.scroll-cue',     delay: 2.00, dur: 0.6  },
   ];
 
-  heroAnimItems.forEach(function (item) {
-    const el = document.querySelector(item.selector);
+  heroItems.forEach(function (item) {
+    var el = document.querySelector(item.sel);
     if (!el) return;
-    // Already starts opacity:0 via CSS
     el.style.animation =
-      'fadeUp ' + item.duration + 's cubic-bezier(0.25,0.46,0.45,0.94) ' + item.delay + 's forwards';
+      'fadeUp ' + item.dur + 's cubic-bezier(0.25,0.46,0.45,0.94) ' + item.delay + 's forwards';
   });
 
 
-  /* ────────────────────────────────────────────────────────
-     6. SCROLL REVEAL — IntersectionObserver
-  ─────────────────────────────────────────────────────── */
-  const revealEls = document.querySelectorAll('.reveal');
+  /* ── 6. INTERSECTION OBSERVER — SCROLL REVEAL ───────────── */
+  var revealEls = document.querySelectorAll('.reveal');
 
   if ('IntersectionObserver' in window && revealEls.length) {
-    var revealObs = new IntersectionObserver(function (entries) {
+    var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          revealObs.unobserve(entry.target);
+          obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.10, rootMargin: '0px 0px -36px 0px' });
 
-    revealEls.forEach(function (el) { revealObs.observe(el); });
+    revealEls.forEach(function (el) { obs.observe(el); });
   } else {
-    // Fallback: show all immediately
     revealEls.forEach(function (el) { el.classList.add('visible'); });
   }
 
 
-  /* ────────────────────────────────────────────────────────
-     7. HERO CARD — subtle parallax tilt on desktop
-  ─────────────────────────────────────────────────────── */
+  /* ── 7. CARD STACK PARALLAX TILT (desktop only) ─────────── */
   var cardStack = document.querySelector('.card-stack');
   var heroSec   = document.getElementById('hero');
 
-  if (cardStack && heroSec && window.matchMedia('(pointer: fine)').matches) {
-    var tiltActive = false;
-
+  if (cardStack && heroSec && window.matchMedia('(pointer:fine)').matches) {
+    var tiltLive = false;
     heroSec.addEventListener('mousemove', function (e) {
       var r  = heroSec.getBoundingClientRect();
       var dx = (e.clientX - (r.left + r.width  * 0.5)) / (r.width  * 0.5);
       var dy = (e.clientY - (r.top  + r.height * 0.5)) / (r.height * 0.5);
-      if (!tiltActive) {
-        cardStack.style.transition = 'none';
-        tiltActive = true;
-      }
+      if (!tiltLive) { cardStack.style.transition = 'none'; tiltLive = true; }
       cardStack.style.transform =
         'perspective(900px) rotateX(' + (dy * 4) + 'deg) rotateY(' + (-dx * 4) + 'deg)';
     });
-
     heroSec.addEventListener('mouseleave', function () {
-      tiltActive = false;
+      tiltLive = false;
       cardStack.style.transition = 'transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)';
       cardStack.style.transform  = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
     });
   }
 
 
-  /* ────────────────────────────────────────────────────────
-     8. TESTIMONIAL STAGGER
-  ─────────────────────────────────────────────────────── */
-  document.querySelectorAll('.testi-card').forEach(function (card, i) {
-    card.style.transitionDelay = (i * 0.12) + 's';
-  });
+  /* ── 8. LOGO SHOWCASE — gentle 3D tilt on hover ─────────── */
+  var logoShowcase = document.querySelector('.logo-showcase');
+  if (logoShowcase && window.matchMedia('(pointer:fine)').matches) {
+    logoShowcase.addEventListener('mousemove', function (e) {
+      var r  = this.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width  * 0.5)) / (r.width  * 0.5);
+      var dy = (e.clientY - (r.top  + r.height * 0.5)) / (r.height * 0.5);
+      this.style.transform =
+        'perspective(600px) rotateX(' + (-dy * 8) + 'deg) rotateY(' + (dx * 8) + 'deg) scale(1.03)';
+      this.style.transition = 'none';
+    });
+    logoShowcase.addEventListener('mouseleave', function () {
+      this.style.transition = 'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
+      this.style.transform  = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  }
 
 
-  /* ────────────────────────────────────────────────────────
-     9. ACTIVE NAV LINK HIGHLIGHTING
-  ─────────────────────────────────────────────────────── */
+  /* ── 9. ACTIVE NAV LINK ──────────────────────────────────── */
   var sections = document.querySelectorAll('section[id]');
-  var navLinks = document.querySelectorAll('.nav-link');
+  var navLinks = document.querySelectorAll('.nav-lnk');
 
   function syncActiveNav () {
     var current = '';
     sections.forEach(function (sec) {
-      if (sec.getBoundingClientRect().top <= 110) current = sec.id;
+      if (sec.getBoundingClientRect().top <= 100) current = sec.id;
     });
-    navLinks.forEach(function (link) {
-      var href = link.getAttribute('href').replace('#', '');
-      link.style.color = (href === current) ? 'var(--forest)' : '';
-      link.style.fontWeight = (href === current) ? '600' : '';
+    navLinks.forEach(function (lnk) {
+      var href = lnk.getAttribute('href').replace('#','');
+      lnk.style.color      = (href === current) ? 'var(--forest)' : '';
+      lnk.style.fontWeight = (href === current) ? '600' : '';
     });
   }
   window.addEventListener('scroll', syncActiveNav, { passive: true });
 
 
-  /* ────────────────────────────────────────────────────────
-     10. COLLECTION CARD — explicit image zoom for Safari
-  ─────────────────────────────────────────────────────── */
-  document.querySelectorAll('.col-card').forEach(function (card) {
-    var img = card.querySelector('.col-card-img');
-    if (!img) return;
-    card.addEventListener('mouseenter', function () {
-      img.style.transform  = 'scale(1.06)';
-      img.style.transition = 'transform 700ms cubic-bezier(0.25,0.46,0.45,0.94)';
-    });
-    card.addEventListener('mouseleave', function () {
-      img.style.transform = 'scale(1)';
-    });
-  });
+  /* ── 10. BUTTON RIPPLE EFFECT ────────────────────────────── */
+  document.querySelectorAll('.cta-primary, .prod-cta, .community-cta-btn, .wa-preview-btn, .wa-cta-btn').forEach(function (btn) {
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
 
-
-  /* ────────────────────────────────────────────────────────
-     11. WOMEN CARD — explicit image zoom for Safari
-  ─────────────────────────────────────────────────────── */
-  document.querySelectorAll('.woman-card').forEach(function (card) {
-    var img = card.querySelector('.woman-card-img');
-    if (!img) return;
-    card.addEventListener('mouseenter', function () {
-      img.style.transform  = 'scale(1.05)';
-      img.style.transition = 'transform 700ms cubic-bezier(0.25,0.46,0.45,0.94)';
-    });
-    card.addEventListener('mouseleave', function () {
-      img.style.transform = 'scale(1)';
+    btn.addEventListener('click', function (e) {
+      var ripple = document.createElement('span');
+      var rect   = this.getBoundingClientRect();
+      var size   = Math.max(rect.width, rect.height);
+      ripple.style.cssText =
+        'position:absolute;border-radius:50%;background:rgba(255,255,255,0.25);' +
+        'width:' + size + 'px;height:' + size + 'px;' +
+        'left:' + (e.clientX - rect.left - size/2) + 'px;' +
+        'top:'  + (e.clientY - rect.top  - size/2) + 'px;' +
+        'transform:scale(0);animation:rippleAnim 0.55s ease-out forwards;pointer-events:none;';
+      this.appendChild(ripple);
+      setTimeout(function () { if (ripple.parentNode) ripple.parentNode.removeChild(ripple); }, 600);
     });
   });
 
+  // Inject ripple keyframes once
+  if (!document.getElementById('ripple-style')) {
+    var ks = document.createElement('style');
+    ks.id  = 'ripple-style';
+    ks.textContent = '@keyframes rippleAnim { to { transform:scale(2.5); opacity:0; } }';
+    document.head.appendChild(ks);
+  }
 
-  /* ────────────────────────────────────────────────────────
-     12. REDUCED MOTION RESPECT
-  ─────────────────────────────────────────────────────── */
+
+  /* ── 11. REDUCED MOTION ─────────────────────────────────── */
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // Show hero elements instantly
     document.querySelectorAll(
-      '.hero-label,.hero-line,.hero-brand,.hero-sub,.hero-ctas,.hero-trust,.hero-visual,.scroll-cue'
+      '.hero-greeting,.hero-l-1,.hero-l-2,.hero-l-3,.hero-l-4,.hero-l-5,' +
+      '.hero-brand,.hero-sub,.hero-ctas,.hero-trust,.hero-visual,.scroll-cue'
     ).forEach(function (el) {
       el.style.animation = 'none';
       el.style.opacity   = '1';
       el.style.transform = 'none';
     });
-    // Show all reveal elements instantly
     revealEls.forEach(function (el) { el.classList.add('visible'); });
   }
 
-}); // ── end DOMContentLoaded ──
+}); // end DOMContentLoaded
