@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<meta name="description" content="ABDAN — Your Devotion Deserves to be Seen. Curated ethnic wear for Tamil Nadu women who deserve to feel celebrated every day."/>
-<title>ABDAN | Your Devotion Deserves to be Seen</title>
+<meta name="description" content="ABDAN — Where Devotion Meets Style. Curated ethnic wear for Tamil Nadu women who deserve to feel celebrated every day."/>
+<title>ABDAN | Where Devotion Meets Style</title>
 <meta name="theme-color" content="#1B5E35"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -307,6 +307,158 @@ footer{background:var(--B);padding:3rem 2rem 2rem;border-top:1px solid rgba(255,
   *{animation:none!important;transition:none!important}
   .rv{opacity:1!important;transform:none!important}
 }
+
+/* ─── ANIMATION ENHANCEMENTS ──────────────────────────────
+   Scroll · Product cards · Images · Buttons
+   All GPU-composited (opacity + transform only).
+   No layout, content, or structure changes.
+────────────────────────────────────────────────────────── */
+
+/* 1. SCROLL REVEAL — tighter, snappier than base .rv
+      Uses a dedicated class so existing .rv is untouched   */
+@keyframes abdn-in{
+  from{opacity:0;transform:translateY(14px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+.abdn-rv{
+  opacity:0;
+  animation:abdn-in 300ms cubic-bezier(.22,.61,.36,1) both;
+  will-change:opacity,transform;
+}
+/* Stagger helpers */
+.abdn-rv.s1{animation-delay:60ms}
+.abdn-rv.s2{animation-delay:120ms}
+.abdn-rv.s3{animation-delay:180ms}
+/* Paused until JS adds .abdn-go (same IntersectionObserver) */
+.abdn-rv:not(.abdn-go){animation-play-state:paused}
+.abdn-rv.abdn-go{animation-play-state:running}
+
+/* 2. PRODUCT CARDS — image zoom + shadow lift
+      Overrides existing .pc / .piw svg transitions with
+      smoother values and a richer shadow arc              */
+.pc{
+  transition:
+    transform 280ms cubic-bezier(.22,.61,.36,1),
+    box-shadow 280ms cubic-bezier(.22,.61,.36,1);
+}
+.pc:hover{
+  transform:translateY(-6px) scale(1.012);
+  box-shadow:
+    0 4px  8px  rgba(44,36,22,.04),
+    0 12px 24px rgba(44,36,22,.08),
+    0 28px 48px rgba(44,36,22,.11);
+}
+/* Image zoom inside card */
+.piw{overflow:hidden}
+.piw svg,.piw img{
+  transition:transform 400ms cubic-bezier(.22,.61,.36,1);
+  will-change:transform;
+}
+.pc:hover .piw svg,
+.pc:hover .piw img{transform:scale(1.06)}
+
+/* 3. IMAGES — subtle zoom-in on first load
+      Targets real <img> tags; SVGs animate separately    */
+@keyframes abdn-imgload{
+  from{opacity:0;transform:scale(.97)}
+  to  {opacity:1;transform:scale(1)}
+}
+img.abdn-loaded{
+  animation:abdn-imgload 350ms cubic-bezier(.22,.61,.36,1) both;
+  will-change:opacity,transform;
+}
+/* Nav coin & footer logos get a gentler fade only */
+#nc,#nw,#fc,#fw{
+  transition:opacity 280ms ease;
+}
+
+/* 4. BUTTONS — unified scale + shadow micro-interaction   */
+/* Primary green buttons */
+.bwa,.bask,.bacl,.ncta,.mcwa,.popcl,.tebtn,.pwaib{
+  transition:
+    background 220ms ease,
+    transform  180ms cubic-bezier(.34,1.56,.64,1),
+    box-shadow 220ms ease,
+    color      180ms ease;
+}
+.bwa:hover{transform:translateY(-2px) scale(1.025)}
+.bask:hover,.ncta:hover,.tebtn:hover,.popcl:hover,.pwaib:hover{
+  transform:translateY(-1px) scale(1.03);
+}
+.bacl:hover{transform:translateY(-2px) scale(1.025)}
+.mcwa:hover{transform:translateY(-1px) scale(1.02)}
+
+/* Outline / ghost buttons */
+.bex,.sb,.mcph,.pwadb{
+  transition:
+    background    220ms ease,
+    border-color  220ms ease,
+    color         180ms ease,
+    transform     180ms cubic-bezier(.34,1.56,.64,1);
+}
+.bex:hover{transform:translateY(-2px) scale(1.025)}
+.sb:hover  {transform:translateY(-2px) scale(1.025)}
+.mcph:hover{transform:translateY(-1px) scale(1.02)}
+
+/* Close button in modal */
+.mclose{
+  transition:background 180ms ease,transform 180ms cubic-bezier(.34,1.56,.64,1);
+}
+.mclose:hover{transform:scale(1.12)}
+
+/* "View details" text link — underline slide */
+.bdet{
+  transition:color 200ms ease,text-decoration-color 200ms ease;
+}
+
+/* Floating WA button scale on hover — CSS-only */
+.wfbtn{
+  transition:transform 200ms cubic-bezier(.34,1.56,.64,1),box-shadow 200ms ease;
+}
+.wfbtn:hover{transform:scale(1.12)}
+
+/* Section cards (wsy, acc, tc) — consistent lift */
+.wc,.acc,.tc{
+  transition:
+    background   300ms ease,
+    border-color 300ms ease,
+    transform    280ms cubic-bezier(.22,.61,.36,1),
+    box-shadow   280ms cubic-bezier(.22,.61,.36,1);
+}
+.wc:hover{transform:translateY(-5px)}
+.acc:hover{transform:translateY(-5px)}
+.tc:hover{transform:translateY(-4px)}
+
+/* Teaser cards */
+.tec{
+  transition:
+    border-color 280ms ease,
+    background   280ms ease,
+    transform    280ms cubic-bezier(.22,.61,.36,1);
+}
+.tec:hover{transform:translateY(-6px) scale(1.01)}
+
+/* ── Mobile: disable hover transforms on touch screens ── */
+@media(hover:none){
+  .pc:hover,.wc:hover,.acc:hover,.tc:hover,
+  .tec:hover,.bwa:hover,.bask:hover,.bex:hover,
+  .sb:hover,.bacl:hover,.wfbtn:hover{
+    transform:none;
+  }
+}
+
+/* ── Reduced motion: kill everything added here too ────── */
+@media(prefers-reduced-motion:reduce){
+  .abdn-rv{animation:none!important;opacity:1!important}
+  img.abdn-loaded{animation:none!important;opacity:1!important;transform:none!important}
+  .pc,.wc,.acc,.tc,.tec,
+  .bwa,.bask,.bex,.sb,.bacl,.mcwa,.ncta,.mclose,
+  .wfbtn,.tebtn,.popcl,.pwaib,.pwadb,.mcph,.bdet,
+  .piw svg,.piw img{
+    transition:none!important;
+    animation:none!important;
+  }
+}
 </style>
 </head>
 <body>
@@ -343,7 +495,7 @@ footer{background:var(--B);padding:3rem 2rem 2rem;border-top:1px solid rgba(255,
 <div class="hbg" aria-hidden="true"></div>
 <section id="hero">
   <div>
-    <p class="hey">Your Devotion Deserves to be Seen</p>
+    <p class="hey">Where Devotion Meets Style</p>
     <h1 class="hh1">
       You always think<br/>of <em>everyone…</em><br/>
       <span class="g">this time, we thought<br/>of you. 💛</span>
@@ -675,7 +827,7 @@ footer{background:var(--B);padding:3rem 2rem 2rem;border-top:1px solid rgba(255,
       </div>
     </div>
     <div class="fbot">
-      <p class="fcp">© 2025 ABDAN. <span class="fg">Your Devotion Deserves to be Seen.</span></p>
+      <p class="fcp">© 2025 ABDAN. <span class="fg">Where Devotion Meets Style.</span></p>
       <p class="fcp">Made with 💛 for the women of Tamil Nadu</p>
     </div>
   </div>
@@ -738,6 +890,37 @@ if('IntersectionObserver' in window){
   },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
   rvEls.forEach(function(el){obs.observe(el);});
 }else{rvEls.forEach(function(el){el.classList.add('on');});}
+
+/* ── ANIMATION ENHANCEMENTS ─────────────────────────────── */
+
+/* 1. Scroll reveal — 300ms fade+rise for .abdn-rv nodes */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var els=document.querySelectorAll('.abdn-rv');
+  if(!els.length)return;
+  if('IntersectionObserver' in window){
+    var ao=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('abdn-go');ao.unobserve(en.target);}
+      });
+    },{threshold:0.06,rootMargin:'0px 0px -24px 0px'});
+    els.forEach(function(el){ao.observe(el);});
+  }else{els.forEach(function(el){el.classList.add('abdn-go');});}
+})();
+
+/* 2. Image load zoom — .abdn-loaded fires once src decoded */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var skip=['nc','nw','fc','fw','pwai'];
+  document.querySelectorAll('img').forEach(function(img){
+    if(skip.indexOf(img.id)!==-1)return;
+    function go(){requestAnimationFrame(function(){img.classList.add('abdn-loaded');});}
+    if(img.complete&&img.naturalWidth){go();}
+    else{img.addEventListener('load',go,{once:true});}
+  });
+})();
+
+/* ── END ANIMATION ENHANCEMENTS ─────────────────────────── */
 var PD=[
   {name:"Kanjivaram Silk Saree",pr:"\u20b98,500 onwards",
    desc:"This saree was not just woven \u2014 it was composed, thread by thread, by hands that have practiced this art for generations. The zari border catches the light the way only pure mulberry silk can. Wearing this is wearing a living legacy.",
