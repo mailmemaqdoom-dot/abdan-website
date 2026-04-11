@@ -33,8 +33,29 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.03'/%3E%3C/svg%3E");opacity:.5}
 /* Reveal */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
-.rv.on{opacity:1;transform:none}
+.rv{
+  opacity:0;
+  transform:translateY(22px);
+  /* Use a var-backed transition so specificity overrides in child classes
+     cannot accidentally strip opacity from the transition shorthand */
+  transition:
+    opacity  .6s  var(--ease),
+    transform .6s var(--ease);
+}
+/* Guard: once .on is set, lock opacity/transform with !important
+   so no card-hover or enhancement transition can override them mid-reveal */
+.rv.on{
+  opacity:1 !important;
+  transform:none !important;
+  /* Keep hover transitions still working AFTER reveal completes */
+  transition:
+    opacity     .6s  var(--ease),
+    transform   .6s  var(--ease),
+    background  .35s ease,
+    border-color .35s ease,
+    box-shadow  .28s var(--ease);
+}
+
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
 .d4{transition-delay:.32s}.d5{transition-delay:.4s}
 @keyframes fU{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
@@ -338,7 +359,8 @@ footer{background:var(--B);padding:3rem 2rem 2rem;border-top:1px solid rgba(255,
       smoother values and a richer shadow arc              */
 .pc{
   transition:
-    transform 280ms cubic-bezier(.22,.61,.36,1),
+    opacity    600ms var(--ease),
+    transform  280ms cubic-bezier(.22,.61,.36,1),
     box-shadow 280ms cubic-bezier(.22,.61,.36,1);
 }
 .pc:hover{
@@ -420,9 +442,10 @@ img.abdn-loaded{
 /* Section cards (wsy, acc, tc) — consistent lift */
 .wc,.acc,.tc{
   transition:
+    opacity      600ms var(--ease),
+    transform    280ms cubic-bezier(.22,.61,.36,1),
     background   300ms ease,
     border-color 300ms ease,
-    transform    280ms cubic-bezier(.22,.61,.36,1),
     box-shadow   280ms cubic-bezier(.22,.61,.36,1);
 }
 .wc:hover{transform:translateY(-5px)}
@@ -432,9 +455,10 @@ img.abdn-loaded{
 /* Teaser cards */
 .tec{
   transition:
+    opacity      600ms var(--ease),
+    transform    280ms cubic-bezier(.22,.61,.36,1),
     border-color 280ms ease,
-    background   280ms ease,
-    transform    280ms cubic-bezier(.22,.61,.36,1);
+    background   280ms ease;
 }
 .tec:hover{transform:translateY(-6px) scale(1.01)}
 
@@ -449,6 +473,9 @@ img.abdn-loaded{
 
 /* ── Reduced motion: kill everything added here too ────── */
 @media(prefers-reduced-motion:reduce){
+  /* Reveal immediately — no motion */
+  .rv{opacity:1!important;transform:none!important;transition:none!important}
+  .rv.on{opacity:1!important;transform:none!important;transition:none!important}
   .abdn-rv{animation:none!important;opacity:1!important}
   img.abdn-loaded{animation:none!important;opacity:1!important;transform:none!important}
   .pc,.wc,.acc,.tc,.tec,
@@ -884,12 +911,33 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
   });
 });
 var rvEls=document.querySelectorAll('.rv');
+/* Reveal observer — ENTRY ONLY, never triggers on exit.
+   unobserve() ensures .on is set once and never reversed.      */
 if('IntersectionObserver' in window){
   var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('on');obs.unobserve(en.target);}});
-  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
-  rvEls.forEach(function(el){obs.observe(el);});
-}else{rvEls.forEach(function(el){el.classList.add('on');});}
+    entries.forEach(function(en){
+      /* Guard: only act on entry, never on exit */
+      if(en.isIntersecting!==true)return;
+      en.target.classList.add('on');
+      obs.unobserve(en.target); /* one-shot: no reverse, no loop */
+    });
+  },{
+    threshold:0.05,         /* fire early — just 5% visible */
+    rootMargin:'0px 0px 0px 0px' /* no negative margin to avoid edge cases */
+  });
+  rvEls.forEach(function(el){
+    /* If already in viewport at load (above fold), reveal immediately */
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight&&r.bottom>0){
+      el.classList.add('on');
+    }else{
+      obs.observe(el);
+    }
+  });
+}else{
+  /* Fallback: reveal all immediately */
+  rvEls.forEach(function(el){el.classList.add('on');});
+}
 
 /* ── ANIMATION ENHANCEMENTS ─────────────────────────────── */
 
@@ -901,9 +949,11 @@ if('IntersectionObserver' in window){
   if('IntersectionObserver' in window){
     var ao=new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        if(en.isIntersecting){en.target.classList.add('abdn-go');ao.unobserve(en.target);}
+        if(en.isIntersecting!==true)return; /* entry only, never exit */
+        en.target.classList.add('abdn-go');
+        ao.unobserve(en.target);            /* one-shot */
       });
-    },{threshold:0.06,rootMargin:'0px 0px -24px 0px'});
+    },{threshold:0.05,rootMargin:'0px 0px 0px 0px'});
     els.forEach(function(el){ao.observe(el);});
   }else{els.forEach(function(el){el.classList.add('abdn-go');});}
 })();
