@@ -22,6 +22,24 @@
   --B:#2C2416;--BL:#4A3C28;
   --WA:#25D366;--WAD:#1da851;
   --ease:cubic-bezier(.25,.46,.45,.94);
+
+  /* ── MOTION TOKENS (Layer 1) ── */
+  /* Duration */
+  --dur-reveal: 540ms;   /* content arriving into view      */
+  --dur-lift:   260ms;   /* card hover rise                 */
+  --dur-micro:  180ms;   /* button / icon response          */
+
+  /* Easing */
+  --ease-out:    cubic-bezier(.25,.46,.45,.94); /* same as --ease, named by purpose */
+  --ease-lift:   cubic-bezier(.22,.61,.36,1);   /* smooth rise, no overshoot        */
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);  /* slight overshoot for buttons     */
+
+  /* Travel (translateY reveal distance) */
+  --travel-md: 22px;   /* standard for section blocks & cards */
+  --travel-sm: 14px;   /* inline elements                     */
+
+  /* Stagger increment — multiplied per sibling index inline */
+  --stagger-unit: 80ms;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -33,31 +51,47 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.03'/%3E%3C/svg%3E");opacity:.5}
 /* Reveal */
-.rv{
-  opacity:0;
-  transform:translateY(22px);
-  /* Use a var-backed transition so specificity overrides in child classes
-     cannot accidentally strip opacity from the transition shorthand */
+/* ── LAYER 3: REVEAL STATE ─────────────────────────────────
+   Owns: opacity + translateY only.
+   Never owns: transform values beyond translateY,
+               background, border-color, box-shadow.
+   Stagger: applied as inline transition-delay by the
+            JS orchestrator — never as a CSS class.
+─────────────────────────────────────────────────────────── */
+[data-rv]{
+  opacity: 0;
+  transform: translateY(var(--travel-md));
   transition:
-    opacity  .6s  var(--ease),
-    transform .6s var(--ease);
-}
-/* Guard: once .on is set, lock opacity/transform with !important
-   so no card-hover or enhancement transition can override them mid-reveal */
-.rv.on{
-  opacity:1 !important;
-  transform:none !important;
-  /* Keep hover transitions still working AFTER reveal completes */
-  transition:
-    opacity     .6s  var(--ease),
-    transform   .6s  var(--ease),
-    background  .35s ease,
-    border-color .35s ease,
-    box-shadow  .28s var(--ease);
+    opacity   var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+  /* transition-delay comes from inline style set by orchestrator */
 }
 
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+/* REVEALED state — set once by JS, never reversed.
+   opacity:1 !important prevents any competing rule from hiding content.
+   transform is NOT !important — releases ownership to component layer
+   so hover transforms work cleanly the moment reveal completes. */
+[data-rv].rv-on{
+  opacity: 1 !important;
+  transform: translateY(0);
+}
+
+/* Legacy class alias — keeps .rv on existing elements working
+   without any HTML changes. Both [data-rv] and .rv are observed. */
+.rv{
+  opacity: 0;
+  transform: translateY(var(--travel-md));
+  transition:
+    opacity   var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+}
+.rv.rv-on{
+  opacity: 1 !important;
+  transform: translateY(0);
+}
+
+/* d1–d5 stagger delays now applied as inline style by JS orchestrator.
+   CSS classes remain on HTML for index lookup only. */
 @keyframes fU{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:.7}70%{transform:scale(1.6);opacity:0}}
 @keyframes floatUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -142,7 +176,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;
 .disc svg{width:15px;height:15px;stroke:var(--G);fill:none;flex-shrink:0;margin-top:1px}
 /* PRODUCT GRID */
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
-.pc{background:var(--CW);border:1px solid var(--CD);border-radius:1.5rem;overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s;cursor:pointer}
+.pc{background:var(--CW);border:1px solid var(--CD);border-radius:1.5rem;overflow:hidden;cursor:pointer}
 .pc:hover{transform:translateY(-7px) scale(1.01);box-shadow:0 28px 56px rgba(44,36,22,.13)}
 .piw{position:relative;aspect-ratio:3/4;overflow:hidden}
 .piw svg{width:100%;height:100%;transition:transform .7s var(--ease)}
@@ -326,13 +360,15 @@ footer{background:var(--B);padding:3rem 2rem 2rem;border-top:1px solid rgba(255,
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  .rv{opacity:1!important;transform:none!important}
+  /* Reveal both selector forms immediately */
+  .rv,[data-rv]{opacity:1!important;transform:none!important}
 }
 
-/* ─── ANIMATION ENHANCEMENTS ──────────────────────────────
-   Scroll · Product cards · Images · Buttons
-   All GPU-composited (opacity + transform only).
-   No layout, content, or structure changes.
+/* ─── MOTION SYSTEM (Layers 3 + 4) ────────────────────────
+   Layer 3 — Reveal state (.rv / [data-rv] + .rv-on signal)
+   Layer 4 — Component states (hover, micro-interactions)
+   All GPU-composited. No layout changes.
+   Each layer owns only its declared properties.
 ────────────────────────────────────────────────────────── */
 
 /* 1. SCROLL REVEAL — tighter, snappier than base .rv
@@ -354,30 +390,35 @@ footer{background:var(--B);padding:3rem 2rem 2rem;border-top:1px solid rgba(255,
 .abdn-rv:not(.abdn-go){animation-play-state:paused}
 .abdn-rv.abdn-go{animation-play-state:running}
 
-/* 2. PRODUCT CARDS — image zoom + shadow lift
-      Overrides existing .pc / .piw svg transitions with
-      smoother values and a richer shadow arc              */
+/* ── LAYER 4: PRODUCT CARD COMPONENT ───────────────────────
+   Owns: transform (lift) + box-shadow only.
+   Does NOT own: opacity — that belongs to reveal system.
+   Single authoritative transition block.
+   Hover works from the moment reveal completes because
+   reveal system does NOT hold transform with !important.
+─────────────────────────────────────────────────────────── */
 .pc{
   transition:
-    opacity    600ms var(--ease),
-    transform  280ms cubic-bezier(.22,.61,.36,1),
-    box-shadow 280ms cubic-bezier(.22,.61,.36,1);
+    transform  var(--dur-lift)  var(--ease-lift),
+    box-shadow var(--dur-lift)  var(--ease-lift);
+  will-change: transform;
 }
 .pc:hover{
-  transform:translateY(-6px) scale(1.012);
+  transform: translateY(-6px) scale(1.012);
   box-shadow:
-    0 4px  8px  rgba(44,36,22,.04),
+    0  4px  8px rgba(44,36,22,.04),
     0 12px 24px rgba(44,36,22,.08),
     0 28px 48px rgba(44,36,22,.11);
 }
-/* Image zoom inside card */
-.piw{overflow:hidden}
-.piw svg,.piw img{
-  transition:transform 400ms cubic-bezier(.22,.61,.36,1);
-  will-change:transform;
+/* Inner image zoom — child of card, owns transform only */
+.piw{ overflow: hidden }
+.piw svg,
+.piw img{
+  transition: transform 380ms var(--ease-lift);
+  will-change: transform;
 }
 .pc:hover .piw svg,
-.pc:hover .piw img{transform:scale(1.06)}
+.pc:hover .piw img{ transform: scale(1.06) }
 
 /* 3. IMAGES — subtle zoom-in on first load
       Targets real <img> tags; SVGs animate separately    */
@@ -473,10 +514,12 @@ img.abdn-loaded{
 
 /* ── Reduced motion: kill everything added here too ────── */
 @media(prefers-reduced-motion:reduce){
-  /* Reveal immediately — no motion */
-  .rv{opacity:1!important;transform:none!important;transition:none!important}
-  .rv.on{opacity:1!important;transform:none!important;transition:none!important}
-  .abdn-rv{animation:none!important;opacity:1!important}
+  /* Reveal immediately — JS orchestrator handles this but CSS is the safety net */
+  .rv,.rv.rv-on,[data-rv],[data-rv].rv-on{
+    opacity:1!important;
+    transform:none!important;
+    transition:none!important;
+  }
   img.abdn-loaded{animation:none!important;opacity:1!important;transform:none!important}
   .pc,.wc,.acc,.tc,.tec,
   .bwa,.bask,.bex,.sb,.bacl,.mcwa,.ncta,.mclose,
@@ -910,55 +953,104 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
     window.scrollTo({top:t.getBoundingClientRect().top+scrollY-h-10,behavior:'smooth'});
   });
 });
-var rvEls=document.querySelectorAll('.rv');
-/* Reveal observer — ENTRY ONLY, never triggers on exit.
-   unobserve() ensures .on is set once and never reversed.      */
-if('IntersectionObserver' in window){
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      /* Guard: only act on entry, never on exit */
-      if(en.isIntersecting!==true)return;
-      en.target.classList.add('on');
-      obs.unobserve(en.target); /* one-shot: no reverse, no loop */
-    });
-  },{
-    threshold:0.05,         /* fire early — just 5% visible */
-    rootMargin:'0px 0px 0px 0px' /* no negative margin to avoid edge cases */
-  });
-  rvEls.forEach(function(el){
-    /* If already in viewport at load (above fold), reveal immediately */
-    var r=el.getBoundingClientRect();
-    if(r.top<window.innerHeight&&r.bottom>0){
-      el.classList.add('on');
-    }else{
-      obs.observe(el);
-    }
-  });
-}else{
-  /* Fallback: reveal all immediately */
-  rvEls.forEach(function(el){el.classList.add('on');});
-}
+/* ══════════════════════════════════════════════════════════
+   LAYER 2 — SCROLL ORCHESTRATOR
+   Single responsibility: decide WHEN to reveal each element.
+   Knows nothing about CSS. Knows nothing about components.
 
-/* ── ANIMATION ENHANCEMENTS ─────────────────────────────── */
-
-/* 1. Scroll reveal — 300ms fade+rise for .abdn-rv nodes */
+   Protocol:
+   · Queries [data-rv] and .rv — both work, no HTML change needed
+   · Reads .d1–.d5 class → sets inline transition-delay
+   · Above-fold: double-rAF guarantees painted opacity:0 baseline
+     before opacity:1 target arrives (fixes flash-on-load bug)
+   · Below-fold: IntersectionObserver, entry only, one-shot
+   · Adds class 'rv-on' as the reveal signal (not 'on')
+   · Reduced motion: skips transitions, reveals immediately
+   ══════════════════════════════════════════════════════════ */
 (function(){
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  var els=document.querySelectorAll('.abdn-rv');
-  if(!els.length)return;
-  if('IntersectionObserver' in window){
-    var ao=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting!==true)return; /* entry only, never exit */
-        en.target.classList.add('abdn-go');
-        ao.unobserve(en.target);            /* one-shot */
+  /* Stagger map: class → delay in ms, matches --stagger-unit multiples */
+  var STAGGER={d1:80,d2:160,d3:240,d4:320,d5:400};
+
+  /* Collect all managed elements (both selector forms) */
+  var allEls=Array.prototype.slice.call(
+    document.querySelectorAll('[data-rv],.rv')
+  );
+  if(!allEls.length)return;
+
+  /* Apply inline transition-delay from stagger class, then reveal */
+  function applyDelay(el){
+    var cls=el.className||'';
+    for(var k in STAGGER){
+      if(cls.indexOf(k)!==-1){
+        el.style.transitionDelay=STAGGER[k]+'ms';
+        break;
+      }
+    }
+  }
+
+  /* Reduced motion: reveal everything immediately, no transitions */
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    allEls.forEach(function(el){
+      el.style.transition='none';
+      el.style.transitionDelay='0ms';
+      el.classList.add('rv-on');
+    });
+    return;
+  }
+
+  /* Reveal function: adds signal class. Called by observer or rAF. */
+  function reveal(el){
+    el.classList.add('rv-on');
+  }
+
+  /* Above-fold reveal: double-rAF ensures browser paints opacity:0
+     before we set opacity:1, giving the transition a real start state.
+     Without this, adding rv-on synchronously collapses both states
+     into one render cycle and the transition never interpolates. */
+  function revealAfterPaint(el){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        reveal(el);
       });
-    },{threshold:0.05,rootMargin:'0px 0px 0px 0px'});
-    els.forEach(function(el){ao.observe(el);});
-  }else{els.forEach(function(el){el.classList.add('abdn-go');});}
+    });
+  }
+
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting!==true)return; /* entry only, never exit  */
+        applyDelay(en.target);
+        reveal(en.target);
+        obs.unobserve(en.target);           /* one-shot: never reverses */
+      });
+    },{
+      threshold: 0.05,         /* fire when 5% visible — early, avoids pop-in */
+      rootMargin:'0px 0px 0px 0px' /* no offset — removes edge-case suppression  */
+    });
+
+    allEls.forEach(function(el){
+      var r=el.getBoundingClientRect();
+      var inView=(r.top < window.innerHeight && r.bottom > 0);
+      if(inView){
+        /* Above fold: apply delay then reveal after paint */
+        applyDelay(el);
+        revealAfterPaint(el);
+      }else{
+        /* Below fold: observer takes over */
+        obs.observe(el);
+      }
+    });
+
+  }else{
+    /* No IntersectionObserver (very old browser): reveal all immediately */
+    allEls.forEach(function(el){
+      applyDelay(el);
+      reveal(el);
+    });
+  }
 })();
 
-/* 2. Image load zoom — .abdn-loaded fires once src decoded */
+/* ── Image load zoom — .abdn-loaded fires once src decoded */
 (function(){
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   var skip=['nc','nw','fc','fw','pwai'];
