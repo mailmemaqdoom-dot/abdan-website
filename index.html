@@ -346,6 +346,39 @@
             margin-bottom: 40px;
         }
 
+        /* Filtering UI */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--emerald-green);
+            color: var(--ivory);
+            border-color: var(--emerald-green);
+        }
+
+        [data-theme="dark"] .filter-btn.active {
+            background: var(--warm-gold);
+            color: var(--emerald-green);
+            border-color: var(--warm-gold);
+        }
+
         /* Product Cards */
         .products-grid {
             display: grid;
@@ -360,6 +393,8 @@
             transition: var(--transition);
             border: 1px solid var(--border-color);
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
@@ -380,6 +415,9 @@
 
         .product-content {
             padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-tag {
@@ -553,6 +591,48 @@
         }
 
         .sl { font-weight: 700; color: var(--text-primary); }
+
+        /* Social Share Feature */
+        .share-container {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .share-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .share-btn:hover {
+            background: var(--accent);
+            color: var(--ivory);
+            transform: scale(1.1);
+        }
 
         /* Mobile Bottom Nav (App Like) */
         .mobile-bottom-nav {
@@ -843,63 +923,39 @@
             </div>
         </section>
 
-        <!-- Products -->
+        <!-- Handpicked for You -->
         <section id="products">
             <div class="container">
                 <div class="section-title reveal">
                     <p class="hero-tagline" style="text-align: center;">Three Moments, Chosen for You</p>
-                    <h2>Handpicked <em>with you in mind</em></h2>
+                    <h2>Handpicked for You</h2>
                 </div>
 
                 <div class="disc-s reveal">
                     <i data-lucide="info" size="18" style="color: var(--warm-gold); flex-shrink: 0;"></i>
                     <p>ABDAN is a curated aggregator. We verify all products and confirm availability before you pay. No hidden charges. We stay with you till delivery. 💛</p>
                 </div>
+
+                <!-- Filtering UI -->
+                <div class="filter-container reveal" id="filterContainer">
+                    <button class="filter-btn active" onclick="filterProducts('All')">All Collections</button>
+                    <button class="filter-btn" onclick="filterProducts('Heritage Moments')">Heritage Moments</button>
+                    <button class="filter-btn" onclick="filterProducts('Everyday Grace')">Everyday Grace</button>
+                    <button class="filter-btn" onclick="filterProducts('Festive Glow')">Festive Glow</button>
+                </div>
                 
-                <div class="products-grid">
-                    <div class="product-card reveal" onclick="openP(0)">
-                        <div class="mp-img-wrap" id="pi0">
-                            <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80" class="product-img">
-                        </div>
-                        <div class="product-content">
-                            <span class="product-tag">Heritage Moment</span>
-                            <h3>Kanjivaram Silk Saree</h3>
-                            <div class="product-price">₹8,500 onwards</div>
-                            <button class="btn btn-primary" style="width: 100%; justify-content: center;">See Why This is for You</button>
-                        </div>
-                    </div>
-                    <div class="product-card reveal" style="transition-delay: 0.1s;" onclick="openP(1)">
-                        <div class="mp-img-wrap" id="pi1">
-                            <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80" class="product-img">
-                        </div>
-                        <div class="product-content">
-                            <span class="product-tag">Everyday Grace</span>
-                            <h3>Hand Block Print Kurti Set</h3>
-                            <div class="product-price">₹1,200 onwards</div>
-                            <button class="btn btn-primary" style="width: 100%; justify-content: center;">See Why This is for You</button>
-                        </div>
-                    </div>
-                    <div class="product-card reveal" style="transition-delay: 0.2s;" onclick="openP(2)">
-                        <div class="mp-img-wrap" id="pi2">
-                            <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29b?auto=format&fit=crop&w=600&q=80" class="product-img">
-                        </div>
-                        <div class="product-content">
-                            <span class="product-tag">Celebration Edit</span>
-                            <h3>Embroidered Festive Dupatta</h3>
-                            <div class="product-price">₹2,800 onwards</div>
-                            <button class="btn btn-primary" style="width: 100%; justify-content: center;">See Why This is for You</button>
-                        </div>
-                    </div>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be rendered by JS -->
                 </div>
             </div>
         </section>
 
-        <!-- Story -->
+        <!-- Her Story -->
         <section id="wsy">
             <div class="container">
                 <div class="section-title reveal">
                     <p class="hero-tagline" style="text-align: center;">We See You</p>
-                    <h2>Every quiet moment <em>you carry for others</em></h2>
+                    <h2>Her Story</h2>
                 </div>
                 <div class="testimonial-grid">
                     <div class="testimonial-card reveal">
@@ -921,12 +977,12 @@
             </div>
         </section>
 
-        <!-- Community Voice -->
+        <!-- Her Circle 💛 -->
         <section id="testi" class="testimonials-section">
             <div class="container">
                 <div class="section-title reveal">
                     <p class="hero-tagline" style="text-align: center;">Community Voice</p>
-                    <h2>Words from <em>our neighbours</em></h2>
+                    <h2>Her Circle 💛</h2>
                 </div>
                 <div class="testimonial-grid">
                     <div class="testimonial-card reveal">
@@ -963,12 +1019,12 @@
             </div>
         </section>
 
-        <!-- Coming Soon -->
+        <!-- What You Might Love -->
         <section id="teasers">
             <div class="container">
                 <div class="section-title reveal">
                     <p class="hero-tagline" style="text-align: center;">Coming Soon</p>
-                    <h2>Something <em>magical</em> is on its way…</h2>
+                    <h2>What You Might Love</h2>
                 </div>
                 <div class="teag">
                     <div class="tec reveal" onclick="openT('loyalty')">
@@ -987,15 +1043,15 @@
             </div>
         </section>
 
-        <!-- Account / Your Space -->
+        <!-- Your Space 💛 -->
         <section id="account" style="background: var(--bg-secondary); border-radius: 40px; margin: 0 20px;">
             <div class="container">
                 <div class="hero-grid">
                     <div class="reveal">
                         <p class="hero-tagline">Your Celebration Space</p>
-                        <h2>💛 A personal corner <em>just for you</em></h2>
+                        <h2>Your Space 💛</h2>
                         <p>Your favourites, your style history, your special moments — saved and remembered. Creating an account is entirely optional. You can always buy without one.</p>
-                        <a href="https://wa.me/918760595307?text=Hi+%F0%9F%92%9B%2C+I%27d+like+to+create+my+personal+space+on+ABDAN!" target="_blank" class="btn btn-primary">Create My Space 💛</a>
+                        <a href="https://wa.me/918760595307?text=Hi+%F0%9F%92%9B%2C+I+d+like+to+create+my+personal+space+on+ABDAN!" target="_blank" class="btn btn-primary">Create My Space 💛</a>
                     </div>
                     <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div style="background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid var(--border-color);">
@@ -1045,6 +1101,14 @@
                 <div id="msoul" style="font-style: italic; font-size: 0.9rem; margin-bottom: 25px; color: var(--text-primary);"></div>
                 
                 <a href="#" id="mwa" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Ask us about this 💛</a>
+
+                <!-- Social Share Feature -->
+                <div class="share-container">
+                    <h4 class="share-title">Share this style</h4>
+                    <div class="share-buttons" id="shareButtons">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1141,28 +1205,96 @@
 
         // Data for Product Detail Modal (PD)
         const PD = [
-          {name:"Kanjivaram Silk Saree",pr:"₹8,500 onwards",
-           desc:"This saree was not just woven — it was composed, thread by thread, by hands that have practiced this art for generations. The zari border catches the light the way only pure mulberry silk can. Wearing this is wearing a living legacy.",
-           specs:[["Fabric","Pure Mulberry Silk — Grade A"],["Length","6.3 metres with matching blouse piece"],["Border","Real Zari (gold thread) border & pallu"],["Occasion","Weddings · Puja ceremonies · The days your family gathers"],["Care","Dry clean only · Store in muslin cloth"],["Verified","✓ Sourced from certified Kanchipuram weavers"]],
-           sty:"Pair with a high-necked blouse with elbow sleeves for a classic Tamil look. Gold temple jewellery — jumkhas and a lakshmi haar — will make you glow. A low bun with jasmine flowers completes it perfectly.",
-           hist:"Kanchipuram silk weaving dates back over 400 years to the temple town of Kanchipuram in Tamil Nadu. Each saree takes 3–7 days to weave using pure mulberry silk and real gold zari. It is considered the Queen of Silks across India.",
-           soul:"<span class=\"hl\">This is for the woman who carries tradition with devotion —</span> let this silken prayer be just for you. 💛",
-           wa:"Hi+%F0%9F%92%9B%2C+I+saw+the+Kanjivaram+Silk+Saree+on+ABDAN+and+it+is+beautiful.+Could+you+tell+me+more+about+it%3F"},
-          {name:"Hand Block Print Kurti Set",pr:"₹1,200 onwards",
-           desc:"Made for the days that never slow down — the mornings with four tasks before breakfast, the evenings that run into each other. This kurti is soft enough to breathe in, beautiful enough to feel proud in, and easy enough to care for.",
-           specs:[["Fabric","100% Soft Cotton — hand-block printed"],["Sizes","S, M, L, XL, 2XL, 3XL"],["Set","Kurti + matching palazzo pants"],["Occasion","Your everyday · Temple mornings · Quiet celebrations"],["Care","Machine washable · Gentle cycle cold water"],["Verified","✓ Sourced from Jaipur block print artisans"]],
-           sty:"Pair with kolhapuri chappals and a small gold bindi for everyday elegance. On special days, add a small gold chain and stud earrings. A complementary dupatta ties the look together beautifully.",
-           hist:"Hand block printing is a 4,500-year-old Indian textile art. Each wooden block is hand-carved by artisans and pressed onto fabric with practiced precision — meaning no two prints are exactly alike. Your kurti carries the mark of human hands.",
-           soul:"<span class=\"hl\">This is for the woman who nurtures everyone through long days —</span> let this softness hold you back, just for today. 💛",
-           wa:"Hi+%F0%9F%92%9B%2C+I%27m+interested+in+the+Block+Print+Kurti+Set+from+ABDAN!+Could+you+help+me+find+the+right+size%3F"},
-          {name:"Embroidered Festive Dupatta",pr:"₹2,800 onwards",
-           desc:"This dupatta does not just complete an outfit — it announces her arrival. The zardozi embroidery catches the candlelight of a puja, the festive lights of Diwali, the wedding kaleidoscope. Every stitch is placed where it will sparkle most for you.",
-           specs:[["Fabric","Georgette chiffon base"],["Embroidery","Zardozi (gold & silver thread) hand embroidery"],["Length","2.5 metres"],["Occasion","Festivals · Weddings · The evenings that deserve to sparkle"],["Care","Dry clean recommended · Handle borders gently"],["Verified","✓ Handcrafted by Lucknow zardozi artisans"]],
-           sty:"Drape over one shoulder for a regal effect with a salwar kameez. Its shimmer works beautifully against both dark and pastel base outfits. For weddings, let it fall in loose elegant folds from the waist.",
-           hist:"Zardozi embroidery originated in Persia and was brought to India by Mughal royalty in the 16th century. It uses metallic threads — originally real gold and silver — to create elaborate raised patterns. Practiced by artisan families across centuries.",
-           soul:"<span class=\"hl\">This is for the woman who lights up every room she walks into —</span> let this sparkle remind you of who you truly are. 💛",
-           wa:"Hi+%F0%9F%92%9B%2C+I+saw+the+Embroidered+Dupatta+on+ABDAN+and+I+can+already+imagine+wearing+it.+Could+you+tell+me+more%3F"}
+          {
+            name: "Kanjivaram Silk Saree",
+            pr: "₹8,500 onwards",
+            img: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80",
+            primaryTag: "Heritage Moments",
+            secondaryTags: {
+                occasion: "Festive",
+                emotion: "Elegant",
+                style: "Embroidered"
+            },
+            desc: "This saree was not just woven — it was composed, thread by thread, by hands that have practiced this art for generations. The zari border catches the light the way only pure mulberry silk can. Wearing this is wearing a living legacy.",
+            specs: [["Fabric","Pure Mulberry Silk — Grade A"],["Length","6.3 metres with matching blouse piece"],["Border","Real Zari (gold thread) border & pallu"],["Occasion","Weddings · Puja ceremonies · The days your family gathers"],["Care","Dry clean only · Store in muslin cloth"],["Verified","✓ Sourced from certified Kanchipuram weavers"]],
+            sty: "Pair with a high-necked blouse with elbow sleeves for a classic Tamil look. Gold temple jewellery — jumkhas and a lakshmi haar — will make you glow. A low bun with jasmine flowers completes it perfectly.",
+            hist: "Kanchipuram silk weaving dates back over 400 years to the temple town of Kanchipuram in Tamil Nadu. Each saree takes 3–7 days to weave using pure mulberry silk and real gold zari. It is considered the Queen of Silks across India.",
+            soul: "<span class=\"hl\">This is for the woman who carries tradition with devotion —</span> let this silken prayer be just for you. 💛",
+            wa: "Hi+%F0%9F%92%9B%2C+I+saw+the+Kanjivaram+Silk+Saree+on+ABDAN+and+it+is+beautiful.+Could+you+tell+me+more+about+it%3F"
+          },
+          {
+            name: "Hand Block Print Kurti Set",
+            pr: "₹1,200 onwards",
+            img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80",
+            primaryTag: "Everyday Grace",
+            secondaryTags: {
+                occasion: "Daily",
+                emotion: "Comfortable",
+                style: "Minimal"
+            },
+            desc: "Made for the days that never slow down — the mornings with four tasks before breakfast, the evenings that run into each other. This kurti is soft enough to breathe in, beautiful enough to feel proud in, and easy enough to care for.",
+            specs: [["Fabric","100% Soft Cotton — hand-block printed"],["Sizes","S, M, L, XL, 2XL, 3XL"],["Set","Kurti + matching palazzo pants"],["Occasion","Your everyday · Temple mornings · Quiet celebrations"],["Care","Machine washable · Gentle cycle cold water"],["Verified","✓ Sourced from Jaipur block print artisans"]],
+            sty: "Pair with kolhapuri chappals and a small gold bindi for everyday elegance. On special days, add a small gold chain and stud earrings. A complementary dupatta ties the look together beautifully.",
+            hist: "Hand block printing is a 4,500-year-old Indian textile art. Each wooden block is hand-carved by artisans and pressed onto fabric with practiced precision — meaning no two prints are exactly alike. Your kurti carries the mark of human hands.",
+            soul: "<span class=\"hl\">This is for the woman who nurtures everyone through long days —</span> let this softness hold you back, just for today. 💛",
+            wa: "Hi+%F0%9F%92%9B%2C+I+m+interested+in+the+Block+Print+Kurti+Set+from+ABDAN!+Could+you+help+me+find+the+right+size%3F"
+          },
+          {
+            name: "Embroidered Festive Dupatta",
+            pr: "₹2,800 onwards",
+            img: "https://images.unsplash.com/photo-1589156280159-27698a70f29b?auto=format&fit=crop&w=600&q=80",
+            primaryTag: "Festive Glow",
+            secondaryTags: {
+                occasion: "Festive",
+                emotion: "Graceful",
+                style: "Embroidered"
+            },
+            desc: "This dupatta does not just complete an outfit — it announces her arrival. The zardozi embroidery catches the candlelight of a puja, the festive lights of Diwali, the wedding kaleidoscope. Every stitch is placed where it will sparkle most for you.",
+            specs: [["Fabric","Georgette chiffon base"],["Embroidery","Zardozi (gold & silver thread) hand embroidery"],["Length","2.5 metres"],["Occasion","Festivals · Weddings · The evenings that deserve to sparkle"],["Care","Dry clean recommended · Handle borders gently"],["Verified","✓ Handcrafted by Lucknow zardozi artisans"]],
+            sty: "Drape over one shoulder for a regal effect with a salwar kameez. Its shimmer works beautifully against both dark and pastel base outfits. For weddings, let it fall in loose elegant folds from the waist.",
+            hist: "Zardozi embroidery originated in Persia and was brought to India by Mughal royalty in the 16th century. It uses metallic threads — originally real gold and silver — to create elaborate raised patterns. Practiced by artisan families across centuries.",
+            soul: "<span class=\"hl\">This is for the woman who lights up every room she walks into —</span> let this sparkle remind you of who you truly are. 💛",
+            wa: "Hi+%F0%9F%92%9B%2C+I+saw+the+Embroidered+Dupatta+on+ABDAN+and+I+can+already+imagine+wearing+it.+Could+you+tell+me+more%3F"
+          }
         ];
+
+        // Render Products
+        const productsGrid = document.getElementById('productsGrid');
+        function renderProducts(filteredList) {
+            productsGrid.innerHTML = '';
+            filteredList.forEach((p, i) => {
+                const card = document.createElement('div');
+                card.className = 'product-card reveal active';
+                card.onclick = () => openP(PD.indexOf(p));
+                card.innerHTML = `
+                    <div class="mp-img-wrap">
+                        <img src="${p.img}" class="product-img">
+                    </div>
+                    <div class="product-content">
+                        <span class="product-tag">${p.primaryTag}</span>
+                        <h3>${p.name}</h3>
+                        <div class="product-price">${p.pr}</div>
+                        <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: auto;">See Why This is for You</button>
+                    </div>
+                `;
+                productsGrid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Initial Render
+        renderProducts(PD);
+
+        // Filter Logic
+        function filterProducts(tag) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === (tag === 'All' ? 'All Collections' : tag));
+            });
+
+            const filtered = tag === 'All' ? PD : PD.filter(p => p.primaryTag === tag);
+            renderProducts(filtered);
+        }
 
         // Modal Logic
         const pmod = document.getElementById('pmod');
@@ -1171,18 +1303,28 @@
             document.getElementById('mpname').textContent = p.name;
             document.getElementById('mpr').textContent = p.pr;
             document.getElementById('mdesc').textContent = p.desc;
+            document.getElementById('mptag').textContent = p.primaryTag;
             document.getElementById('mspecs').innerHTML = p.specs.map(s => 
                 `<div class="sr"><span class="sl">${s[0]}</span><span class="sv">${s[1]}</span></div>`
             ).join('');
             document.getElementById('mhist').textContent = p.hist;
             document.getElementById('msoul').innerHTML = p.soul;
             document.getElementById('mwa').href = 'https://wa.me/918760595307?text=' + p.wa;
+            document.getElementById('mimg').innerHTML = `<img src="${p.img}" alt="${p.name}">`;
             
-            const srcImg = document.getElementById('pi' + i).innerHTML;
-            document.getElementById('mimg').innerHTML = srcImg;
+            // Render Social Share Buttons
+            const shareText = encodeURIComponent(`I love this ${p.name} style from ABDAN! 💛 ${p.primaryTag}`);
+            const shareUrl = encodeURIComponent(window.location.href);
+            
+            document.getElementById('shareButtons').innerHTML = `
+                <button class="share-btn" onclick="window.open('https://wa.me/?text=${shareText}%20${shareUrl}', '_blank')" title="Share on WhatsApp"><i data-lucide="message-circle"></i></button>
+                <button class="share-btn" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${shareUrl}', '_blank')" title="Share on Facebook"><i data-lucide="facebook"></i></button>
+                <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'))" title="Copy Link"><i data-lucide="link"></i></button>
+            `;
             
             pmod.classList.add('op');
             document.body.style.overflow = 'hidden';
+            lucide.createIcons();
         }
         function closeP() {
             pmod.classList.remove('op');
