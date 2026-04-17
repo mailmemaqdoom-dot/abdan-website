@@ -9,7 +9,7 @@
     <meta name="mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-title" content="ABDAN"/>
-    <link id="mflink" rel="manifest"/>
+    <link id="manifest-link" rel="manifest"/>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -90,11 +90,6 @@
             font-family: 'Libre Baskerville', serif;
             color: var(--text-primary);
             font-weight: 400;
-        }
-
-        .calligraphy {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.4rem;
         }
 
         .container {
@@ -225,9 +220,13 @@
             margin-bottom: 1.5rem;
         }
 
-        .hero h1 span {
-            color: var(--accent);
+        .hero h1 em {
             font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .hero h1 span.g {
+            color: var(--accent);
         }
 
         .hero p {
@@ -322,7 +321,7 @@
             margin-bottom: 15px;
         }
 
-        .section-title h2 span {
+        .section-title h2 em {
             font-style: italic;
             color: var(--accent);
         }
@@ -475,7 +474,7 @@
         }
 
         /* Popups from Original */
-        #popup {
+        #tpop {
             position: fixed;
             inset: 0;
             background: rgba(2, 38, 27, 0.6);
@@ -487,7 +486,7 @@
             padding: 20px;
         }
 
-        #popup.open {
+        #tpop.op {
             display: flex;
         }
 
@@ -503,7 +502,7 @@
         }
 
         /* Product Detail Modal System from Original */
-        #pmodal {
+        #pmod {
             position: fixed;
             inset: 0;
             background: rgba(2, 38, 27, 0.7);
@@ -514,7 +513,7 @@
             padding: 40px 20px;
         }
 
-        #pmodal.open {
+        #pmod.op {
             display: block;
         }
 
@@ -529,7 +528,13 @@
             border: 1px solid var(--border-color);
         }
 
-        .mp-img {
+        .mp-img-wrap {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-secondary);
+        }
+
+        .mp-img-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -538,6 +543,16 @@
         .mp-content {
             padding: 40px;
         }
+
+        .sr {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+        }
+
+        .sl { font-weight: 700; color: var(--text-primary); }
 
         /* Mobile Bottom Nav (App Like) */
         .mobile-bottom-nav {
@@ -622,7 +637,7 @@
             display: none;
         }
 
-        #pwab.show {
+        #pwab.sh {
             display: block;
             animation: slideUp 0.5s var(--ease-out);
         }
@@ -683,6 +698,7 @@
             margin-bottom: 20px;
             display: block;
             color: var(--soft-cream);
+            font-family: 'Libre Baskerville', serif;
         }
 
         .footer-tagline {
@@ -728,10 +744,11 @@
             <span class="logo-text">ABDAN</span>
         </a>
         <div class="nav-links">
-            <a href="#products">Collections</a>
-            <a href="#wsy">Our Story</a>
-            <a href="#testi">Community</a>
-            <a href="#account">Your Space</a>
+            <a href="#products">Handpicked for You</a>
+            <a href="#wsy">Her Story</a>
+            <a href="#testi">Her Circle 💛</a>
+            <a href="#teasers">What You Might Love</a>
+            <a href="#account">Your Space 💛</a>
         </div>
         <div class="nav-actions">
             <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode">
@@ -768,11 +785,13 @@
 
     <!-- PWA Banner -->
     <div id="pwab">
-        <p style="font-weight: 700; margin-bottom: 10px;">This space belongs on your phone 💛</p>
-        <p style="font-size: 0.8rem; margin-bottom: 20px;">Open us like a memory, anytime — even without internet.</p>
+        <div class="pwatx">
+            <p style="font-weight: 700; margin-bottom: 10px;">This space belongs on your phone 💛</p>
+            <p style="font-size: 0.8rem; margin-bottom: 20px;">Open us like a memory, anytime — even without internet.</p>
+        </div>
         <div style="display: flex; gap: 10px;">
-            <button class="btn btn-primary" id="pwaib" style="padding: 8px 15px; font-size: 0.75rem;">Keep ABDAN Close</button>
-            <button id="pwadb" style="background: none; border: none; font-size: 0.75rem; color: var(--text-secondary); cursor: pointer;">Not yet</button>
+            <button class="btn btn-primary" id="pwaib" style="padding: 8px 15px; font-size: 0.75rem;">Keep ABDAN Close 💛</button>
+            <button id="pwadb" style="background: none; border: none; font-size: 0.75rem; color: var(--text-secondary); cursor: pointer;">Not yet, thank you</button>
         </div>
     </div>
 
@@ -782,20 +801,21 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="reveal">
-                        <span class="hero-tagline">Your Devotion Deserves To Be Seen</span>
-                        <h1>You always think of <span>everyone…</span> this time, we thought of you. 💛</h1>
+                        <p class="hero-tagline">Where Devotion Meets Style</p>
+                        <h1>You always think<br/>of <em>everyone…</em><br/><span class="g">this time, we thought<br/>of you. 💛</span></h1>
                         <p class="hero-sub">Every morning you fold the day around others — their tiffins, their schedules, their smiles. <strong>You are the heartbeat of your home.</strong> ABDAN is a warm corner curated just for you.</p>
                         <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a href="#products" class="btn btn-primary">See what we found for you</a>
-                            <a href="https://wa.me/918760595307" class="btn btn-outline">Ask us anything</a>
+                            <a href="https://wa.me/918760595307?text=Hi+%F0%9F%92%9B%2C+I+found+ABDAN+and+something+here+caught+my+heart.+I%27d+love+to+know+more+%E2%80%94+no+rush+at+all." target="_blank" class="btn btn-primary">Ask us about this 💛</a>
+                            <a href="#products" class="btn btn-outline">See what we found for you</a>
                         </div>
                         <div style="margin-top: 40px; display: flex; align-items: center; gap: 15px;">
                             <div style="display: flex;">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=50&h=50" style="border-radius: 50%; border: 2px solid var(--bg-primary);">
-                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=50&h=50" style="border-radius: 50%; border: 2px solid var(--bg-primary); margin-left: -15px;">
-                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=50&h=50" style="border-radius: 50%; border: 2px solid var(--bg-primary); margin-left: -15px;">
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(197, 160, 72, 0.24); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary);">M</div>
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(27, 94, 53, 0.18); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary); margin-left: -8px;">P</div>
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(123, 28, 46, 0.15); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary); margin-left: -8px;">S</div>
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(197, 160, 72, 0.3); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary); margin-left: -8px;">R</div>
                             </div>
-                            <span style="font-size: 0.85rem; opacity: 0.7;"><strong>1,200+ women</strong> feel seen and celebrated</span>
+                            <span style="font-size: 0.85rem; opacity: 0.7;"><strong>1,200+ women</strong> across Tamil Nadu feel seen and celebrated</span>
                         </div>
                     </div>
                     <div class="hero-image-container reveal" style="transition-delay: 0.2s;">
@@ -813,22 +833,34 @@
             <span>✦ No Account Needed</span>
         </div>
 
+        <!-- Belief Section -->
+        <section id="belief" style="background: var(--emerald-green); color: var(--ivory); text-align: center; padding: 100px 20px;">
+            <div class="container">
+                <blockquote style="font-family: 'Libre Baskerville', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-style: italic; line-height: 1.6; margin-bottom: 30px;">
+                    "The most beautiful thing a woman can wear is the feeling that someone thought of her, curated for her, and <span style="color: var(--warm-gold);">celebrated her.</span>"
+                </blockquote>
+                <p style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--soft-cream);">— The ABDAN Promise</p>
+            </div>
+        </section>
+
         <!-- Products -->
         <section id="products">
             <div class="container">
                 <div class="section-title reveal">
-                    <h2>Handpicked <span>with you in mind</span></h2>
-                    <p>We are a curated aggregator. We do not sell directly. All products are verified and sourced from trusted artisan partners.</p>
+                    <p class="hero-tagline" style="text-align: center;">Three Moments, Chosen for You</p>
+                    <h2>Handpicked <em>with you in mind</em></h2>
                 </div>
 
                 <div class="disc-s reveal">
                     <i data-lucide="info" size="18" style="color: var(--warm-gold); flex-shrink: 0;"></i>
-                    <p>ABDAN is a curated aggregator. We verify all products and confirm availability before you pay. No hidden charges. We stay with you till delivery.</p>
+                    <p>ABDAN is a curated aggregator. We verify all products and confirm availability before you pay. No hidden charges. We stay with you till delivery. 💛</p>
                 </div>
                 
                 <div class="products-grid">
                     <div class="product-card reveal" onclick="openP(0)">
-                        <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80" class="product-img">
+                        <div class="mp-img-wrap" id="pi0">
+                            <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80" class="product-img">
+                        </div>
                         <div class="product-content">
                             <span class="product-tag">Heritage Moment</span>
                             <h3>Kanjivaram Silk Saree</h3>
@@ -837,7 +869,9 @@
                         </div>
                     </div>
                     <div class="product-card reveal" style="transition-delay: 0.1s;" onclick="openP(1)">
-                        <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80" class="product-img">
+                        <div class="mp-img-wrap" id="pi1">
+                            <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80" class="product-img">
+                        </div>
                         <div class="product-content">
                             <span class="product-tag">Everyday Grace</span>
                             <h3>Hand Block Print Kurti Set</h3>
@@ -846,7 +880,9 @@
                         </div>
                     </div>
                     <div class="product-card reveal" style="transition-delay: 0.2s;" onclick="openP(2)">
-                        <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29b?auto=format&fit=crop&w=600&q=80" class="product-img">
+                        <div class="mp-img-wrap" id="pi2">
+                            <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29b?auto=format&fit=crop&w=600&q=80" class="product-img">
+                        </div>
                         <div class="product-content">
                             <span class="product-tag">Celebration Edit</span>
                             <h3>Embroidered Festive Dupatta</h3>
@@ -858,27 +894,18 @@
             </div>
         </section>
 
-        <!-- Belief Section from Original -->
-        <section id="belief" style="background: var(--emerald-green); color: var(--ivory); text-align: center; padding: 100px 20px;">
-            <div class="container">
-                <blockquote style="font-family: 'Libre Baskerville', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-style: italic; line-height: 1.6; margin-bottom: 30px;">
-                    "The most beautiful thing a woman can wear is the feeling that someone thought of her, curated for her, and <span style="color: var(--warm-gold);">celebrated her.</span>"
-                </blockquote>
-                <p style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--soft-cream);">— The ABDAN Promise</p>
-            </div>
-        </section>
-
         <!-- Story -->
         <section id="wsy">
             <div class="container">
                 <div class="section-title reveal">
-                    <h2>Every quiet moment <span>you carry for others</span></h2>
+                    <p class="hero-tagline" style="text-align: center;">We See You</p>
+                    <h2>Every quiet moment <em>you carry for others</em></h2>
                 </div>
                 <div class="testimonial-grid">
                     <div class="testimonial-card reveal">
                         <span style="font-size: 2rem; margin-bottom: 20px; display: block;">🌅</span>
                         <h3>The 5 AM Morning</h3>
-                        <p>Before anyone else wakes, you're already caring — making tiffin, beginning the day for everyone. You deserve something beautiful to begin it for yourself too.</p>
+                        <p>Before anyone else wakes, you are already caring — making tiffin, beginning the day for everyone. You deserve something beautiful to begin it for yourself too.</p>
                     </div>
                     <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
                         <span style="font-size: 2rem; margin-bottom: 20px; display: block;">🙏</span>
@@ -898,7 +925,8 @@
         <section id="testi" class="testimonials-section">
             <div class="container">
                 <div class="section-title reveal">
-                    <h2>Words from <span>our neighbours</span></h2>
+                    <p class="hero-tagline" style="text-align: center;">Community Voice</p>
+                    <h2>Words from <em>our neighbours</em></h2>
                 </div>
                 <div class="testimonial-grid">
                     <div class="testimonial-card reveal">
@@ -939,19 +967,20 @@
         <section id="teasers">
             <div class="container">
                 <div class="section-title reveal">
-                    <h2>Something <span>magical</span> is on its way…</h2>
+                    <p class="hero-tagline" style="text-align: center;">Coming Soon</p>
+                    <h2>Something <em>magical</em> is on its way…</h2>
                 </div>
                 <div class="teag">
-                    <div class="tec reveal" onclick="openPopup('loyalty')">
+                    <div class="tec reveal" onclick="openT('loyalty')">
                         <span style="font-size: 3rem; margin-bottom: 20px; display: block;">💎</span>
                         <h3>ABDAN Loyalty Circle</h3>
-                        <p style="margin-bottom: 20px;">A special place where your opinions, style, and loyalty are celebrated with early access and personal attention.</p>
+                        <p style="margin-bottom: 20px;">A special place where your opinions, your style, and your loyalty are celebrated with early access, exclusive pieces, and personal attention — because you deserve to be remembered.</p>
                         <span style="color: var(--accent); font-weight: 700;">Explore the Circle →</span>
                     </div>
-                    <div class="tec reveal" style="transition-delay: 0.1s;" onclick="openPopup('community')">
+                    <div class="tec reveal" style="transition-delay: 0.1s;" onclick="openT('community')">
                         <span style="font-size: 3rem; margin-bottom: 20px; display: block;">🌸</span>
                         <h3>ABDAN Community</h3>
-                        <p style="margin-bottom: 20px;">Share your fashion stories, ask opinions, and connect with women who understand your world. A warm, safe space.</p>
+                        <p style="margin-bottom: 20px;">Share your fashion stories, ask opinions, celebrate each other's style, and connect with women who understand your world. A warm, safe, joyful space — just for you.</p>
                         <span style="color: var(--accent); font-weight: 700;">Join the Community →</span>
                     </div>
                 </div>
@@ -963,31 +992,31 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="reveal">
-                        <span class="hero-tagline">Your Celebration Space</span>
-                        <h2>💛 A personal corner <span>just for you</span></h2>
-                        <p>Your favourites, your style history, your special moments — saved and remembered. Creating an account is entirely optional.</p>
-                        <a href="https://wa.me/918760595307" class="btn btn-primary">Create My Space 💛</a>
+                        <p class="hero-tagline">Your Celebration Space</p>
+                        <h2>💛 A personal corner <em>just for you</em></h2>
+                        <p>Your favourites, your style history, your special moments — saved and remembered. Creating an account is entirely optional. You can always buy without one.</p>
+                        <a href="https://wa.me/918760595307?text=Hi+%F0%9F%92%9B%2C+I%27d+like+to+create+my+personal+space+on+ABDAN!" target="_blank" class="btn btn-primary">Create My Space 💛</a>
                     </div>
                     <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div style="background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid var(--border-color);">
                             <i data-lucide="heart" color="var(--accent)" style="margin-bottom: 15px;"></i>
                             <h4 style="margin-bottom: 10px;">Moments Loved</h4>
-                            <p style="font-size: 0.75rem; opacity: 0.7;">Save the pieces that caught your eye.</p>
+                            <p style="font-size: 0.75rem; opacity: 0.7;">Save the pieces that caught your eye. Your favourites wait here, always.</p>
                         </div>
                         <div style="background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid var(--border-color);">
                             <i data-lucide="shopping-bag" color="var(--accent)" style="margin-bottom: 15px;"></i>
                             <h4 style="margin-bottom: 10px;">Your Keepsakes</h4>
-                            <p style="font-size: 0.75rem; opacity: 0.7;">Every order — a memory of you.</p>
+                            <p style="font-size: 0.75rem; opacity: 0.7;">Every order — a memory of the day you chose something just for yourself.</p>
                         </div>
                         <div style="background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid var(--border-color);">
                             <i data-lucide="sparkles" color="var(--accent)" style="margin-bottom: 15px;"></i>
                             <h4 style="margin-bottom: 10px;">Style Profile</h4>
-                            <p style="font-size: 0.75rem; opacity: 0.7;">Surprises that speak to you.</p>
+                            <p style="font-size: 0.75rem; opacity: 0.7;">So we remember what you love and surprise you with pieces that speak to you.</p>
                         </div>
                         <div style="background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid var(--border-color);">
                             <i data-lucide="mail" color="var(--accent)" style="margin-bottom: 15px;"></i>
                             <h4 style="margin-bottom: 10px;">Personal Notes</h4>
-                            <p style="font-size: 0.75rem; opacity: 0.7;">Festival greetings & updates.</p>
+                            <p style="font-size: 0.75rem; opacity: 0.7;">Festival greetings, style updates — because you deserve to be remembered always.</p>
                         </div>
                     </div>
                 </div>
@@ -996,64 +1025,37 @@
     </main>
 
     <!-- Product Detail Modals -->
-    <div id="pmodal">
-        <!-- Pane 0: Kanjivaram -->
-        <div class="modal-pane" id="pane-0">
-            <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800" class="mp-img">
+    <div id="pmod">
+        <div class="modal-pane">
+            <div class="mp-img-wrap" id="mimg"></div>
             <div class="mp-content">
-                <button onclick="closeP()" style="float: right; cursor: pointer;"><i data-lucide="x"></i></button>
-                <span class="product-tag">Heritage Moment</span>
-                <h3>Kanjivaram Silk Saree</h3>
-                <p style="margin: 20px 0; font-size: 0.95rem;">Pure Mulberry Silk · 6.3m · Real Zari · Woven in Kanchipuram</p>
-                <div class="product-price">₹8,500 onwards</div>
+                <button onclick="closeP()" style="float: right; cursor: pointer; border: none; background: none;"><i data-lucide="x"></i></button>
+                <span class="product-tag" id="mptag">Handpicked for You</span>
+                <h3 id="mpname">Product Name</h3>
+                <p id="mdesc" style="margin: 20px 0; font-size: 0.95rem; line-height: 1.8;"></p>
+                <div class="product-price" id="mpr">Price</div>
+                
+                <div id="mspecs" style="margin: 25px 0;"></div>
+
                 <div style="background: rgba(197, 160, 72, 0.1); padding: 20px; border-radius: 15px; margin: 25px 0;">
                     <h4 style="font-size: 0.9rem; margin-bottom: 10px;">🏛 Cultural Touch</h4>
-                    <p style="font-size: 0.85rem;">Kanchipuram silk is more than fabric; it is history woven in thread. Known for its "temple borders" and durability, it remains the crown jewel of South Indian heritage.</p>
+                    <p id="mhist" style="font-size: 0.85rem; line-height: 1.6;"></p>
                 </div>
-                <a href="https://wa.me/918760595307" class="btn btn-primary" style="width: 100%; justify-content: center;">Ask us about this 💛</a>
-            </div>
-        </div>
-        <!-- Pane 1: Kurti -->
-        <div class="modal-pane" id="pane-1" style="display: none;">
-            <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800" class="mp-img">
-            <div class="mp-content">
-                <button onclick="closeP()" style="float: right; cursor: pointer;"><i data-lucide="x"></i></button>
-                <span class="product-tag">Everyday Grace</span>
-                <h3>Hand Block Print Kurti Set</h3>
-                <p style="margin: 20px 0; font-size: 0.95rem;">Soft Cotton · Sizes S–3XL · Easy to care for</p>
-                <div class="product-price">₹1,200 onwards</div>
-                <div style="background: rgba(197, 160, 72, 0.1); padding: 20px; border-radius: 15px; margin: 25px 0;">
-                    <h4 style="font-size: 0.9rem; margin-bottom: 10px;">🌿 Sustainable Comfort</h4>
-                    <p style="font-size: 0.85rem;">Each block is carved by hand and stamped with precision. Breathable cotton that gets softer with every wash — perfect for the busy Indian homemaker.</p>
-                </div>
-                <a href="https://wa.me/918760595307" class="btn btn-primary" style="width: 100%; justify-content: center;">Ask us about this 💛</a>
-            </div>
-        </div>
-        <!-- Pane 2: Dupatta -->
-        <div class="modal-pane" id="pane-2" style="display: none;">
-            <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29b?auto=format&fit=crop&w=800" class="mp-img">
-            <div class="mp-content">
-                <button onclick="closeP()" style="float: right; cursor: pointer;"><i data-lucide="x"></i></button>
-                <span class="product-tag">Celebration Edit</span>
-                <h3>Embroidered Festive Dupatta</h3>
-                <p style="margin: 20px 0; font-size: 0.95rem;">Chiffon · Zardozi hand embroidery · Catches every light</p>
-                <div class="product-price">₹2,800 onwards</div>
-                <div style="background: rgba(197, 160, 72, 0.1); padding: 20px; border-radius: 15px; margin: 25px 0;">
-                    <h4 style="font-size: 0.9rem; margin-bottom: 10px;">✨ Artisan Craft</h4>
-                    <p style="font-size: 0.85rem;">Zardozi embroidery uses metallic threads to create elaborate patterns. A craft passed through generations to make you shine at every function.</p>
-                </div>
-                <a href="https://wa.me/918760595307" class="btn btn-primary" style="width: 100%; justify-content: center;">Ask us about this 💛</a>
+                
+                <div id="msoul" style="font-style: italic; font-size: 0.9rem; margin-bottom: 25px; color: var(--text-primary);"></div>
+                
+                <a href="#" id="mwa" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Ask us about this 💛</a>
             </div>
         </div>
     </div>
 
     <!-- Info Popup -->
-    <div id="popup">
+    <div id="tpop">
         <div class="popbox">
-            <div id="pop-ico" style="font-size: 3rem; margin-bottom: 20px;"></div>
-            <h3 id="pop-tit" style="margin-bottom: 15px;"></h3>
-            <p id="pop-msg" style="margin-bottom: 25px; font-size: 0.9rem; opacity: 0.8;"></p>
-            <button class="btn btn-primary" onclick="closePopup()">I can't wait! 💛</button>
+            <div id="pico" style="font-size: 3rem; margin-bottom: 20px;"></div>
+            <h3 id="ptit" style="margin-bottom: 15px;"></h3>
+            <p id="pmsg" style="margin-bottom: 25px; font-size: 0.9rem; opacity: 0.8; line-height: 1.7;"></p>
+            <button class="btn btn-primary" onclick="closeT()">I can't wait! 💛</button>
         </div>
     </div>
 
@@ -1065,9 +1067,9 @@
                     <p class="footer-tagline">Where Devotion Meets Style</p>
                     <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px;">Curated with love for the Tamil Nadu homemaker — her grace, her devotion, her style. Celebrating her, every day.</p>
                     <div style="display: flex; gap: 15px;">
-                        <a href="https://www.instagram.com/mailme.nmcollections" style="color: white;"><i data-lucide="instagram"></i></a>
-                        <a href="https://www.facebook.com/share/173kbKas2c/" style="color: white;"><i data-lucide="facebook"></i></a>
-                        <a href="https://wa.me/918760595307" style="color: white;"><i data-lucide="message-circle"></i></a>
+                        <a href="https://www.instagram.com/mailme.nmcollections" target="_blank" style="color: white;"><i data-lucide="instagram"></i></a>
+                        <a href="https://www.facebook.com/share/173kbKas2c/" target="_blank" style="color: white;"><i data-lucide="facebook"></i></a>
+                        <a href="https://wa.me/918760595307" target="_blank" style="color: white;"><i data-lucide="message-circle"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -1082,14 +1084,15 @@
                 <div class="footer-links">
                     <h4>Connect</h4>
                     <ul>
-                        <li><a href="https://wa.me/918760595307">WhatsApp: +91 876 059 5307</a></li>
-                        <li><a href="https://whatsapp.com/channel/0029Vb6NK8AChq6PXxF7rB0F">WhatsApp Channel</a></li>
+                        <li><a href="https://wa.me/918760595307" target="_blank">WhatsApp: +91 876 059 5307</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Vb6NK8AChq6PXxF7rB0F" target="_blank">WhatsApp Channel</a></li>
                         <li><a href="tel:+918760595307">Call: +91 876 059 5307</a></li>
                     </ul>
                 </div>
             </div>
             <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; font-size: 0.75rem; opacity: 0.5;">
-                <p>&copy; 2026 ABDAN. Where Devotion Meets Style. Handcrafted with love in Tamil Nadu.</p>
+                <p><strong>Aggregator Disclaimer:</strong> ABDAN curates and connects you with trusted artisan and vendor partners. We do not sell directly. Products are verified before purchase. We confirm availability before payment. No hidden charges. We stay with you till delivery. 💛</p>
+                <p style="margin-top: 10px;">&copy; 2026 ABDAN. Where Devotion Meets Style. Handcrafted with love in Tamil Nadu.</p>
             </div>
         </div>
     </footer>
@@ -1136,49 +1139,90 @@
         window.addEventListener("scroll", reveal);
         reveal();
 
+        // Data for Product Detail Modal (PD)
+        const PD = [
+          {name:"Kanjivaram Silk Saree",pr:"₹8,500 onwards",
+           desc:"This saree was not just woven — it was composed, thread by thread, by hands that have practiced this art for generations. The zari border catches the light the way only pure mulberry silk can. Wearing this is wearing a living legacy.",
+           specs:[["Fabric","Pure Mulberry Silk — Grade A"],["Length","6.3 metres with matching blouse piece"],["Border","Real Zari (gold thread) border & pallu"],["Occasion","Weddings · Puja ceremonies · The days your family gathers"],["Care","Dry clean only · Store in muslin cloth"],["Verified","✓ Sourced from certified Kanchipuram weavers"]],
+           sty:"Pair with a high-necked blouse with elbow sleeves for a classic Tamil look. Gold temple jewellery — jumkhas and a lakshmi haar — will make you glow. A low bun with jasmine flowers completes it perfectly.",
+           hist:"Kanchipuram silk weaving dates back over 400 years to the temple town of Kanchipuram in Tamil Nadu. Each saree takes 3–7 days to weave using pure mulberry silk and real gold zari. It is considered the Queen of Silks across India.",
+           soul:"<span class=\"hl\">This is for the woman who carries tradition with devotion —</span> let this silken prayer be just for you. 💛",
+           wa:"Hi+%F0%9F%92%9B%2C+I+saw+the+Kanjivaram+Silk+Saree+on+ABDAN+and+it+is+beautiful.+Could+you+tell+me+more+about+it%3F"},
+          {name:"Hand Block Print Kurti Set",pr:"₹1,200 onwards",
+           desc:"Made for the days that never slow down — the mornings with four tasks before breakfast, the evenings that run into each other. This kurti is soft enough to breathe in, beautiful enough to feel proud in, and easy enough to care for.",
+           specs:[["Fabric","100% Soft Cotton — hand-block printed"],["Sizes","S, M, L, XL, 2XL, 3XL"],["Set","Kurti + matching palazzo pants"],["Occasion","Your everyday · Temple mornings · Quiet celebrations"],["Care","Machine washable · Gentle cycle cold water"],["Verified","✓ Sourced from Jaipur block print artisans"]],
+           sty:"Pair with kolhapuri chappals and a small gold bindi for everyday elegance. On special days, add a small gold chain and stud earrings. A complementary dupatta ties the look together beautifully.",
+           hist:"Hand block printing is a 4,500-year-old Indian textile art. Each wooden block is hand-carved by artisans and pressed onto fabric with practiced precision — meaning no two prints are exactly alike. Your kurti carries the mark of human hands.",
+           soul:"<span class=\"hl\">This is for the woman who nurtures everyone through long days —</span> let this softness hold you back, just for today. 💛",
+           wa:"Hi+%F0%9F%92%9B%2C+I%27m+interested+in+the+Block+Print+Kurti+Set+from+ABDAN!+Could+you+help+me+find+the+right+size%3F"},
+          {name:"Embroidered Festive Dupatta",pr:"₹2,800 onwards",
+           desc:"This dupatta does not just complete an outfit — it announces her arrival. The zardozi embroidery catches the candlelight of a puja, the festive lights of Diwali, the wedding kaleidoscope. Every stitch is placed where it will sparkle most for you.",
+           specs:[["Fabric","Georgette chiffon base"],["Embroidery","Zardozi (gold & silver thread) hand embroidery"],["Length","2.5 metres"],["Occasion","Festivals · Weddings · The evenings that deserve to sparkle"],["Care","Dry clean recommended · Handle borders gently"],["Verified","✓ Handcrafted by Lucknow zardozi artisans"]],
+           sty:"Drape over one shoulder for a regal effect with a salwar kameez. Its shimmer works beautifully against both dark and pastel base outfits. For weddings, let it fall in loose elegant folds from the waist.",
+           hist:"Zardozi embroidery originated in Persia and was brought to India by Mughal royalty in the 16th century. It uses metallic threads — originally real gold and silver — to create elaborate raised patterns. Practiced by artisan families across centuries.",
+           soul:"<span class=\"hl\">This is for the woman who lights up every room she walks into —</span> let this sparkle remind you of who you truly are. 💛",
+           wa:"Hi+%F0%9F%92%9B%2C+I+saw+the+Embroidered+Dupatta+on+ABDAN+and+I+can+already+imagine+wearing+it.+Could+you+tell+me+more%3F"}
+        ];
+
         // Modal Logic
-        const pmodal = document.getElementById('pmodal');
+        const pmod = document.getElementById('pmod');
         function openP(i) {
-            document.querySelectorAll('.modal-pane').forEach((p, idx) => {
-                p.style.display = idx === i ? 'grid' : 'none';
-            });
-            pmodal.classList.add('open');
+            const p = PD[i];
+            document.getElementById('mpname').textContent = p.name;
+            document.getElementById('mpr').textContent = p.pr;
+            document.getElementById('mdesc').textContent = p.desc;
+            document.getElementById('mspecs').innerHTML = p.specs.map(s => 
+                `<div class="sr"><span class="sl">${s[0]}</span><span class="sv">${s[1]}</span></div>`
+            ).join('');
+            document.getElementById('mhist').textContent = p.hist;
+            document.getElementById('msoul').innerHTML = p.soul;
+            document.getElementById('mwa').href = 'https://wa.me/918760595307?text=' + p.wa;
+            
+            const srcImg = document.getElementById('pi' + i).innerHTML;
+            document.getElementById('mimg').innerHTML = srcImg;
+            
+            pmod.classList.add('op');
             document.body.style.overflow = 'hidden';
         }
         function closeP() {
-            pmodal.classList.remove('open');
+            pmod.classList.remove('op');
             document.body.style.overflow = '';
         }
-        pmodal.addEventListener('click', (e) => { if(e.target === pmodal) closeP(); });
+        pmod.addEventListener('click', (e) => { if(e.target === pmod) closeP(); });
 
         // Popup Logic
-        const popup = document.getElementById('popup');
-        const POPDATA = {
-            loyalty: { ico: '💎', tit: 'Coming Soon — Loyalty Circle', msg: 'A special place where your opinions, loyalty, and style will be celebrated with early access and personal styling notes.' },
-            community: { ico: '🌸', tit: 'Coming Soon — ABDAN Community', msg: 'Imagine a warm, safe space where women like you share fashion stories and celebrate each other.' }
+        const tpop = document.getElementById('tpop');
+        const TD = {
+          loyalty: { ico: "💎", tit: "Coming Soon — ABDAN Loyalty Circle", msg: "💛 A special place where your opinions, your loyalty, and your style will be celebrated with early access to new collections, personal styling notes, and exclusive pieces curated just for you. You deserve to be remembered." },
+          community: { ico: "🌸", tit: "Coming Soon — ABDAN Community", msg: "💛 Imagine a warm, safe space where women like you share fashion stories, ask for opinions, celebrate each other, and feel joyfully seen. A private circle where your voice matters." }
         };
-        function openPopup(t) {
-            const d = POPDATA[t];
-            document.getElementById('pop-ico').textContent = d.ico;
-            document.getElementById('pop-tit').textContent = d.tit;
-            document.getElementById('pop-msg').textContent = d.msg;
-            popup.classList.add('open');
+        function openT(t) {
+            const d = TD[t];
+            document.getElementById('pico').textContent = d.ico;
+            document.getElementById('ptit').textContent = d.tit;
+            document.getElementById('pmsg').textContent = d.msg;
+            tpop.classList.add('op');
             document.body.style.overflow = 'hidden';
         }
-        function closePopup() {
-            popup.classList.remove('open');
+        function closeT() {
+            tpop.classList.remove('op');
             document.body.style.overflow = '';
         }
-        popup.addEventListener('click', (e) => { if(e.target === popup) closePopup(); });
+        tpop.addEventListener('click', (e) => { if(e.target === tpop) closeT(); });
 
         // PWA Banner Logic
         const banner = document.getElementById('pwab');
         if(!sessionStorage.getItem('abdan-pwa-x')) {
-            setTimeout(() => { banner.classList.add('show'); }, 15000);
+            setTimeout(() => { banner.classList.add('sh'); }, 9000);
         }
         document.getElementById('pwadb').addEventListener('click', () => {
-            banner.classList.remove('show');
+            banner.classList.remove('sh');
             sessionStorage.setItem('abdan-pwa-x', '1');
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') { closeP(); closeT(); }
         });
     </script>
 </body>
