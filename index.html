@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
     <meta name="description" content="ABDAN — Where Devotion Meets Style. Curated ethnic wear for Tamil Nadu women who deserve to feel celebrated every day."/>
     <title>ABDAN | Where Devotion Meets Style</title>
-    <meta name="theme-color" content="#044D37"/>
+    <meta name="theme-color" content="#023D3A"/>
     <meta name="mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-title" content="ABDAN"/>
+    <link rel="icon" type="image/png" href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663561972157/GvogLbUBgONDrsTX.png"/>
     <link id="manifest-link" rel="manifest"/>
     
     <!-- Fonts -->
@@ -21,37 +22,36 @@
     
     <style>
         :root {
-            /* Branding Colors from Brandingguide.jpeg */
-            --emerald-green: #044D37;
-            --emerald-dark: #02261B;
-            --warm-gold: #C5A048;
-            --soft-cream: #EAE0C9;
-            --ivory: #F9F6EE;
+            /* BRAND COLOR SYSTEM (HARD LOCK) */
+            --emerald-green: #023D3A;
+            --warm-gold: #C5A13B;
+            --soft-cream: #E6DFCB;
+            --ivory: #F8F5EC;
             
-            /* Light Mode (Default) */
+            /* UI Colors */
             --bg-primary: var(--ivory);
             --bg-secondary: var(--soft-cream);
             --text-primary: var(--emerald-green);
-            --text-secondary: #333333;
+            --text-secondary: #044D37; /* Open Sans Body Color */
             --accent: var(--warm-gold);
-            --nav-bg: rgba(249, 246, 238, 0.85);
+            --nav-bg: rgba(248, 245, 236, 0.9);
             --card-bg: #ffffff;
-            --border-color: rgba(4, 77, 55, 0.1);
-            --shadow: rgba(4, 77, 55, 0.08);
+            --border-color: rgba(2, 61, 58, 0.1);
+            --shadow: rgba(2, 61, 58, 0.08);
             
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             --ease-out: cubic-bezier(0.2, 1, 0.3, 1);
         }
 
         [data-theme="dark"] {
-            --bg-primary: #02261B;
-            --bg-secondary: #033627;
+            --bg-primary: #011f1d;
+            --bg-secondary: #022b29;
             --text-primary: var(--soft-cream);
-            --text-secondary: #EAE0C9;
+            --text-secondary: var(--ivory);
             --accent: var(--warm-gold);
-            --nav-bg: rgba(2, 38, 27, 0.85);
-            --card-bg: #044D37;
-            --border-color: rgba(234, 224, 201, 0.15);
+            --nav-bg: rgba(1, 31, 29, 0.9);
+            --card-bg: #023D3A;
+            --border-color: rgba(230, 223, 203, 0.15);
             --shadow: rgba(0, 0, 0, 0.3);
         }
 
@@ -75,7 +75,7 @@
             transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        /* Noise Overlay from Original */
+        /* Noise Overlay */
         body::after {
             content: '';
             position: fixed;
@@ -86,10 +86,15 @@
             opacity: .4;
         }
 
+        /* TYPOGRAPHY SYSTEM (HARD LOCK) */
         h1, h2, h3, h4, .font-serif {
             font-family: 'Libre Baskerville', serif;
             color: var(--text-primary);
             font-weight: 400;
+        }
+
+        .abdan-calligraph {
+            font-family: 'Dancing Script', cursive; /* Using Dancing Script for calligraphic brand touch */
         }
 
         .container {
@@ -110,7 +115,7 @@
             backdrop-filter: blur(12px);
             z-index: 1000;
             border-radius: 50px;
-            padding: 10px 25px;
+            padding: 8px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -122,7 +127,7 @@
         nav.scrolled {
             top: 10px;
             width: 95%;
-            padding: 8px 20px;
+            padding: 6px 20px;
         }
 
         .logo-area {
@@ -132,16 +137,10 @@
             text-decoration: none;
         }
 
-        .logo-text {
-            font-family: 'Libre Baskerville', serif;
-            font-weight: 700;
-            color: var(--emerald-green);
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
-
-        [data-theme="dark"] .logo-text {
-            color: var(--soft-cream);
+        .logo-img-header {
+            height: 45px;
+            width: auto;
+            display: block;
         }
 
         .nav-links {
@@ -186,7 +185,7 @@
         }
 
         .theme-toggle:hover {
-            background: rgba(197, 160, 72, 0.1);
+            background: rgba(197, 161, 59, 0.1);
         }
 
         /* Hero Section */
@@ -267,7 +266,7 @@
         .btn-primary {
             background: var(--emerald-green);
             color: var(--ivory);
-            box-shadow: 0 10px 20px rgba(4, 77, 55, 0.2);
+            box-shadow: 0 10px 20px rgba(2, 61, 58, 0.2);
         }
 
         [data-theme="dark"] .btn-primary {
@@ -291,7 +290,7 @@
             box-shadow: 0 15px 30px var(--shadow);
         }
 
-        /* Trust Bar from Original */
+        /* Trust Bar */
         #tbar {
             background: var(--emerald-green);
             padding: 1.1rem 2rem;
@@ -332,10 +331,10 @@
             color: var(--text-secondary);
         }
 
-        /* Aggregator Disclaimer Box from Original */
+        /* Aggregator Disclaimer Box */
         .disc-s {
-            background: rgba(197, 160, 72, 0.1);
-            border: 1px solid rgba(197, 160, 72, 0.3);
+            background: rgba(197, 161, 59, 0.1);
+            border: 1px solid rgba(197, 161, 59, 0.3);
             border-radius: 1rem;
             padding: 1.2rem;
             display: flex;
@@ -480,7 +479,7 @@
         .tav2 {
             width: 45px;
             height: 45px;
-            background: rgba(4, 77, 55, 0.1);
+            background: rgba(2, 61, 58, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -511,11 +510,11 @@
             border-color: var(--accent);
         }
 
-        /* Popups from Original */
+        /* Popups */
         #tpop {
             position: fixed;
             inset: 0;
-            background: rgba(2, 38, 27, 0.6);
+            background: rgba(1, 31, 29, 0.6);
             backdrop-filter: blur(8px);
             z-index: 2000;
             display: none;
@@ -539,11 +538,11 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.2);
         }
 
-        /* Product Detail Modal System from Original */
+        /* Product Detail Modal System */
         #pmod {
             position: fixed;
             inset: 0;
-            background: rgba(2, 38, 27, 0.7);
+            background: rgba(1, 31, 29, 0.7);
             backdrop-filter: blur(12px);
             z-index: 1500;
             display: none;
@@ -634,7 +633,7 @@
             transform: scale(1.1);
         }
 
-        /* Mobile Bottom Nav (App Like) */
+        /* Mobile Bottom Nav */
         .mobile-bottom-nav {
             display: none;
             position: fixed;
@@ -668,7 +667,7 @@
             text-transform: uppercase;
         }
 
-        /* WhatsApp Floating CTA from Original */
+        /* WhatsApp Floating CTA */
         #waf {
             position: fixed;
             bottom: 100px;
@@ -702,7 +701,7 @@
             box-shadow: 0 5px 15px var(--shadow);
         }
 
-        /* PWA Banner from Original */
+        /* PWA Banner */
         #pwab {
             position: fixed;
             bottom: 100px;
@@ -773,12 +772,11 @@
             margin-bottom: 60px;
         }
 
-        .footer-logo {
-            font-size: 2rem;
+        .footer-logo-img {
+            height: 60px;
+            width: auto;
             margin-bottom: 20px;
             display: block;
-            color: var(--soft-cream);
-            font-family: 'Libre Baskerville', serif;
         }
 
         .footer-tagline {
@@ -821,7 +819,7 @@
     <!-- Floating Top Nav -->
     <nav id="topNav">
         <a href="#" class="logo-area">
-            <span class="logo-text">ABDAN</span>
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663561972157/CLsmPdmHcNuRpeof.jpg" alt="ABDAN Logo" class="logo-img-header">
         </a>
         <div class="nav-links">
             <a href="#products">Handpicked for You</a>
@@ -890,10 +888,10 @@
                         </div>
                         <div style="margin-top: 40px; display: flex; align-items: center; gap: 15px;">
                             <div style="display: flex;">
-                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(197, 160, 72, 0.24); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary);">M</div>
-                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(27, 94, 53, 0.18); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary); margin-left: -8px;">P</div>
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(197, 161, 59, 0.24); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary);">M</div>
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(2, 61, 58, 0.18); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary); margin-left: -8px;">P</div>
                                 <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(123, 28, 46, 0.15); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary); margin-left: -8px;">S</div>
-                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(197, 160, 72, 0.3); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary); margin-left: -8px;">R</div>
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(197, 161, 59, 0.3); display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary); margin-left: -8px;">R</div>
                             </div>
                             <span style="font-size: 0.85rem; opacity: 0.7;"><strong>1,200+ women</strong> across Tamil Nadu feel seen and celebrated</span>
                         </div>
@@ -945,7 +943,7 @@
                 </div>
                 
                 <div class="products-grid" id="productsGrid">
-                    <!-- Products will be rendered by JS -->
+                    <!-- Products rendered by JS -->
                 </div>
             </div>
         </section>
@@ -1093,7 +1091,7 @@
                 
                 <div id="mspecs" style="margin: 25px 0;"></div>
 
-                <div style="background: rgba(197, 160, 72, 0.1); padding: 20px; border-radius: 15px; margin: 25px 0;">
+                <div style="background: rgba(197, 161, 59, 0.1); padding: 20px; border-radius: 15px; margin: 25px 0;">
                     <h4 style="font-size: 0.9rem; margin-bottom: 10px;">🏛 Cultural Touch</h4>
                     <p id="mhist" style="font-size: 0.85rem; line-height: 1.6;"></p>
                 </div>
@@ -1127,7 +1125,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <span class="footer-logo">ABDAN</span>
+                    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663561972157/GvogLbUBgONDrsTX.png" alt="ABDAN Logo" class="footer-logo-img">
                     <p class="footer-tagline">Where Devotion Meets Style</p>
                     <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px;">Curated with love for the Tamil Nadu homemaker — her grace, her devotion, her style. Celebrating her, every day.</p>
                     <div style="display: flex; gap: 15px;">
@@ -1210,11 +1208,7 @@
             pr: "₹8,500 onwards",
             img: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80",
             primaryTag: "Heritage Moments",
-            secondaryTags: {
-                occasion: "Festive",
-                emotion: "Elegant",
-                style: "Embroidered"
-            },
+            secondaryTags: { occasion: "Festive", emotion: "Elegant", style: "Embroidered" },
             desc: "This saree was not just woven — it was composed, thread by thread, by hands that have practiced this art for generations. The zari border catches the light the way only pure mulberry silk can. Wearing this is wearing a living legacy.",
             specs: [["Fabric","Pure Mulberry Silk — Grade A"],["Length","6.3 metres with matching blouse piece"],["Border","Real Zari (gold thread) border & pallu"],["Occasion","Weddings · Puja ceremonies · The days your family gathers"],["Care","Dry clean only · Store in muslin cloth"],["Verified","✓ Sourced from certified Kanchipuram weavers"]],
             sty: "Pair with a high-necked blouse with elbow sleeves for a classic Tamil look. Gold temple jewellery — jumkhas and a lakshmi haar — will make you glow. A low bun with jasmine flowers completes it perfectly.",
@@ -1227,28 +1221,20 @@
             pr: "₹1,200 onwards",
             img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80",
             primaryTag: "Everyday Grace",
-            secondaryTags: {
-                occasion: "Daily",
-                emotion: "Comfortable",
-                style: "Minimal"
-            },
+            secondaryTags: { occasion: "Daily", emotion: "Comfortable", style: "Minimal" },
             desc: "Made for the days that never slow down — the mornings with four tasks before breakfast, the evenings that run into each other. This kurti is soft enough to breathe in, beautiful enough to feel proud in, and easy enough to care for.",
             specs: [["Fabric","100% Soft Cotton — hand-block printed"],["Sizes","S, M, L, XL, 2XL, 3XL"],["Set","Kurti + matching palazzo pants"],["Occasion","Your everyday · Temple mornings · Quiet celebrations"],["Care","Machine washable · Gentle cycle cold water"],["Verified","✓ Sourced from Jaipur block print artisans"]],
             sty: "Pair with kolhapuri chappals and a small gold bindi for everyday elegance. On special days, add a small gold chain and stud earrings. A complementary dupatta ties the look together beautifully.",
             hist: "Hand block printing is a 4,500-year-old Indian textile art. Each wooden block is hand-carved by artisans and pressed onto fabric with practiced precision — meaning no two prints are exactly alike. Your kurti carries the mark of human hands.",
             soul: "<span class=\"hl\">This is for the woman who nurtures everyone through long days —</span> let this softness hold you back, just for today. 💛",
-            wa: "Hi+%F0%9F%92%9B%2C+I+m+interested+in+the+Block+Print+Kurti+Set+from+ABDAN!+Could+you+help+me+find+the+right+size%3F"
+            wa: "Hi+%F0%9F%92%9B%2C+I%27m+interested+in+the+Block+Print+Kurti+Set+from+ABDAN!+Could+you+help+me+find+the+right+size%3F"
           },
           {
             name: "Embroidered Festive Dupatta",
             pr: "₹2,800 onwards",
             img: "https://images.unsplash.com/photo-1589156280159-27698a70f29b?auto=format&fit=crop&w=600&q=80",
             primaryTag: "Festive Glow",
-            secondaryTags: {
-                occasion: "Festive",
-                emotion: "Graceful",
-                style: "Embroidered"
-            },
+            secondaryTags: { occasion: "Festive", emotion: "Graceful", style: "Embroidered" },
             desc: "This dupatta does not just complete an outfit — it announces her arrival. The zardozi embroidery catches the candlelight of a puja, the festive lights of Diwali, the wedding kaleidoscope. Every stitch is placed where it will sparkle most for you.",
             specs: [["Fabric","Georgette chiffon base"],["Embroidery","Zardozi (gold & silver thread) hand embroidery"],["Length","2.5 metres"],["Occasion","Festivals · Weddings · The evenings that deserve to sparkle"],["Care","Dry clean recommended · Handle borders gently"],["Verified","✓ Handcrafted by Lucknow zardozi artisans"]],
             sty: "Drape over one shoulder for a regal effect with a salwar kameez. Its shimmer works beautifully against both dark and pastel base outfits. For weddings, let it fall in loose elegant folds from the waist.",
@@ -1287,11 +1273,9 @@
 
         // Filter Logic
         function filterProducts(tag) {
-            // Update active button
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.textContent === (tag === 'All' ? 'All Collections' : tag));
             });
-
             const filtered = tag === 'All' ? PD : PD.filter(p => p.primaryTag === tag);
             renderProducts(filtered);
         }
@@ -1312,7 +1296,6 @@
             document.getElementById('mwa').href = 'https://wa.me/918760595307?text=' + p.wa;
             document.getElementById('mimg').innerHTML = `<img src="${p.img}" alt="${p.name}">`;
             
-            // Render Social Share Buttons
             const shareText = encodeURIComponent(`I love this ${p.name} style from ABDAN! 💛 ${p.primaryTag}`);
             const shareUrl = encodeURIComponent(window.location.href);
             
