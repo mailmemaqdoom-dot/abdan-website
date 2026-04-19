@@ -1284,17 +1284,61 @@
         const revealObserver = new IntersectionObserver(revealCallback, { threshold: 0.1 });
         document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
+        // ABDAN AI-Style Content Generator Engine
+        function generateAbdanContent(p) {
+            const fabric = p.specs.find(s => s[0].includes('Fabric'))?.[1] || 'fine fabric';
+            const color = p.color || 'graceful hues';
+            const style = p.secondaryTags.style || 'elegant design';
+            const cat = p.primaryTag;
+
+            const hooks = [
+                `For those moments when you reach for something that holds the weight of your family’s stories, this ${p.name} feels like a warm embrace.`,
+                `When the day calls for a touch of quiet brilliance, this piece in ${fabric} moves with a softness that is entirely your own.`,
+                `Crafted for the woman who finds beauty in the honest details, this ${style} ${p.name} is a tribute to the grace you carry.`
+            ];
+            
+            const connections = [
+                `It is woven for the woman who moves with purpose, providing an effortless presence in the kaleidoscope of her daily life.`,
+                `Designed to be your quiet companion through busy mornings and celebratory evenings alike, fitting perfectly into the tapestry of your journey.`,
+                `This is for the woman who balances a thousand tasks with a smile, offering a comfort that breathes as easily as you do.`
+            ];
+
+            const feels = [
+                `The ${fabric} feels like a second skin, draped in ${color} to reflect the gentle strength you bring to every room.`,
+                `Experience a presence that is both grounded and celebrated, with a texture that respects the sensitivity of your skin and spirit.`,
+                `It drapes with a gentle weight, allowing you to move with a confidence that is felt rather than seen.`
+            ];
+
+            const closures = [
+                `Every fold is a reminder of the devotion you carry in your everyday life. 💛`,
+                `A celebration of the simple, honest beauty you bring to the world. 💛`,
+                `Let this piece be a whispered story of your own grace. 💛`
+            ];
+
+            // Styling Logic
+            const stylingTips = {
+                "Heritage Moments": `A simple high-necked blouse and a soft low bun with fresh jasmine would complement this ${fabric} beautifully. It’s a timeless choice for those days when you want to feel deeply connected to your roots.`,
+                "Everyday Grace": `This ${style} piece pairs effortlessly with your favourite comfortable footwear for a day of errands or a quiet lunch. A simple gold chain adds just enough sparkle without feeling overdone.`,
+                "Festive Glow": `Try draping this to let the ${style} details catch the light as you move. A pair of statement earrings and a small bindi will enhance the festive spirit of this ${color} ensemble.`
+            };
+
+            const hash = p.name.length % 3;
+            const desc = `${hooks[hash]} ${connections[(hash+1)%3]} ${feels[(hash+2)%3]} ${closures[hash]}`;
+            const styling = stylingTips[cat] || `Pair this ${style} ${p.name} with pieces that make you feel most like yourself. A touch of your favourite fragrance and a comfortable pair of sandals will complete this look with ease.`;
+
+            return { desc, styling };
+        }
+
         // Data for Product Detail Modal (PD)
-        const PD = [
+        const rawPD = [
           {
             name: "Kanjivaram Silk Saree",
             pr: "₹8,500 onwards",
             img: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80",
             primaryTag: "Heritage Moments",
             secondaryTags: { occasion: "Festive", emotion: "Elegant", style: "Embroidered" },
-            desc: "For those mornings when you reach for something that holds the weight of your family’s stories, this saree feels like a warm embrace. It is woven for the woman who finds beauty in the quiet strength of heritage, moving with an effortless grace that only pure mulberry silk can provide. Every fold is a reminder of the devotion you carry in your everyday life.",
+            color: "deep gold and emerald",
             specs: [["Fabric","Pure Mulberry Silk — Grade A"],["Length","6.3 metres with matching blouse piece"],["Border","Real Zari (gold thread) border & pallu"],["Occasion","Weddings · Puja ceremonies · The days your family gathers"],["Care","Dry clean only · Store in muslin cloth"],["Verified","✓ Sourced from certified Kanchipuram weavers"]],
-            styling: "A simple high-necked blouse allows the silk to be the true storyteller of your look. You might consider a soft low bun adorned with fresh jasmine for that timeless feel. It’s a beautiful choice for a temple visit or a family wedding where you want to feel both grounded and celebrated.",
             hist: "Kanchipuram silk weaving dates back over 400 years to the temple town of Kanchipuram in Tamil Nadu. Each saree takes 3–7 days to weave using pure mulberry silk and real gold zari. It is considered the Queen of Silks across India.",
             soul: "<span class=\"hl\">This is for the woman who carries tradition with devotion —</span> let this silken prayer be just for you. 💛",
             wa: "Hi+%F0%9F%92%9B%2C+I+saw+the+Kanjivaram+Silk+Saree+on+ABDAN+and+it+is+beautiful.+Could+you+tell+me+more+about+it%3F"
@@ -1305,9 +1349,8 @@
             img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80",
             primaryTag: "Everyday Grace",
             secondaryTags: { occasion: "Daily", emotion: "Comfortable", style: "Minimal" },
-            desc: "For the long afternoons and busy mornings that make up the heart of your home, this kurti set is your quiet companion. It is crafted for the woman who balances a thousand tasks with a smile, offering a softness that breathes with you. The gentle hand-block prints are a tribute to the simple, honest beauty you bring to every room you enter.",
+            color: "soft indigo and ivory",
             specs: [["Fabric","100% Soft Cotton — hand-block printed"],["Sizes","S, M, L, XL, 2XL, 3XL"],["Set","Kurti + matching palazzo pants"],["Occasion","Your everyday · Temple mornings · Quiet celebrations"],["Care","Machine washable · Gentle cycle cold water"],["Verified","✓ Sourced from Jaipur block print artisans"]],
-            styling: "This set pairs beautifully with your favourite comfortable kolhapuris for a day of errands or a quiet lunch. A simple gold chain or small studs add just enough sparkle without feeling overdone. It’s perfect for those days when you want to feel put together while staying completely at ease.",
             hist: "Hand block printing is a 4,500-year-old Indian textile art. Each wooden block is hand-carved by artisans and pressed onto fabric with practiced precision — meaning no two prints are exactly alike. Your kurti carries the mark of human hands.",
             soul: "<span class=\"hl\">This is for the woman who nurtures everyone through long days —</span> let this softness hold you back, just for today. 💛",
             wa: "Hi+%F0%9F%92%9B%2C+I%27m+interested+in+the+Block+Print+Kurti+Set+from+ABDAN!+Could+you+help+me+find+the+right+size%3F"
@@ -1318,14 +1361,19 @@
             img: "https://images.unsplash.com/photo-1589156280159-27698a70f29b?auto=format&fit=crop&w=600&q=80",
             primaryTag: "Festive Glow",
             secondaryTags: { occasion: "Festive", emotion: "Graceful", style: "Embroidered" },
-            desc: "When the evening calls for a touch of something special, this dupatta drapes you in a soft, festive light. It is created for the moments when you step out of your daily roles and into the glow of a celebration. The delicate zardozi work is like a constellation of stars, chosen to reflect the quiet brilliance you carry within you.",
+            color: "shimmering crimson",
             specs: [["Fabric","Georgette chiffon base"],["Embroidery","Zardozi (gold & silver thread) hand embroidery"],["Length","2.5 metres"],["Occasion","Festivals · Weddings · The evenings that deserve to sparkle"],["Care","Dry clean recommended · Handle borders gently"],["Verified","✓ Handcrafted by Lucknow zardozi artisans"]],
-            styling: "Try draping this over one shoulder to let the embroidery catch the light as you move. A pair of statement earrings and a simple bindi would complement the shimmer beautifully. It’s a lovely way to elevate a simple suit for a festive puja or an evening gathering with friends.",
             hist: "Zardozi embroidery originated in Persia and was brought to India by Mughal royalty in the 16th century. It uses metallic threads — originally real gold and silver — to create elaborate raised patterns. Practiced by artisan families across centuries.",
             soul: "<span class=\"hl\">This is for the woman who lights up every room she walks into —</span> let this sparkle remind you of who you truly are. 💛",
             wa: "Hi+%F0%9F%92%9B%2C+I+saw+the+Embroidered+Dupatta+on+ABDAN+and+I+can+already+imagine+wearing+it.+Could+you+tell+me+more%3F"
           }
         ];
+
+        // Process data through generator
+        const PD = rawPD.map(p => {
+            const gen = generateAbdanContent(p);
+            return { ...p, desc: gen.desc, styling: gen.styling };
+        });
 
         // Render Products
         const productsGrid = document.getElementById('productsGrid');
