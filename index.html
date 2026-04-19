@@ -834,12 +834,38 @@
             gap: 60px;
             margin-bottom: 60px;
         }
-
+        
         .footer-logo-img {
             height: 60px;
-            width: auto;
             margin-bottom: 20px;
             display: block;
+        }
+
+        .footer-social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white !important;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social-icon:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-faq div::-webkit-scrollbar, .footer-tc div::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .footer-faq div::-webkit-scrollbar-thumb, .footer-tc div::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
         }
 
         .footer-tagline {
@@ -1196,10 +1222,12 @@
                     <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663561972157/GvogLbUBgONDrsTX.png" alt="ABDAN Logo" class="footer-logo-img">
                     <p class="footer-tagline">Where Deviation Meets Style</p>
                     <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px;">Curated with love for the Tamil Nadu homemaker — her grace, her devotion, her style. Celebrating her, every day.</p>
-                    <div style="display: flex; gap: 15px;">
-                        <a href="https://www.instagram.com/mailme.nmcollections" target="_blank" style="color: white; padding: 10px;"><i data-lucide="instagram"></i></a>
-                        <a href="https://www.facebook.com/share/173kbKas2c/" target="_blank" style="color: white; padding: 10px;"><i data-lucide="facebook"></i></a>
-                        <a href="https://wa.me/918760595307" target="_blank" style="color: white; padding: 10px;"><i data-lucide="message-circle"></i></a>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <a href="https://wa.me/918760595307" target="_blank" class="footer-social-icon" title="WhatsApp"><i data-lucide="message-circle"></i></a>
+                        <a href="https://t.me/+918760595307" target="_blank" class="footer-social-icon" title="Telegram"><i data-lucide="send"></i></a>
+                        <a href="https://www.instagram.com/mailme.nmcollections" target="_blank" class="footer-social-icon" title="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="https://www.facebook.com/share/173kbKas2c/" target="_blank" class="footer-social-icon" title="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="https://www.linkedin.com/" target="_blank" class="footer-social-icon" title="LinkedIn"><i data-lucide="linkedin"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -1213,14 +1241,92 @@
                 </div>
                 <div class="footer-links">
                     <h4>Connect</h4>
-                    <ul>
-                        <li><a href="https://wa.me/918760595307" target="_blank">WhatsApp: +91 876 059 5307</a></li>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="https://wa.me/918760595307" target="_blank" class="footer-social-icon" title="WhatsApp Chat"><i data-lucide="message-circle"></i></a>
+                        <a href="tel:+918760595307" class="footer-social-icon" title="Call Us"><i data-lucide="phone"></i></a>
+                        <a href="https://t.me/+918760595307" target="_blank" class="footer-social-icon" title="Telegram Message"><i data-lucide="send"></i></a>
+                    </div>
+                    <ul style="margin-top: 15px;">
                         <li><a href="https://whatsapp.com/channel/0029Vb6NK8AChq6PXxF7rB0F" target="_blank">WhatsApp Channel</a></li>
-                        <li><a href="tel:+918760595307">Call: +91 876 059 5307</a></li>
                     </ul>
                 </div>
             </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; font-size: 0.75rem; opacity: 0.5;">
+
+            <!-- Enhanced Footer Content -->
+            <div class="footer-enhanced-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 50px;">
+                <!-- About Section -->
+                <div class="footer-about">
+                    <h4 style="color: var(--accent); margin-bottom: 20px;">Who We Are</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.7; opacity: 0.8; margin-bottom: 20px;">ABDAN is more than a brand; it's a celebration of the everyday grace found in the lives of women. We are observers of beauty and believers in the power of a well-chosen piece to brighten a moment.</p>
+                    <h4 style="color: var(--accent); margin-bottom: 20px;">What We Do</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.7; opacity: 0.8; margin-bottom: 20px;">We curate and connect. By partnering with skilled artisans and trusted vendors, we bring you pieces that balance tradition with modern ease, ensuring quality and trust at every step.</p>
+                    <h4 style="color: var(--accent); margin-bottom: 20px;">Our Philosophy</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.7; opacity: 0.8;">We value appreciation, emotional connection, and the quiet joy of everyday value. Every choice we make is rooted in respect for your style and your story.</p>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="footer-faq">
+                    <h4 style="color: var(--accent); margin-bottom: 20px;">Common Questions</h4>
+                    <div style="max-height: 400px; overflow-y: auto; padding-right: 15px; font-size: 0.85rem;">
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">How do you ensure product quality?</strong>
+                            <span style="opacity: 0.7;">Every piece is handpicked and verified by our team before we even list it for you.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">Is the pricing transparent?</strong>
+                            <span style="opacity: 0.7;">Yes, we believe in honesty. No hidden charges, ever. We confirm all costs before payment.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">Can I trust the artisans?</strong>
+                            <span style="opacity: 0.7;">We only work with partners who share our values of craftsmanship and integrity.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">How long does delivery take?</strong>
+                            <span style="opacity: 0.7;">Usually 5-7 working days, depending on your location in Tamil Nadu or beyond.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">What is your return policy?</strong>
+                            <span style="opacity: 0.7;">We accept returns for damaged items. Just reach out within 24 hours of delivery.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">How do I choose the right size?</strong>
+                            <span style="opacity: 0.7;">Our WhatsApp support is always here to guide you with detailed measurements.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">Do you take custom requests?</strong>
+                            <span style="opacity: 0.7;">Yes! If you have a specific style in mind, let us know and we'll try to find it.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">Is my payment secure?</strong>
+                            <span style="opacity: 0.7;">We use trusted payment gateways and confirm every transaction personally.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">What if the color looks different?</strong>
+                            <span style="opacity: 0.7;">Minor variations occur due to lighting, but we try to show the most accurate shades.</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong style="display: block; margin-bottom: 5px;">How can I contact support?</strong>
+                            <span style="opacity: 0.7;">WhatsApp is the fastest way! We're available from 10 AM to 8 PM daily.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- T&C Section -->
+                <div class="footer-tc">
+                    <h4 style="color: var(--accent); margin-bottom: 20px;">Our Promises (T&C)</h4>
+                    <div style="max-height: 400px; overflow-y: auto; padding-right: 15px; font-size: 0.8rem; opacity: 0.8; line-height: 1.6;">
+                        <p style="margin-bottom: 10px;"><strong>Orders & Payments:</strong> Orders are confirmed only after payment. We verify availability with our partners before accepting any transaction.</p>
+                        <p style="margin-bottom: 10px;"><strong>Pricing:</strong> All prices are inclusive of taxes unless stated otherwise. Shipping costs are clearly mentioned during checkout.</p>
+                        <p style="margin-bottom: 10px;"><strong>Shipping:</strong> We partner with reliable couriers. While we aim for 5-7 days, external delays may occasionally occur.</p>
+                        <p style="margin-bottom: 10px;"><strong>Returns:</strong> Returns are only for manufacturing defects or wrong items. Please provide an unboxing video for a smooth process.</p>
+                        <p style="margin-bottom: 10px;"><strong>Expectations:</strong> Handcrafted items may have slight irregularities—this is the mark of human hands and not a defect.</p>
+                        <p style="margin-bottom: 10px;"><strong>Platform Usage:</strong> By using ABDAN, you agree to our respectful community standards and privacy policies.</p>
+                        <p><strong>Liability:</strong> While we stay with you until delivery, we act as a bridge between you and our trusted vendor partners.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; font-size: 0.75rem; opacity: 0.5; margin-top: 50px;">
                 <p><strong>Aggregator Disclaimer:</strong> ABDAN curates and connects you with trusted artisan and vendor partners. We do not sell directly. Products are verified before purchase. We confirm availability before payment. No hidden charges. We stay with you till delivery. 💛</p>
                 <p style="margin-top: 10px;">&copy; 2026 ABDAN. Where Deviation Meets Style. Handcrafted with love in Tamil Nadu.</p>
             </div>
