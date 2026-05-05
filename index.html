@@ -698,6 +698,182 @@
             transform: scale(1.1);
         }
 
+        /* Cart System Styles */
+        .cart-toggle {
+            position: relative;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .cart-toggle:hover {
+            background: var(--accent);
+            color: var(--ivory);
+            transform: scale(1.05);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: var(--ivory);
+            font-size: 0.65rem;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--bg-primary);
+        }
+
+        #cartPanel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: 3000;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+            transition: right 0.4s var(--ease-out);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cartPanel.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .cart-item-meta {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background: var(--bg-secondary);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .cart-footer {
+            padding: 25px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        /* Product Options UI */
+        .product-options {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-group h5 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .option-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .chip.selected {
+            background: var(--accent);
+            color: var(--ivory);
+            border-color: var(--accent);
+        }
+
         /* UPI Payment System */
         .payment-block {
             margin-top: 30px;
@@ -706,6 +882,12 @@
             border-radius: 20px;
             border: 1px solid var(--border-color);
             text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        .payment-block.visible {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
         }
 
         .payment-title {
@@ -1064,6 +1246,10 @@
             <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode">
                 <i data-lucide="sun" id="themeIcon"></i>
             </button>
+            <div class="cart-toggle" onclick="toggleCart()">
+                <i data-lucide="shopping-cart"></i>
+                <div class="cart-badge" id="cartBadge">0</div>
+            </div>
         </div>
     </nav>
 
@@ -1337,8 +1523,31 @@
                 
                 <a href="#" id="mwa" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Ask us about this 💛</a>
 
+                <!-- Product Options -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <h5>Select Size</h5>
+                        <div class="option-chips" id="sizeOptions">
+                            <!-- JS Rendered -->
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h5>Select Colour</h5>
+                        <div class="option-chips" id="colorOptions">
+                            <!-- JS Rendered -->
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="addToCart()" style="width: 100%; justify-content: center; background: var(--emerald-green); border-color: var(--emerald-green);">Add to Cart 💛</button>
+                </div>
+
+                <!-- Proceed to Checkout Button -->
+                <div id="checkoutTrigger" style="margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="proceedToCheckout()" style="width: 100%; justify-content: center; background: var(--accent); border-color: var(--accent); height: 55px; font-weight: 700;">Proceed to Checkout 💛</button>
+                    <p style="font-size: 0.75rem; text-align: center; margin-top: 10px; opacity: 0.6;">Secure payment via UPI Network</p>
+                </div>
+
                 <!-- UPI Payment Block -->
-                <div class="payment-block">
+                <div class="payment-block" id="paymentSection">
                     <h4 class="payment-title">Complete Your Devotion 💛</h4>
                     
                     <!-- Desktop: QR Code -->
@@ -1367,6 +1576,13 @@
                     </div>
 
                     <!-- Trust & Checkout Notes -->
+                    <!-- UPI Confirmation Button -->
+                    <div style="margin-top: 20px;">
+                        <a href="https://wa.me/918760595307?text=Hello%2C%20I%20have%20completed%20payment%20via%20UPI.%0A%0APlease%20confirm%20my%20order." target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center; background: #25D366; border-color: #25D366;">
+                            <i data-lucide="check-circle" style="margin-right: 8px;"></i> I Have Paid
+                        </a>
+                    </div>
+
                     <div style="margin-top: 20px; text-align: left; border-top: 1px solid var(--border-color); padding-top: 15px;">
                         <div style="margin-bottom: 15px;">
                             <h5 style="font-size: 0.75rem; color: var(--text-primary); margin-bottom: 5px; text-transform: uppercase;">Checkout Note:</h5>
@@ -1396,6 +1612,24 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Cart Panel -->
+    <div id="cartPanel">
+        <div class="cart-header">
+            <h3>Your Bag 💛</h3>
+            <button onclick="toggleCart()" style="background:none; border:none; cursor:pointer;"><i data-lucide="x"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Rendered by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="toggleCart()">Continue Shopping</button>
         </div>
     </div>
 
@@ -1700,6 +1934,15 @@
             lucide.createIcons();
         }
 
+        // Razorpay Payment Handler (Mock for WhatsApp Trigger Integration)
+        function handleRazorpaySuccess(response) {
+            var message = "Hello, I have completed payment via Razorpay.%0A%0A" +
+                          "Please confirm my order.%0A%0A" +
+                          "Payment ID: " + response.razorpay_payment_id;
+            
+            window.open("https://wa.me/918760595307?text=" + message, "_blank");
+        }
+
         // Initial Render
         renderProducts(PD);
 
@@ -1712,10 +1955,104 @@
             renderProducts(filtered);
         }
 
+        // Cart System State
+        let cart = [];
+        let currentProduct = null;
+        let selectedSize = null;
+        let selectedColor = null;
+
+        function toggleCart() {
+            document.getElementById('cartPanel').classList.toggle('open');
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const badge = document.getElementById('cartBadge');
+            const totalEl = document.getElementById('cartTotal');
+            
+            badge.textContent = cart.length;
+            container.innerHTML = cart.length === 0 ? '<p style="text-align:center; margin-top:50px; opacity:0.6;">Your bag is empty. 💛</p>' : '';
+            
+            let total = 0;
+            cart.forEach((item, index) => {
+                const priceNum = parseInt(item.price.replace(/[^\d]/g, ''));
+                total += priceNum * (item.qty || 1);
+                
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-meta">${item.size} / ${item.color}</div>
+                        <div class="cart-item-price">${item.price}</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                        <span>${item.qty || 1}</span>
+                        <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer; margin-left:10px;"><i data-lucide="trash-2" size="16"></i></button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            
+            totalEl.textContent = '₹' + total.toLocaleString('en-IN');
+            lucide.createIcons();
+        }
+
+        function updateQty(index, delta) {
+            if (!cart[index].qty) cart[index].qty = 1;
+            cart[index].qty += delta;
+            if (cart[index].qty < 1) removeFromCart(index);
+            else renderCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function addToCart() {
+            if (!selectedSize || !selectedColor) {
+                alert("Please select size and colour first 💛");
+                return;
+            }
+            cart.push({
+                name: currentProduct.name,
+                price: currentProduct.pr,
+                size: selectedSize,
+                color: selectedColor,
+                qty: 1
+            });
+            renderCart();
+            closeP();
+            toggleCart();
+        }
+
+        function selectOption(type, value, el) {
+            if (type === 'size') selectedSize = value;
+            if (type === 'color') selectedColor = value;
+            
+            el.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
         // Modal Logic
         const pmod = document.getElementById('pmod');
         function openP(i) {
             const p = PD[i];
+            currentProduct = p;
+            selectedSize = null;
+            selectedColor = null;
+
+            // Render Options
+            const sizes = ["S", "M", "L", "XL", "XXL"];
+            const colors = p.color.split(' and ').map(c => c.trim());
+            
+            document.getElementById('sizeOptions').innerHTML = sizes.map(s => `<div class="chip" onclick="selectOption('size', '${s}', this)">${s}</div>`).join('');
+            document.getElementById('colorOptions').innerHTML = colors.map(c => `<div class="chip" onclick="selectOption('color', '${c}', this)">${c}</div>`).join('');
+
             document.getElementById('mpname').textContent = p.name;
             document.getElementById('mpr').textContent = p.pr;
             document.getElementById('mdesc').textContent = p.desc;
@@ -1745,6 +2082,16 @@
         function closeP() {
             pmod.classList.remove('op');
             document.body.style.overflow = '';
+            // Reset checkout state
+            document.getElementById('paymentSection').classList.remove('visible');
+            document.getElementById('checkoutTrigger').style.display = 'block';
+        }
+
+        function proceedToCheckout() {
+            document.getElementById('paymentSection').classList.add('visible');
+            document.getElementById('checkoutTrigger').style.display = 'none';
+            // Scroll to payment section
+            document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         pmod.addEventListener('click', (e) => { if(e.target === pmod) closeP(); });
 
