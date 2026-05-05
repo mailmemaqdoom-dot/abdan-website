@@ -174,7 +174,7 @@
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 12px;
             align-items: center;
         }
 
@@ -185,13 +185,41 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: var(--transition);
-            opacity: 0.8;
+            padding: 8px 12px;
+            border-radius: 50px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: transparent;
+            overflow: hidden;
+            max-width: 40px;
+            white-space: nowrap;
         }
 
-        .nav-links a:hover {
+        .nav-links a i {
+            min-width: 18px;
+        }
+
+        .nav-links a span {
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            font-size: 0.7rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            max-width: 200px;
+            background: var(--accent);
+            color: var(--ivory);
+            padding: 8px 18px;
+            gap: 10px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .nav-links a:hover span, .nav-links a.active span {
             opacity: 1;
-            color: var(--accent);
+            transform: translateX(0);
         }
 
         .nav-actions {
@@ -990,39 +1018,80 @@
         .mobile-bottom-nav {
             display: none;
             position: fixed;
-            bottom: 20px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
+            width: 92%;
             background: var(--nav-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 30px;
-            padding: 12px 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 10px 15px;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 -5px 25px var(--shadow);
+            box-shadow: 0 10px 40px var(--shadow);
             border: 1px solid var(--border-color);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .mobile-nav-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-decoration: none;
             color: var(--text-primary);
-            gap: 4px;
-            flex: 1;
-            padding: 5px 0;
-            touch-action: manipulation;
+            gap: 0;
+            padding: 10px 12px;
+            border-radius: 30px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            max-width: 45px;
+            white-space: nowrap;
+        }
+
+        .mobile-nav-item i {
+            min-width: 20px;
         }
 
         .mobile-nav-item span {
-            font-size: 0.6rem;
-            font-weight: 600;
+            display: none;
+            font-size: 0.7rem;
+            font-weight: 700;
             text-transform: uppercase;
+        }
+
+        .mobile-nav-item.active {
+            max-width: 120px;
+            background: var(--accent);
+            color: var(--ivory);
+            gap: 8px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 15px rgba(197, 161, 59, 0.3);
+        }
+
+        .mobile-nav-item.active span {
+            display: block;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        /* Ripple Effect */
+        .mobile-nav-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to { transform: scale(4); opacity: 0; }
         }
 
         /* WhatsApp Floating CTA */
@@ -1236,11 +1305,11 @@
             <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663561972157/CLsmPdmHcNuRpeof.jpg" alt="ABDAN Logo" class="logo-img-header">
         </a>
         <div class="nav-links">
-            <a href="#products">Handpicked for You</a>
-            <a href="#wsy">Her Story</a>
-            <a href="#testi">Her Circle 💛</a>
-            <a href="#teasers">What You Might Love</a>
-            <a href="#account">Your Space 💛</a>
+            <a href="#products" class="active"><i data-lucide="shopping-bag"></i> <span>Handpicked for You</span></a>
+            <a href="#wsy"><i data-lucide="heart"></i> <span>Her Story</span></a>
+            <a href="#testi"><i data-lucide="users"></i> <span>Her Circle 💛</span></a>
+            <a href="#teasers"><i data-lucide="sparkles"></i> <span>What You Might Love</span></a>
+            <a href="#account"><i data-lucide="user"></i> <span>Your Space 💛</span></a>
         </div>
         <div class="nav-actions">
             <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode">
@@ -1255,19 +1324,19 @@
 
     <!-- Mobile Bottom Nav (App Like) -->
     <div class="mobile-bottom-nav" id="bottomNav">
-        <a href="#products" class="mobile-nav-item">
+        <a href="#products" class="mobile-nav-item active" onclick="activateMobileNav(this)">
             <i data-lucide="shopping-bag" size="20"></i>
             <span>Shop</span>
         </a>
-        <a href="#wsy" class="mobile-nav-item">
+        <a href="#wsy" class="mobile-nav-item" onclick="activateMobileNav(this)">
             <i data-lucide="heart" size="20"></i>
             <span>Story</span>
         </a>
-        <a href="#account" class="mobile-nav-item">
+        <a href="#account" class="mobile-nav-item" onclick="activateMobileNav(this)">
             <i data-lucide="user" size="20"></i>
             <span>Space</span>
         </a>
-        <a href="https://wa.me/918760595307" class="mobile-nav-item">
+        <a href="https://wa.me/918760595307" class="mobile-nav-item" onclick="activateMobileNav(this)">
             <i data-lucide="message-circle" size="20"></i>
             <span>Chat</span>
         </a>
@@ -2130,14 +2199,68 @@
         }
         tpop.addEventListener('click', (e) => { if(e.target === tpop) closeT(); });
 
-        // PWA Banner Logic
+        // PWA Banner & Install Prompt Logic
         const banner = document.getElementById('pwab');
-        if(!sessionStorage.getItem('abdan-pwa-x')) {
-            setTimeout(() => { banner.classList.add('sh'); }, 9000);
-        }
+        const installBtn = document.getElementById('pwaib');
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if(!sessionStorage.getItem('abdan-pwa-x')) {
+                setTimeout(() => { banner.classList.add('sh'); }, 5000);
+            }
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    banner.classList.remove('sh');
+                }
+                deferredPrompt = null;
+            } else {
+                // Fallback for browsers that don't support beforeinstallprompt
+                alert("To install: Tap the share button and 'Add to Home Screen' 💛");
+            }
+        });
+
         document.getElementById('pwadb').addEventListener('click', () => {
             banner.classList.remove('sh');
             sessionStorage.setItem('abdan-pwa-x', '1');
+        });
+
+        // Mobile Nav Activation Logic
+        function activateMobileNav(el) {
+            document.querySelectorAll('.mobile-nav-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+            
+            // Add ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            el.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        // Active Section Tracking for Nav
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
         });
 
         // Close on Escape
